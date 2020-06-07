@@ -9,7 +9,7 @@
         <!-- Bootstrap CSS -->
         <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet" >
         <link href="{{asset('vendors/linericon/style.css')}}" rel="stylesheet" >
-        <link href="{{asset('css/font-awesome.min.css')}}" rel="stylesheet" >
+        <link href= "{{asset('css/font-awesome.min.css')}}" rel="stylesheet" >
         <link href="{{asset('vendors/owl-carousel/owl.carousel.min.css')}}" rel="stylesheet" >
         <link href="{{asset('vendors/lightbox/simpleLightbox.css')}}" rel="stylesheet" >
         <link href="{{asset('vendors/nice-select/css/nice-select.css')}}" rel="stylesheet" >
@@ -27,7 +27,8 @@
             	<nav class="navbar navbar-expand-lg navbar-light">
 					<div class="container box_1620">
 						<!-- Brand and toggle get grouped for better mobile display -->
-						<a class="navbar-brand logo_h" href="index.html"> <img src="{{asset('img/logo.png')}}" alt=""></a>
+{{--						<a class="navbar-brand logo_h" href="index.html"> <img src="{{asset('img/logo.png')}}" alt=""></a>--}}
+						<a class="navbar-brand logo_h" href="index.html" style="font-size:22px;font-weight:bold;text-transform: uppercase;font-family: Chilanka;color: #adb5bd"> eventcreate</a>
 						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 							<span class="icon-bar"></span>
 							<span class="icon-bar"></span>
@@ -37,8 +38,9 @@
 						<div class="collapse navbar-collapse offset" id="navbarSupportedContent">
 							<ul class="nav navbar-nav menu_nav ml-auto">
 								<li class="nav-item active"><a class="nav-link" href="index.html">Home</a></li>
-								<li class="nav-item"><a class="nav-link" href="about-us.html">About</a></li>
-								<li class="nav-item"><a class="nav-link" href="speakers.html">Speakers</a>
+								<li class="nav-item active"><a class="nav-link" href="index.html">Events</a></li>
+								<li class="nav-item"><a class="nav-link" href="speakers.html">Singers</a>
+                                <li class="nav-item"><a class="nav-link" href="about-us.html">About</a></li>
 								<li class="nav-item submenu dropdown">
 									<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Pages</a>
 									<ul class="dropdown-menu">
@@ -48,13 +50,13 @@
 										<li class="nav-item"><a class="nav-link" href="elements.html">Elements</a></li>
 									</ul>
 								</li>
-								<li class="nav-item submenu dropdown">
-									<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Blog</a>
-									<ul class="dropdown-menu">
-										<li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
-										<li class="nav-item"><a class="nav-link" href="single-blog.html">Blog Details</a></li>
-									</ul>
-								</li>
+{{--								<li class="nav-item submenu dropdown">--}}
+{{--									<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Blog</a>--}}
+{{--									<ul class="dropdown-menu">--}}
+{{--										<li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>--}}
+{{--										<li class="nav-item"><a class="nav-link" href="single-blog.html">Blog Details</a></li>--}}
+{{--									</ul>--}}
+{{--								</li>--}}
 								<li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
 							</ul>
 							<ul class="nav navbar-nav navbar-right">
@@ -73,9 +75,10 @@
             <div class="banner_inner">
 				<div class="container">
 					<div class="banner_content">
-						<h2>International Digital <br />Business Event</h2>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore  et dolore magna aliqua.</p>
-						<a class="banner_btn" href="#">View More Details</a>
+{{--						<h2>International Digital <br />Business Event</h2>--}}
+                        <h2>Build your Event in Minutes</h2>
+                        <p>Get started by creating an  event . From there, you can quickly add content, import images or videos, customize your fonts. It's that easy.</p>
+                        <a class="banner_btn" href="#">View More Details</a>
 					</div>
 				</div>
             </div>
@@ -133,13 +136,13 @@
         			</div>
         			<div class="col-lg-6 offset-lg-1">
         				<div class="welcome_text">
-        					<h3>Welcome to Eventure</h3>
+        					<h3>Welcome to eventcreate</h3>
                             <div class="content">
-                <div  id="example" class="title m-b-md"></div>
-            </div>
+                              <div  id="example" class="title m-b-md"></div>
+                             </div>
         					<p>inappropriate behavior is often laughed off as “boys will be boys,” women face higher conduct standards especially in the workplace. That’s why it’s crucial that, as women, our behavior on the job is beyond reproach. inappropriate behavior is often laughed.</p>
         					<p>inappropriate behavior is often laughed off as “boys will be boys,” women face higher conduct standards especially in the workplace.</p>
-        					<a class="main_btn" href="#">View More Details</a>
+        					<a class="main_btn" href="#">Create an Event</a>
         				</div>
         			</div>
         		</div>
@@ -407,7 +410,7 @@
         <!--================End Event Schedule Area =================-->
 
         <!--================End Event Schedule Area =================-->
-        <section class="home_map_area">
+        <section class="home_map_area" style="background-color: black">
         	<div id="mapBox2" class="mapBox2"
 				data-lat="40.701083"
 				data-lon="-74.1522848"
@@ -416,9 +419,9 @@
 				data-mlat="40.701083"
 				data-mlon="-74.1522848">
 			</div>
-       		<div class="home_details">
-				<div class="container">
-					<div class="box_home_details">
+       		<div class="home_details"  >
+				<div class="container" >
+					<div class="box_home_details" style="background-color: #adb5bd">
 						<div class="media">
 							<div class="d-flex">
 								<i class="lnr lnr-home"></i>
@@ -576,14 +579,13 @@
                                 <li><img  src="{{asset('img/instagram/Image-06.jpg')}}"alt="" ></li>
                                 <li><img  src="{{asset('img/instagram/Image-07.jpg')}}"alt="" ></li>
                                 <li><img  src="{{asset('img/instagram/Image-08.jpg')}}"alt="" ></li>
-                                <li><img  src="{{asset('img/instagram/Image-01.jpg')}}"alt="" ></li>
                             </ul>
                         </div>
                     </div>
                 </div>
                 <div class="row footer-bottom d-flex justify-content-between align-items-center">
                     <p class="col-lg-8 col-md-8 footer-text m-0"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+Copyright &copy;<script>document.write(new Date().getFullYear());</script>
 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
                     <div class="col-lg-4 col-md-4 footer-social">
                         <a href="#"><i class="fa fa-facebook"></i></a>
@@ -602,7 +604,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="js/jquery-3.2.1.min.js"></script>
+        <script src="{{asset('js/jquery-3.2.1.min.js')}}"  ></script>
         <script src="js/popper.js"></script>
         <script src="{{asset('js/bootstrap.min.js')}}"  ></script>
         <script src="{{asset('js/app.js')}}"  ></script>
