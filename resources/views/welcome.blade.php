@@ -79,9 +79,9 @@
                 </div>
             @endif
 
-            <div class="content">
+           <!-- <div class="content">
                 <div  id="example" class="title m-b-md"></div>
-            </div>
+            </div>-->
 
         </div>
     </body>
