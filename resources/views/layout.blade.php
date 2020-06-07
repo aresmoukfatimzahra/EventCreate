@@ -8,25 +8,26 @@
         <title>Eventure Multi</title>
         <!-- Bootstrap CSS -->
         <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet" >
-        <link rel="stylesheet" href="vendors/linericon/style.css">
-        <link rel="stylesheet" href="css/font-awesome.min.css">
-        <link rel="stylesheet" href="vendors/owl-carousel/owl.carousel.min.css">
-        <link rel="stylesheet" href="vendors/lightbox/simpleLightbox.css">
-        <link rel="stylesheet" href="vendors/nice-select/css/nice-select.css">
-        <link rel="stylesheet" href="vendors/animate-css/animate.css">
+        <link href="{{asset('vendors/linericon/style.css')}}" rel="stylesheet" >
+        <link href="{{asset('css/font-awesome.min.css')}}" rel="stylesheet" >
+        <link href="{{asset('vendors/owl-carousel/owl.carousel.min.css')}}" rel="stylesheet" >
+        <link href="{{asset('vendors/lightbox/simpleLightbox.css')}}" rel="stylesheet" >
+        <link href="{{asset('vendors/nice-select/css/nice-select.css')}}" rel="stylesheet" >
+        <link href="{{asset('vendors/animate-css/animate.css')}}" rel="stylesheet" >
+
         <!-- main css -->
         <link href="{{asset('css/style.css')}}" rel="stylesheet" >
-        <link rel="stylesheet" href="css/responsive.css">
+        <link href="{{asset('css/responsive.css')}}" rel="stylesheet" >
     </head>
     <body>
-        
+
         <!--================Header Menu Area =================-->
         <header class="header_area">
             <div class="main_menu">
             	<nav class="navbar navbar-expand-lg navbar-light">
 					<div class="container box_1620">
 						<!-- Brand and toggle get grouped for better mobile display -->
-						<a class="navbar-brand logo_h" href="index.html"><img src="img/logo.png" alt=""></a>
+						<a class="navbar-brand logo_h" href="index.html"> <img src="{{asset('img/logo.png')}}" alt=""></a>
 						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 							<span class="icon-bar"></span>
 							<span class="icon-bar"></span>
@@ -35,38 +36,38 @@
 						<!-- Collect the nav links, forms, and other content for toggling -->
 						<div class="collapse navbar-collapse offset" id="navbarSupportedContent">
 							<ul class="nav navbar-nav menu_nav ml-auto">
-								<li class="nav-item active"><a class="nav-link" href="index.html">Home</a></li> 
-								<li class="nav-item"><a class="nav-link" href="about-us.html">About</a></li> 
+								<li class="nav-item active"><a class="nav-link" href="index.html">Home</a></li>
+								<li class="nav-item"><a class="nav-link" href="about-us.html">About</a></li>
 								<li class="nav-item"><a class="nav-link" href="speakers.html">Speakers</a>
 								<li class="nav-item submenu dropdown">
 									<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Pages</a>
 									<ul class="dropdown-menu">
 										<li class="nav-item"><a class="nav-link" href="schedule.html">Schedule</a>
 										<li class="nav-item"><a class="nav-link" href="venue.html">Venue</a>
-										<li class="nav-item"><a class="nav-link" href="price.html">Pricing</a> 
+										<li class="nav-item"><a class="nav-link" href="price.html">Pricing</a>
 										<li class="nav-item"><a class="nav-link" href="elements.html">Elements</a></li>
 									</ul>
-								</li> 
+								</li>
 								<li class="nav-item submenu dropdown">
 									<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Blog</a>
 									<ul class="dropdown-menu">
 										<li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
 										<li class="nav-item"><a class="nav-link" href="single-blog.html">Blog Details</a></li>
 									</ul>
-								</li> 
+								</li>
 								<li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
 							</ul>
 							<ul class="nav navbar-nav navbar-right">
 								<li class="nav-item"><a href="#" class="tickets_btn">Get Tickets</a></li>
 								<li class="nav-item"><a href="#" class="search"><i class="lnr lnr-magnifier"></i></a></li>
 							</ul>
-						</div> 
+						</div>
 					</div>
             	</nav>
             </div>
         </header>
         <!--================Header Menu Area =================-->
-        
+
         <!--================Home Banner Area =================-->
         <section class="home_banner_area">
             <div class="banner_inner">
@@ -80,11 +81,11 @@
             </div>
         </section>
         <!--================End Home Banner Area =================-->
-        
+
         <!--================Event Time Area =================-->
         <section class="event_time_area">
         	<div class="container">
-            
+
         		<div class="event_time_inner">
         			<div class="row">
         				<div class="col-lg-6">
@@ -120,14 +121,14 @@
         	</div>
         </section>
         <!--================End Event Time Area =================-->
-        
+
         <!--================Welcome Area =================-->
         <section class="welcome_area pad_btm">
         	<div class="container">
         		<div class="welcome_inner row">
         			<div class="col-lg-5">
         				<div class="welcome_img">
-        					<img class="img-fluid" src="img/welcome-1.jpg" alt="">
+                            <img class="img-fluid"  src="{{asset('img/welcome-1.jpg')}}" alt=""><
         				</div>
         			</div>
         			<div class="col-lg-6 offset-lg-1">
@@ -145,7 +146,7 @@
         	</div>
         </section>
         <!--================End Welcome Area =================-->
-        
+
         <!--================Team Area =================-->
         <section class="team_area p_120">
         	<div class="container">
@@ -157,7 +158,7 @@
         			<div class="col-lg-3 col-sm-6">
         				<div class="team_item">
         					<div class="team_img">
-        						<img class="img-fluid" src="img/team/team-1.jpg" alt="">
+                                <img class="img-fluid" src="{{asset('img/team/team-1.jpg')}}" >
         						<div class="hover">
         							<a href="#"><i class="fa fa-facebook"></i></a>
         							<a href="#"><i class="fa fa-twitter"></i></a>
@@ -173,7 +174,7 @@
         			<div class="col-lg-3 col-sm-6">
         				<div class="team_item">
         					<div class="team_img">
-        						<img class="img-fluid" src="img/team/team-2.jpg" alt="">
+                                <img class="img-fluid" src="{{asset('img/team/team-2.jpg')}}"alt="" >
         						<div class="hover">
         							<a href="#"><i class="fa fa-facebook"></i></a>
         							<a href="#"><i class="fa fa-twitter"></i></a>
@@ -189,7 +190,7 @@
         			<div class="col-lg-3 col-sm-6">
         				<div class="team_item">
         					<div class="team_img">
-        						<img class="img-fluid" src="img/team/team-3.jpg" alt="">
+                                <img class="img-fluid" src="{{asset('img/team/team-3.jpg')}}"alt="" >
         						<div class="hover">
         							<a href="#"><i class="fa fa-facebook"></i></a>
         							<a href="#"><i class="fa fa-twitter"></i></a>
@@ -205,7 +206,7 @@
         			<div class="col-lg-3 col-sm-6">
         				<div class="team_item">
         					<div class="team_img">
-        						<img class="img-fluid" src="img/team/team-4.jpg" alt="">
+                                <img class="img-fluid" src="{{asset('img/team/team-4.jpg')}}"alt="" >
         						<div class="hover">
         							<a href="#"><i class="fa fa-facebook"></i></a>
         							<a href="#"><i class="fa fa-twitter"></i></a>
@@ -222,7 +223,7 @@
         	</div>
         </section>
         <!--================End Team Area =================-->
-        
+
         <!--================Event Schedule Area =================-->
         <section class="event_schedule_area p_120">
         	<div class="container">
@@ -246,7 +247,7 @@
 						<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
 							<div class="media">
 								<div class="d-flex">
-									<img src="img/schedule-1.jpg" alt="">
+                                    <img  src="{{asset('img/schedule-1.jpg')}}"alt="" >
 								</div>
 								<div class="media-body">
 									<h5>09.00 am</h5>
@@ -256,7 +257,7 @@
 							</div>
 							<div class="media">
 								<div class="d-flex">
-									<img src="img/schedule-1.jpg" alt="">
+                                    <img  src="{{asset('img/schedule-1.jpg')}}"alt="" >
 								</div>
 								<div class="media-body">
 									<h5>09.00 am</h5>
@@ -266,7 +267,7 @@
 							</div>
 							<div class="media">
 								<div class="d-flex">
-									<img src="img/schedule-1.jpg" alt="">
+                                    <img  src="{{asset('img/schedule-1.jpg')}}"alt="" >
 								</div>
 								<div class="media-body">
 									<h5>09.00 am</h5>
@@ -276,7 +277,7 @@
 							</div>
 							<div class="media">
 								<div class="d-flex">
-									<img src="img/schedule-1.jpg" alt="">
+                                    <img  src="{{asset('img/schedule-1.jpg')}}"alt="" >
 								</div>
 								<div class="media-body">
 									<h5>09.00 am</h5>
@@ -286,7 +287,7 @@
 							</div>
 							<div class="media">
 								<div class="d-flex">
-									<img src="img/schedule-1.jpg" alt="">
+                                    <img  src="{{asset('img/schedule-1.jpg')}}"alt="" >
 								</div>
 								<div class="media-body">
 									<h5>09.00 am</h5>
@@ -298,7 +299,7 @@
 						<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
 							<div class="media">
 								<div class="d-flex">
-									<img src="img/schedule-1.jpg" alt="">
+                                    <img  src="{{asset('img/schedule-1.jpg')}}"alt="" >
 								</div>
 								<div class="media-body">
 									<h5>09.00 am</h5>
@@ -308,7 +309,7 @@
 							</div>
 							<div class="media">
 								<div class="d-flex">
-									<img src="img/schedule-1.jpg" alt="">
+                                    <img  src="{{asset('img/schedule-1.jpg')}}"alt="" >
 								</div>
 								<div class="media-body">
 									<h5>09.00 am</h5>
@@ -318,7 +319,7 @@
 							</div>
 							<div class="media">
 								<div class="d-flex">
-									<img src="img/schedule-1.jpg" alt="">
+                                    <img  src="{{asset('img/schedule-1.jpg')}}"alt="" >
 								</div>
 								<div class="media-body">
 									<h5>09.00 am</h5>
@@ -328,7 +329,7 @@
 							</div>
 							<div class="media">
 								<div class="d-flex">
-									<img src="img/schedule-1.jpg" alt="">
+                                    <img  src="{{asset('img/schedule-1.jpg')}}"alt="" >
 								</div>
 								<div class="media-body">
 									<h5>09.00 am</h5>
@@ -338,7 +339,7 @@
 							</div>
 							<div class="media">
 								<div class="d-flex">
-									<img src="img/schedule-1.jpg" alt="">
+                                    <img  src="{{asset('img/schedule-1.jpg')}}"alt="" >
 								</div>
 								<div class="media-body">
 									<h5>09.00 am</h5>
@@ -350,7 +351,7 @@
 						<div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
 							<div class="media">
 								<div class="d-flex">
-									<img src="img/schedule-1.jpg" alt="">
+                                    <img  src="{{asset('img/schedule-1.jpg')}}"alt="" >
 								</div>
 								<div class="media-body">
 									<h5>09.00 am</h5>
@@ -360,7 +361,7 @@
 							</div>
 							<div class="media">
 								<div class="d-flex">
-									<img src="img/schedule-1.jpg" alt="">
+                                    <img  src="{{asset('img/schedule-1.jpg')}}"alt="" >
 								</div>
 								<div class="media-body">
 									<h5>09.00 am</h5>
@@ -370,7 +371,7 @@
 							</div>
 							<div class="media">
 								<div class="d-flex">
-									<img src="img/schedule-1.jpg" alt="">
+                                    <img  src="{{asset('img/schedule-1.jpg')}}"alt="" >
 								</div>
 								<div class="media-body">
 									<h5>09.00 am</h5>
@@ -380,7 +381,7 @@
 							</div>
 							<div class="media">
 								<div class="d-flex">
-									<img src="img/schedule-1.jpg" alt="">
+                                    <img  src="{{asset('img/schedule-1.jpg')}}"alt="" >
 								</div>
 								<div class="media-body">
 									<h5>09.00 am</h5>
@@ -390,7 +391,7 @@
 							</div>
 							<div class="media">
 								<div class="d-flex">
-									<img src="img/schedule-1.jpg" alt="">
+                                    <img  src="{{asset('img/schedule-1.jpg')}}"alt="" >
 								</div>
 								<div class="media-body">
 									<h5>09.00 am</h5>
@@ -404,13 +405,13 @@
         	</div>
         </section>
         <!--================End Event Schedule Area =================-->
-        
+
         <!--================End Event Schedule Area =================-->
         <section class="home_map_area">
-        	<div id="mapBox2" class="mapBox2" 
-				data-lat="40.701083" 
-				data-lon="-74.1522848" 
-				data-zoom="13" 
+        	<div id="mapBox2" class="mapBox2"
+				data-lat="40.701083"
+				data-lon="-74.1522848"
+				data-zoom="13"
 				data-info="PO Box CT16122 Collins Street West, Victoria 8007, Australia."
 				data-mlat="40.701083"
 				data-mlon="-74.1522848">
@@ -450,10 +451,10 @@
        		</div>
         </section>
         <!--================End Event Schedule Area =================-->
-        
+
         <!--================Price Area =================-->
         <section class="price_area p_120">
-        	<div class="container">	
+        	<div class="container">
         		<div class="main_title">
         			<h2>Ticket Pricing</h2>
         			<p>If you are looking at blank cassettes on the web, you may be very confused at the difference in price. You may see some for as low as $.17 each.</p>
@@ -531,8 +532,8 @@
         	</div>
         </section>
         <!--================End Price Area =================-->
-        
-        <!--================ start footer Area  =================-->	
+
+        <!--================ start footer Area  =================-->
         <footer class="footer-area p_120">
             <div class="container">
                 <div class="row">
@@ -550,13 +551,13 @@
                     <div class="col-lg-5 col-md-6 col-sm-6">
                         <div class="single-footer-widget news_widgets">
                             <h6 class="footer_title">Newsletter</h6>
-                            <p>You can trust us. we only send promo offers, not a single spam.</p>		
+                            <p>You can trust us. we only send promo offers, not a single spam.</p>
                             <div id="mc_embed_signup">
                                 <form target="_blank" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01" method="get" class="subscribe_form relative">
                                     <div class="input-group d-flex flex-row">
                                         <input name="EMAIL" placeholder="Your email address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email Address '" required="" type="email">
-                                        <button class="btn sub-btn">Subscribe</button>		
-                                    </div>									
+                                        <button class="btn sub-btn">Subscribe</button>
+                                    </div>
                                     <div class="mt-10 info"></div>
                                 </form>
                             </div>
@@ -566,17 +567,19 @@
                         <div class="single-footer-widget instafeed">
                             <h6 class="footer_title">Instagram Feed</h6>
                             <ul class="list instafeed d-flex flex-wrap">
-                                <li><img src="img/instagram/Image-01.jpg" alt=""></li>
-                                <li><img src="img/instagram/Image-02.jpg" alt=""></li>
-                                <li><img src="img/instagram/Image-03.jpg" alt=""></li>
-                                <li><img src="img/instagram/Image-04.jpg" alt=""></li>
-                                <li><img src="img/instagram/Image-05.jpg" alt=""></li>
-                                <li><img src="img/instagram/Image-06.jpg" alt=""></li>
-                                <li><img src="img/instagram/Image-07.jpg" alt=""></li>
-                                <li><img src="img/instagram/Image-08.jpg" alt=""></li>
+                                <img  src="{{asset('img/instagram/Image-01.jpg')}}"alt="" >
+
+                               <li><img  src="{{asset('img/instagram/Image-02.jpg')}}"alt="" ></li>
+                                <li><img  src="{{asset('img/instagram/Image-03.jpg')}}"alt="" ></li>
+                                <li> <img  src="{{asset('img/instagram/Image-04.jpg')}}"alt="" ></li>
+                                <li><img  src="{{asset('img/instagram/Image-05.jpg')}}"alt="" ></li>
+                                <li><img  src="{{asset('img/instagram/Image-06.jpg')}}"alt="" ></li>
+                                <li><img  src="{{asset('img/instagram/Image-07.jpg')}}"alt="" ></li>
+                                <li><img  src="{{asset('img/instagram/Image-08.jpg')}}"alt="" ></li>
+                                <li><img  src="{{asset('img/instagram/Image-01.jpg')}}"alt="" ></li>
                             </ul>
                         </div>
-                    </div>	
+                    </div>
                 </div>
                 <div class="row footer-bottom d-flex justify-content-between align-items-center">
                     <p class="col-lg-8 col-md-8 footer-text m-0"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
@@ -592,11 +595,11 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
             </div>
         </footer>
 		<!--================ End footer Area  =================-->
-        
-        
-        
-        
-        
+
+
+
+
+
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="js/jquery-3.2.1.min.js"></script>
@@ -604,19 +607,24 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
         <script src="{{asset('js/bootstrap.min.js')}}"  ></script>
         <script src="{{asset('js/app.js')}}"  ></script>
         <script src="js/stellar.js"></script>
-        <script src="vendors/lightbox/simpleLightbox.min.js"></script>
-        <script src="vendors/nice-select/js/jquery.nice-select.min.js"></script>
-        <script src="vendors/isotope/imagesloaded.pkgd.min.js"></script>
-        <script src="vendors/isotope/isotope-min.js"></script>
-        <script src="vendors/owl-carousel/owl.carousel.min.js"></script>
-        <script src="js/jquery.ajaxchimp.min.js"></script>
-        <script src="vendors/flipclock/timer.js"></script>
-        <script src="vendors/counter-up/jquery.waypoints.min.js"></script>
-        <script src="vendors/counter-up/jquery.counterup.js"></script>
-        <script src="js/mail-script.js"></script>
+        <script src="{{asset('vendors/lightbox/simpleLightbox.min.js')}}" ></script>
+        <script src="{{asset('vendors/nice-select/js/jquery.nice-select.min.js')}}" ></script>
+        <script src="{{asset('vendors/isotope/imagesloaded.pkgd.min.js')}}" ></script>
+        <script src="{{asset('vendors/isotope/isotope-min.js')}}" ></script>
+        <script src="{{asset('vendors/owl-carousel/owl.carousel.min.js')}}" ></script>
+        <script src="{{asset('js/jquery.ajaxchimp.min.js')}}" ></script>
+        <script src="{{asset('vendors/flipclock/timer.js')}}" ></script>
+
+        <script src="{{asset('vendors/counter-up/jquery.waypoints.min.js')}}" ></script>
+        <script src="{{asset('vendors/counter-up/jquery.counterup.js')}}" ></script>
+
+
+        <script src="{{asset('js/mail-script.js')}}" ></script>
         <!--gmaps Js-->
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
-        <script src="js/gmaps.min.js"></script>
-        <script src="js/theme.js"></script>
+
+        <script src="{{asset('js/gmaps.min.js')}}" ></script>
+        <script src="{{asset('js/theme.js')}}" ></script>
+
     </body>
 </html>
