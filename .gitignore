@@ -5,8 +5,15 @@
 /vendor
 .env
 .env.backup
+/.env.*.local
+/.env.local
 .phpunit.result.cache
 Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
+package-lock.json
+
+/.idea
+/.vscode
+/vendor/
