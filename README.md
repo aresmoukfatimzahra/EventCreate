@@ -1,7 +1,7 @@
 git clone https://github.com/Zahiraa/EventCreate.git
 
 - cd EventCreate
-- composer update 
+- composer install 
 - composer require laravel/ui
 - php artisan ui bootstrap
 - npm install 
