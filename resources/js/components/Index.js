@@ -11,6 +11,8 @@ import ContactInfo from "./ContactInfo";
 import PricesBox from "./PricesBox";
 import Footer from "./Footer";
 import WelcomeMessage from "./WelcomeMessage";
+import Artists from "./Events/Artists";
+import Media from "./Events/Media";
 
 
 export default class Index extends Component {
@@ -23,6 +25,8 @@ export default class Index extends Component {
                      <div className="container">
                        <WelcomeMessage/>
                         <IndexEvents/>
+                        <Artists/>
+                        <Media/>
                         <Schedule/>
                       </div>
                       <ContactInfo/>

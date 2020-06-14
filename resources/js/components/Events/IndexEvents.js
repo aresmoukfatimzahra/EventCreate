@@ -14,7 +14,7 @@ export default class IndexEvents extends React.Component {
 <section className="team_area p_120">
 
         <div className="main_title">
-            <h2>Meet Head Speakers</h2>
+            <h2>Events of the month</h2>
             <p>If you are looking at blank cassettes on the web, you may be very confused at the difference in price.
                 You may see some for as low as $.17 each.</p>
         </div>
@@ -84,7 +84,7 @@ export default class IndexEvents extends React.Component {
                 </div>
             </div>
         </div>
-
+    <div className=" offset-5 col-md-6 button-all"> <a className="main_btn" href="#">See all Events</a></div>
  </section>
 
     );
