@@ -21,11 +21,22 @@ Route::get('events/{event}','EventController@show');
 
 
 Route::post('events', 'EventController@store');
-
+Route::get('event_medias/{event}','EventController@showMedia');
 Route::put('events/{event}', 'EventController@update');
 
 Route::delete('events/{event}','EventController@delete');
+//media
+Route::get('medias', 'MediaController@index');
 
+Route::get('medias/{media}','MediaController@show');
+
+
+
+Route::post('medias', 'MediaController@store');
+
+Route::put('medias/{media}', 'MediaController@update');
+
+Route::delete('medias/{media}','MediaController@destroy');
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });

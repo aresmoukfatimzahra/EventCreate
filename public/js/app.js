@@ -66330,8 +66330,8 @@ var IndexEvents = /*#__PURE__*/function (_React$Component) {
   }
 
   _createClass(IndexEvents, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
+    key: "componentWillMount",
+    value: function componentWillMount() {
       var _this2 = this;
 
       var url = "http://localhost:8000/api";
@@ -66339,15 +66339,11 @@ var IndexEvents = /*#__PURE__*/function (_React$Component) {
         _this2.setState({
           events: data
         });
-
-        console.log("data");
-        console.log(data);
       });
     }
   }, {
     key: "render",
     value: function render() {
-      console.log(this.state);
       var events = this.state.events;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("section", {
         className: "team_area p_120"
@@ -66355,14 +66351,21 @@ var IndexEvents = /*#__PURE__*/function (_React$Component) {
         className: "main_title"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Events of the month"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec congue, ante quis blandit malesuada, quam nulla viverra erat")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "row team_inner"
-      }, this.state.events.slice(0, 4).map(function (event) {
+      }, this.state.events.slice(0, 4).map(function (event, i) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          key: i,
           className: "col-lg-3 col-sm-6"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "team_item"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "team_img"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        }, event.media.length > 0 ? event.media.slice(0, 1).map(function (media, i) {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+            key: i,
+            className: "img-fluid eventImg",
+            src: media.url
+          });
+        }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
           className: "img-fluid eventImg",
           src: _public_img_event1_jpg__WEBPACK_IMPORTED_MODULE_7___default.a
         }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -67691,12 +67694,13 @@ var WelcomeMessage = /*#__PURE__*/function (_Component) {
 /*!****************************************!*\
   !*** ./resources/js/services/index.js ***!
   \****************************************/
-/*! exports provided: indexEvents */
+/*! exports provided: indexEvents, indexMedia */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "indexEvents", function() { return indexEvents; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "indexMedia", function() { return indexMedia; });
 function indexEvents(api, onSuccess) {
   // fetch('http://localhost:8000/api/events')
   fetch(api).then(function (results) {
@@ -67704,6 +67708,20 @@ function indexEvents(api, onSuccess) {
       return results.json();
     } else {
       console.log('error event index');
+    }
+  }).then(function (data) {
+    return onSuccess(data);
+  })["catch"](function (error) {
+    return console.log('error => ' + error);
+  });
+}
+function indexMedia(api, onSuccess) {
+  // fetch('http://localhost:8000/api/events')
+  fetch(api).then(function (results) {
+    if (results.ok) {
+      return results.json();
+    } else {
+      console.log('error media index');
     }
   }).then(function (data) {
     return onSuccess(data);

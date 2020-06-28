@@ -9,12 +9,21 @@ class EventController extends Controller
 {
     public function index()
     {
-        return Event::all();
+//        return Event::all();
+        $events= Event::with('media')->get();
+        return $events;
     }
 
     public function show(Event $event)
     {
         return $event;
+    }
+    public function showMedia(Event $event)
+    {
+        return[
+            'info' => $event->media
+        ];
+
     }
 
     public function store(Request $request)

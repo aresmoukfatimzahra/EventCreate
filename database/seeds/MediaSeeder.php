@@ -15,7 +15,8 @@ class MediaSeeder extends Seeder
         for($i=0;$i<5;$i++){
             \App\Media::create([
                 'title'=>$faker->text(10),
-                'url'=>'https://picsum.photos/200/300'
+                'url'=>'https://picsum.photos/200/300',
+                'event_id'=>App\Event::all()->random(1)[0]->id,
 
             ]);
         }

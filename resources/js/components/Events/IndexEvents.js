@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import ReactDOM from 'react-dom';
-import {indexEvents} from "../../services";
+import {indexEvents,indexMedia} from "../../services";
 import team1 from '../../../../public/img/team/team-1.jpg';
 import team2 from '../../../../public/img/team/team-2.jpg';
 import team3 from '../../../../public/img/team/team-3.jpg';
@@ -17,38 +17,41 @@ export default class IndexEvents extends React.Component {
         }
     }
 
-    componentDidMount() {
+    componentWillMount() {
         const url=process.env.MIX_REACT_APP_ROOT
 
         indexEvents(url+'/events',data=>{
             this.setState({
                 events:data,
-
             })
-            console.log("data")
-                console.log(data)
+
         })
-
-
     }
     render() {
-        console.log(this.state)
+
         let events=this.state.events
         return (
 
-<section className="team_area p_120">
+    <section className="team_area p_120">
 
         <div className="main_title">
             <h2>Events of the month</h2>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec congue, ante quis blandit malesuada, quam nulla viverra erat</p>
         </div>
         <div className="row team_inner">
-            {this.state.events.slice(0, 4).map((event) => {
+            {this.state.events.slice(0, 4).map((event,i) => {
                 return (
-            <div className="col-lg-3 col-sm-6">
+            <div key={i} className="col-lg-3 col-sm-6">
                 <div className="team_item">
                     <div className="team_img">
-                        <img className="img-fluid eventImg" src={img}/>
+                        {event.media.length>0?(event.media.slice(0, 1).map((media,i) => {
+                            return (
+
+                                <img key={i} className="img-fluid eventImg" src={media.url}/>
+                            )
+                        })):  <img  className="img-fluid eventImg" src={img}/>
+                        }
+
                             <div className="hover">
                                 <a href="#"><i className="fa fa-facebook"></i></a>
                                 <a href="#"><i className="fa fa-twitter"></i></a>
