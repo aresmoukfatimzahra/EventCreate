@@ -9,6 +9,7 @@ import img from '../../../../public/img/event1.jpg';
 
 
 
+
 export default class IndexEvents extends React.Component {
     constructor(props) {
         super(props);
@@ -70,7 +71,11 @@ export default class IndexEvents extends React.Component {
             }
 
         </div>
-    <div className=" offset-5 col-md-6 button-all"> <a className="main_btn" href="#">See all Events</a></div>
+    <div className=" offset-5 col-md-6 button-all">
+
+        <a href="#">See all Events</a>
+
+    </div>
  </section>
 
     );

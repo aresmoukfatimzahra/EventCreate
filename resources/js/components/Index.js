@@ -13,13 +13,30 @@ import Footer from "./Footer";
 import WelcomeMessage from "./WelcomeMessage";
 import Artists from "./Events/Artists";
 import Media from "./Events/Media";
-
+import { BrowserRouter as Router,Route,Switch } from 'react-router-dom';
+import history from '../services/history';
+import Routes from '../Routes';
+import MoreEvents from "./Events/MoreEvents";
 
 export default class Index extends Component {
     render() {
         return (
+
             <div>
-               <HeaderTemplate/>
+
+                {/*<React.Fragment>*/}
+
+                {/*    <Router>*/}
+
+                {/*        <div>*/}
+                {/*            <HeaderTemplate/>*/}
+                {/*            <Route exact path="/" component={Index} />*/}
+                {/*            <Route path="/about" component={MoreEvents} />*/}
+
+                {/*        </div>*/}
+                {/*    </Router>*/}
+                {/*</React.Fragment>*/}
+                <HeaderTemplate/>
                    <HomeBanner/>
                      <TimeArea/>
                      <div className="container">
