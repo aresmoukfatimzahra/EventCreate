@@ -17,37 +17,24 @@ import { BrowserRouter as Router,Route,Switch,MemoryRouter } from 'react-router-
 
 import Routes from '../Routes';
 import MoreEvents from "./Events/MoreEvents";
+import Index from "./Index";
 
-export default class Index extends Component {
+ class App extends Component {
     render() {
         return (
 
-            <div>
 
-                <HeaderTemplate/>
-
-
-                   <HomeBanner/>
-                     <TimeArea/>
-                     <div className="container">
-                       <WelcomeMessage/>
-                        <IndexEvents/>
-                        <Artists/>
-                        <Media/>
-                        <Schedule/>
-                      </div>
-                      <ContactInfo/>
-                      <div className="container">
-                          <PricesBox/>
-                     </div>
-                <Footer/>
-
-            </div>
+                <Router>
+                    <Switch>
+                        <Route path="/"  component={Index}  exact={true}/>
+                        <Route path="/MoreEvents" component={MoreEvents} exact={true} />
+                    </Switch>
+                </Router>
 
         );
     }
 }
 
-// if (document.getElementById('example')) {
-//     ReactDOM.render(<Index />, document.getElementById('example'));
-// }
+if (document.getElementById('example')) {
+    ReactDOM.render(<App />, document.getElementById('example'));
+}

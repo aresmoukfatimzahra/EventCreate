@@ -32,8 +32,8 @@ export default class HeaderTemplate extends React.Component {
                                     <ul className="nav navbar-nav menu_nav ml-auto">
                                         {/*<li className="nav-item active"><Link  to={"/"}>Home</Link></li>*/}
                                         {/*<li className="nav-item active"><Link to={"/MoreEvents"}>Events</Link></li> */}
-                                        <li className="nav-item active"><a  className="nav-link" href="/">Home</a></li>
-                                        <li className="nav-item active"><a className="nav-link" href="/MoreEvents">Events</a></li>
+                                        <li className="nav-item active"><Link className="nav-link" to="/">Home</Link></li>
+                                        <li className="nav-item active"><Link className="nav-link" to="/MoreEvents">Events</Link></li>
                                         <li className="nav-item"><a className="nav-link" href="speakers.html">Singers</a></li>
                                         <li className="nav-item"><a className="nav-link" href="speakers.html">Music News</a></li>
                                             <li className="nav-item"><a className="nav-link" href="about-us.html">About</a></li>
@@ -64,16 +64,12 @@ export default class HeaderTemplate extends React.Component {
                                 </div>
                             </div>
                         </nav>
+                        <div>
 
+                        </div>
                     </div>
                 </header>
 
-
-         {/*<Route exact path="/" component={Index} />*/}
-         {/*<Route exact path="/MoreEvents" component={MoreEvents} />*/}
-         {/*       <div style={{paddingTop: '100px'}}>*/}
-         {/*           <Routes/>*/}
-         {/*       </div>*/}
             </div>
 
 
@@ -81,3 +77,4 @@ export default class HeaderTemplate extends React.Component {
                             );
                             }
                             }
+
