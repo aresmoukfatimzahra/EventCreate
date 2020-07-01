@@ -20,9 +20,11 @@ Route::get('events', 'EventController@index');
 Route::get('events/{event}','EventController@show');
 
 
-Route::post('events', 'EventController@store');
+Route::post('events/create', 'EventController@store');
 
-Route::put('events/{event}', 'EventController@update');
+Route::get('event/{id}/edit', 'EventController@edit');
+
+Route::put('event/{event}/update', 'EventController@update');
 
 Route::delete('events/{event}','EventController@delete');
 
