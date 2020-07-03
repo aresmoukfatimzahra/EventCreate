@@ -17,6 +17,7 @@ import { BrowserRouter as Router,Route,Switch,MemoryRouter } from 'react-router-
 
 import Routes from '../Routes';
 import MoreEvents from "./Events/MoreEvents";
+import banner from "../../../public/img/banner/home-banner.jpg";
 
 export default class Index extends Component {
     render() {
@@ -27,7 +28,13 @@ export default class Index extends Component {
                 <HeaderTemplate/>
 
 
-                   <HomeBanner/>
+                   {/*<HomeBanner/>*/}
+                <HomeBanner  pic={banner}
+                             text={[  <h2>Build your Event in Minutes</h2>,
+                                 <p>Get started by creating an event . From there, you can quickly add content, import images or videos,
+                                     customize your fonts. It's that easy.</p>]}/>
+
+                />
                      <TimeArea/>
                      <div className="container">
                        <WelcomeMessage/>
@@ -47,7 +54,11 @@ export default class Index extends Component {
         );
     }
 }
-
+const styles = {
+    exampleStyle: {
+        backgroundColor: 'red',
+    }
+};
 // if (document.getElementById('example')) {
 //     ReactDOM.render(<Index />, document.getElementById('example'));
 // }

@@ -19,7 +19,7 @@ export default class HeaderTemplate extends React.Component {
                     <div className="main_menu">
                         <nav className="navbar navbar-expand-lg navbar-light">
                             <div className="container box_1620">
-                                <a className="navbar-brand logo_h logoHeader" href="index.html" style={{textTransform:"uppercase",color:"white"}} > eventcreate</a>
+                                <Link className="navbar-brand logo_h logoHeader" to="/" style={{textTransform:"uppercase",color:"white"}} > eventcreate</Link>
                                 <button className="navbar-toggler" type="button" data-toggle="collapse"
                                         data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                                         aria-expanded="false" aria-label="Toggle navigation">

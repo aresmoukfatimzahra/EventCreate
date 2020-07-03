@@ -6,6 +6,7 @@ import team2 from '../../../../public/img/team/team-2.jpg';
 import team3 from '../../../../public/img/team/team-3.jpg';
 import team4 from '../../../../public/img/team/team-4.jpg';
 import img from '../../../../public/img/event1.jpg';
+import { Link } from 'react-router-dom';
 
 
 
@@ -71,11 +72,12 @@ export default class IndexEvents extends React.Component {
             }
 
         </div>
-    <div className=" offset-5 col-md-6 button-all">
+    {/*<div className=" offset-5 col-md-6 button-all">*/}
 
-        <a href="#">See all Events</a>
 
-    </div>
+        <div className=" offset-5 col-md-6 button-all">  <Link className="main_btn" to="/MoreEvents">See all Events</Link></div>
+
+    {/*</div>*/}
  </section>
 
     );
