@@ -17,8 +17,8 @@ class CreateEventsTable extends Migration
             $table->id();
             $table->string('title');
             $table->string('place');
-            $table->string('status');
-            $table->text('description');
+            $table->boolean('status');
+            $table->string('description');
             $table->date('date');
             $table->timestamps();
         });

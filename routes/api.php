@@ -20,6 +20,11 @@ Route::get('events', 'EventController@index');
 Route::get('events/{event}','EventController@show');
 
 
+Route::post('events/create', 'EventController@store');
+
+Route::get('event/{id}/edit', 'EventController@edit');
+
+Route::put('event/{event}/update', 'EventController@update');
 Route::post('events', 'EventController@store');
 Route::get('event_medias/{event}','EventController@showMedia');
 Route::put('events/{event}', 'EventController@update');
