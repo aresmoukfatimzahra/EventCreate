@@ -38,9 +38,9 @@ const Typography = React.lazy(() => import('./views/theme/typography/Typography'
 const Widgets = React.lazy(() => import('./views/widgets/Widgets'));
 const Users = React.lazy(() => import('./views/users/Users'));
 const User = React.lazy(() => import('./views/users/User'));
-const Events = React.lazy(()=> import('./views/events/liste'))
+const Events = React.lazy(()=> import('./views/events/Liste'))
 const EventAdd = React.lazy(() => import('./views/events/Add'));
-const EventListe = React.lazy(() => import('./views/events/liste'));
+const EventListe = React.lazy(() => import('./views/events/Liste'));
 const UpdateEvent = React.lazy(() => import('./views/events/Update'));
 
 const routes = [

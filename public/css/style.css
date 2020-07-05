@@ -4160,3 +4160,23 @@ h6 {
     width: 300px;
     height: 260px;
 }
+.title-event{
+    color:#7cbd1e;
+}
+.btn-events{
+    margin-left: 0px;
+}
+.videoEvent iframe{
+    width: 1150px !important;
+    height: 500px !important;
+}
+.event_desctitle
+{
+    font-family: "League Spartan", sans-serif;
+    font-size: 40px !important;
+    font-weight: bold !important;
+}
+.event_desc{
+    font-family: "League Spartan", sans-serif;
+    margin-top: 40px;
+}

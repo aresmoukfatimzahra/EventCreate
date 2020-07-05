@@ -1,8 +1,8 @@
 import React,{Component} from 'react';
 import HeaderTemplate from "../HeaderTemplate";
 import HomeBanner from "./HomeBanner";
-import banner from '../../../../public/img/banner/home-banner.jpg';
-import team4 from '../../../../public/images/img_3.jpg';
+import banner from '../../../../public/assets/img/banner/home-banner.jpg';
+import team4 from '../../../../public/assets/images/img_3.jpg';
 import {indexEvents} from "../../services";
 import { Link } from 'react-router-dom';
 
@@ -46,10 +46,11 @@ export default class MoreEvents extends React.Component {
                 {this.state.events.map((event,i) => {
                     return (
                 <div className="col-md-6 col-lg-4 mb-5" data-aos="fade-up" data-aos-delay="100">
-                    <a href="#"><img src={team4} alt="Image" className="img-fluid"/></a>
+                    <Link to={"/EventDesc/"+event.id}><img src={team4} alt="Image" className="img-fluid"/></Link>
+
                     <div className="p-4 bg-white">
                         <span style={{"color": "#6c757d",'textTransform': 'uppercase','fontSize':15}} className="d-block text-secondary small text-uppercase">Jan 20th, 2019</span>
-                        <h2 className="h5 text-black mb-3" style={{'color': '#517b14;'}} ><Link to="/" >{event.title}</Link></h2>
+                        <h2 className="h5 text-black mb-3" style={{'color': '#517b14;'}} ><Link to={"/EventDesc/"+event.id} >{event.title}</Link></h2>
                         <p>
                             {event.description}
                         </p>

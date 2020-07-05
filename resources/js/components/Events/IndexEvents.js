@@ -1,11 +1,8 @@
 import React,{Component} from 'react';
 import ReactDOM from 'react-dom';
 import {indexEvents,indexMedia} from "../../services";
-import team1 from '../../../../public/img/team/team-1.jpg';
-import team2 from '../../../../public/img/team/team-2.jpg';
-import team3 from '../../../../public/img/team/team-3.jpg';
-import team4 from '../../../../public/img/team/team-4.jpg';
-import img from '../../../../public/img/event1.jpg';
+
+import img from '../../../../public/assets/img/event1.jpg';
 import { Link } from 'react-router-dom';
 
 
@@ -49,9 +46,9 @@ export default class IndexEvents extends React.Component {
                         {event.media.length>0?(event.media.slice(0, 1).map((media,i) => {
                             return (
 
-                                <img key={i} className="img-fluid eventImg" src={media.url}/>
+                                <Link to={"/EventDesc/"+event.id}><img key={i} className="img-fluid eventImg" src={media.url}/></Link>
                             )
-                        })):  <img  className="img-fluid eventImg" src={img}/>
+                        })):  <Link to={"/EventDesc/"+event.id}><img  className="img-fluid eventImg" src={img}/></Link>
                         }
 
                             <div className="hover">
@@ -61,7 +58,7 @@ export default class IndexEvents extends React.Component {
                             </div>
                     </div>
                     <div className="team_name">
-                        <h4>{event.title}</h4>
+                        <h4><Link to={"/EventDesc/"+event.id}>{event.title}</Link></h4>
                         <p>{event.description.substring(0,60)}</p>
                     </div>
                 </div>

@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 
-import pic from '../../../public/img/gens.jpg';
+import pic from '../../../public/assets/img/gens.jpg';
 
 
 

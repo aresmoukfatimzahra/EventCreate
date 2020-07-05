@@ -11,6 +11,7 @@ import {
     CLink
   } from '@coreui/react'
 import Axios from 'axios';
+import {indexEvents} from "../../../../js/services";
 
 export default class Liste extends Component
 {
@@ -23,7 +24,8 @@ export default class Liste extends Component
     }
 
     componentDidMount=()=>{
-        Axios.get('/api/events').then(
+      const url=process.env.MIX_REACT_APP_ROOT
+        Axios.get(url+'/events').then(
             Response => {
                 this.setState(
                     {
@@ -34,6 +36,10 @@ export default class Liste extends Component
             }
         ).catch(err => console.log(err));
     }
+
+
+
+
 
     getBadge = status => {
         switch (status) {
@@ -50,15 +56,15 @@ export default class Liste extends Component
             console.log('success')
             //this.props.history.push('/events/liste')
           }).catch(err => console.log(err));
-          
+
       }
-    
+
     fields = ['title','place', 'description', 'date', 'status', 'action']
 
     render() {
-        
+
         return(
-            
+
             <CRow>
                 <CCol>
                 <CCard>
@@ -67,7 +73,7 @@ export default class Liste extends Component
                     </CCardHeader>
                     <CCardBody>
                         <CDataTable
-                        items={this.state.events}                   
+                        items={this.state.events}
                         fields={this.fields}
                         hover
                         striped
@@ -86,7 +92,7 @@ export default class Liste extends Component
                             ),
                             'action':
                               (item) =>  (
-                                <td> 
+                                <td>
                                     <CLink to={`/events/${item.id}/update/`}  type="submit" size="sm" className="btn btn-warning">Update</CLink>
                                     <CLink onClick={this.handleDelete.bind(this,item.id)} type="submit" size="sm" className="btn btn-danger">Delete</CLink>
                                 </td>

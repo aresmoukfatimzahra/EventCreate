@@ -2,7 +2,7 @@ import React,{Component} from 'react';
 import ReactDOM from 'react-dom';
 import Example from "./Example";
 import IndexEvents from "./Events/IndexEvents";
-import pic from '../../../public/img/gens.jpg';
+
 import HeaderTemplate from "./HeaderTemplate";
 import HomeBanner from "./Events/HomeBanner";
 import TimeArea from "./Events/TimeArea";
@@ -18,6 +18,7 @@ import { BrowserRouter as Router,Route,Switch,MemoryRouter } from 'react-router-
 import Routes from '../Routes';
 import MoreEvents from "./Events/MoreEvents";
 import Index from "./Index";
+import EventDesc from "./Events/EventDesc";
 
  class App extends Component {
     render() {
@@ -28,6 +29,7 @@ import Index from "./Index";
                     <Switch>
                         <Route path="/"  component={Index}  exact={true}/>
                         <Route path="/MoreEvents" component={MoreEvents} exact={true} />
+                        <Route path="/EventDesc/:id" component={EventDesc} exact={true} />
                     </Switch>
                 </Router>
 

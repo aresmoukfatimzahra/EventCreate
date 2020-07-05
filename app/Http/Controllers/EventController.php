@@ -16,7 +16,10 @@ class EventController extends Controller
 
     public function show(Event $event)
     {
-        return $event;
+        $events= Event::with('media')->get();
+        $re= $events->find($event);
+        return ['event'=>$re,"event_medias"=>$re->media];
+
     }
     public function showMedia(Event $event)
     {

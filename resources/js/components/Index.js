@@ -2,7 +2,7 @@ import React,{Component} from 'react';
 import ReactDOM from 'react-dom';
 import Example from "./Example";
 import IndexEvents from "./Events/IndexEvents";
-import pic from '../../../public/img/gens.jpg';
+
 import HeaderTemplate from "./HeaderTemplate";
 import HomeBanner from "./Events/HomeBanner";
 import TimeArea from "./Events/TimeArea";
@@ -17,7 +17,7 @@ import { BrowserRouter as Router,Route,Switch,MemoryRouter } from 'react-router-
 
 import Routes from '../Routes';
 import MoreEvents from "./Events/MoreEvents";
-import banner from "../../../public/img/banner/home-banner.jpg";
+import banner from "../../../public/assets/img/banner/home-banner.jpg";
 
 export default class Index extends Component {
     render() {
