@@ -19,6 +19,8 @@ import Routes from '../Routes';
 import MoreEvents from "./Events/MoreEvents";
 import Index from "./Index";
 import EventDesc from "./Events/EventDesc";
+import MoreArtists from "./Artists/MoreArtists";
+import MoreMedias from "./Media/MoreMedias";
 
  class App extends Component {
     render() {
@@ -30,6 +32,8 @@ import EventDesc from "./Events/EventDesc";
                         <Route path="/"  component={Index}  exact={true}/>
                         <Route path="/MoreEvents" component={MoreEvents} exact={true} />
                         <Route path="/EventDesc/:id" component={EventDesc} exact={true} />
+                        <Route path="/MoreArtists" component={MoreArtists} exact={true} />
+                        <Route path="/MoreMedias" component={MoreMedias} exact={true} />
                     </Switch>
                 </Router>
 

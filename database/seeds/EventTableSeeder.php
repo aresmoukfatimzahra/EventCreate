@@ -19,7 +19,7 @@ class EventTableSeeder extends Seeder
                 'title' => $faker->text(15),
                 'place' => $faker->text,
                 'status' => $faker->boolean(false),
-                'description' => $faker->paragraph,
+                'description' => $faker->realText(),
                 'date' => $faker->date('Y-m-d'),
 
             ]);

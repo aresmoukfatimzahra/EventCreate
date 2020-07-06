@@ -34,7 +34,7 @@ export default class HeaderTemplate extends React.Component {
                                         {/*<li className="nav-item active"><Link to={"/MoreEvents"}>Events</Link></li> */}
                                         <li className="nav-item active"><Link className="nav-link" to="/">Home</Link></li>
                                         <li className="nav-item active"><Link className="nav-link" to="/MoreEvents">Events</Link></li>
-                                        <li className="nav-item"><a className="nav-link" href="speakers.html">Singers</a></li>
+                                        <li className="nav-item"><Link to="/MoreArtists" className="nav-link" href="speakers.html">Singers</Link></li>
                                         <li className="nav-item"><a className="nav-link" href="speakers.html">Music News</a></li>
                                             <li className="nav-item"><a className="nav-link" href="about-us.html">About</a></li>
                                         {/*<li className="nav-item submenu dropdown"><a href="#" className="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Pages</a>*/}
@@ -58,7 +58,7 @@ export default class HeaderTemplate extends React.Component {
                                     </ul>
 
                                     <ul className="nav navbar-nav navbar-right">
-                                        <li className="nav-item"><a href="#" className="tickets_btn">Get Tickets</a></li>
+                                        <li className="nav-item"><Link to="/login" className="tickets_btn">LOGIN</Link></li>
                                         <li className="nav-item"><a href="#" className="search"><i className="lnr lnr-magnifier"/></a></li>
                                     </ul>
                                 </div>

@@ -16,11 +16,13 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('events', 'EventController@index');
+Route::get('users', 'EventController@userss');
 
 Route::get('events/{event}','EventController@show');
 
 
 Route::post('events/create', 'EventController@store');
+
 
 Route::get('event/{id}/edit', 'EventController@edit');
 

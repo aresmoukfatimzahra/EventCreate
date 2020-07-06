@@ -4,6 +4,7 @@ import team1 from '../../../../public/assets/img/team/team-1.jpg';
 import team2 from '../../../../public/assets/img/team/team-2.jpg';
 import team3 from '../../../../public/assets/img/team/team-3.jpg';
 import team4 from '../../../../public/assets/img/team/team-4.jpg';
+import {Link} from "react-router-dom";
 
 
 
@@ -84,7 +85,7 @@ export default class Media extends React.Component {
                         </div>
                     </div>
                 </div>
-                <div className=" offset-5 col-md-6 button-all"> <a className="main_btn" href="#">See all Medias</a></div>
+                <div className=" offset-5 col-md-6 button-all"> <Link to="/MoreMedias" className="main_btn" href="#">See all Medias</Link></div>
             </section>
 
         );
