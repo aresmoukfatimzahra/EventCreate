@@ -164,10 +164,14 @@ export default class Add extends Component
                                 <CCol xs="8">
                                     <CFormGroup>
                                         <CLabel htmlFor="name">Description</CLabel>
-                                        <CInput id="name" placeholder="Description" 
+                                        <CTextarea 
+                                        name="description" 
                                         required
                                         onChange={this.handleDescription}
                                         value={this.state.description}
+                                        id="description" 
+                                        rows="9"
+                                        placeholder="Description..." 
                                         />
                                     </CFormGroup>
                                 </CCol>

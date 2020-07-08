@@ -8,7 +8,8 @@ import {
   CCol,
   CDataTable,
   CRow,
-  CPagination
+  CPagination,
+  CLink
 } from '@coreui/react'
 
 import usersData from './UsersData'
@@ -39,25 +40,25 @@ const Users = () => {
 
   return (
     <CRow>
-      <CCol xl={6}>
+      <CCol xl={12}>
         <CCard>
           <CCardHeader>
             Users
-            <small className="text-muted"> example</small>
+            <small className="text-muted"> liste</small>
           </CCardHeader>
           <CCardBody>
           <CDataTable
             items={usersData}
             fields={[
               { key: 'name', _classes: 'font-weight-bold' },
-              'registered', 'role', 'status'
+              'registered', 'role', 'status', 'actions'
             ]}
             hover
             striped
             itemsPerPage={5}
             activePage={page}
             clickableRows
-            onRowClick={(item) => history.push(`/users/${item.id}`)}
+            //onRowClick={(item) => history.push(`/users/${item.id}`)}
             scopedSlots = {{
               'status':
                 (item)=>(
@@ -66,13 +67,21 @@ const Users = () => {
                       {item.status}
                     </CBadge>
                   </td>
+                ),
+                'actions':
+                (item)=>(
+                  <td>
+                     <CLink to={`/users/${item.id}/update/`}  type="submit" size="sm" className="btn btn-warning">Update</CLink>
+                     <CLink size="sm" className="btn btn-danger">Delete</CLink>
+                     <CLink to={`/users/${item.id}`} size="sm" className="btn btn-danger">Details</CLink>
+                  </td>
                 )
             }}
           />
           <CPagination
             activePage={page}
             onActivePageChange={pageChange}
-            pages={5}
+            pages={10}
             doubleArrows={false} 
             align="center"
           />

@@ -38,10 +38,11 @@ const Typography = React.lazy(() => import('./views/theme/typography/Typography'
 const Widgets = React.lazy(() => import('./views/widgets/Widgets'));
 const Users = React.lazy(() => import('./views/users/Users'));
 const User = React.lazy(() => import('./views/users/User'));
+const UpdateUser = React.lazy(() => import('./views/users/Update'));
 const Events = React.lazy(()=> import('./views/events/liste'))
 const EventAdd = React.lazy(() => import('./views/events/Add'));
 const EventListe = React.lazy(() => import('./views/events/liste'));
-const UpdateEvent = React.lazy(() => import('./views/events/Update'));
+const UpdateEvent = React.lazy(() => import('./views/events/update'));
 
 const routes = [
   { path: '/', exact: true, name: 'Home' },
@@ -88,7 +89,8 @@ const routes = [
   { path: '/notifications/toaster', name: 'Toaster', component: Toaster },
   { path: '/widgets', name: 'Widgets', component: Widgets },
   { path: '/users', exact: true,  name: 'Users', component: Users },
-  { path: '/users/:id', exact: true, name: 'User Details', component: User }
+  { path: '/users/:id', exact: true, name: 'User Details', component: User },
+  { path: '/users/:id/update', name: 'User Update', component: UpdateUser }
 ];
 
 export default routes;
