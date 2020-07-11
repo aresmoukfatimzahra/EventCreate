@@ -34,7 +34,7 @@ export default class HeaderTemplate extends React.Component {
                                         {/*<li className="nav-item active"><Link to={"/MoreEvents"}>Events</Link></li> */}
                                         <li className="nav-item active"><Link className="nav-link" to="/">Home</Link></li>
                                         <li className="nav-item active"><Link className="nav-link" to="/MoreEvents">Events</Link></li>
-                                        <li className="nav-item"><Link to="/MoreArtists" className="nav-link" href="speakers.html">Singers</Link></li>
+                                        <li className="nav-item"><Link to="/MoreArtists" className="nav-link" href="speakers.html">Artists</Link></li>
                                         <li className="nav-item"><a className="nav-link" href="speakers.html">Music News</a></li>
                                             <li className="nav-item"><a className="nav-link" href="about-us.html">About</a></li>
                                         {/*<li className="nav-item submenu dropdown"><a href="#" className="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Pages</a>*/}

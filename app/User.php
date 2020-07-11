@@ -39,6 +39,16 @@ class User extends Authenticatable
 
     public function role()
     {
-        return $this->hasOne('App\Role');
+        return $this->hasMany('App\Role');
     }
+    public function media()
+    {
+        return $this->hasOne('App\Media');
+    }
+    public function events()
+    {
+        return $this->belongsToMany('App\Event','user_event')->withTimestamps();
+
+    }
+
 }

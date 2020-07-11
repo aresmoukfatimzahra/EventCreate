@@ -11,4 +11,8 @@ class Event extends Model
     {
         return $this->hasMany('App\Media');
     }
+    public function user()
+    {
+        return $this->belongsToMany('App\User','user_event')->withTimestamps();
+    }
 }

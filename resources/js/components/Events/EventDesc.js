@@ -71,7 +71,7 @@ let n=this.state.medias.length;
                                     <li className="active">
                                         <Link to={"/"}>Home</Link>
                                     </li>
-                                    <li><a href="dj.html">Singers</a></li>
+                                    <li><Link to="/MoreArtists">Artists</Link></li>
                                     <li><a href="about.html">About</a></li>
                                     <li><a href="about.html">Music News</a></li>
                                     <li><a href="contact.html">Contact</a></li>

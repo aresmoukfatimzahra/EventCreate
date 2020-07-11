@@ -5,6 +5,9 @@ import banner from '../../../../public/assets/img/banner/home-banner.jpg';
 import team4 from '../../../../public/assets/images/img_3.jpg';
 import {indexEvents} from "../../services";
 import { Link } from 'react-router-dom';
+import img from "../../../../public/assets/img/event1.jpg";
+
+
 
 
 
@@ -12,23 +15,26 @@ export default class MoreArtists extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            events: [],
+            artists: [],
+            role: [],
         }
     }
 
     componentWillMount() {
         const url=process.env.MIX_REACT_APP_ROOT
 
-        indexEvents(url+'/events',data=>{
+        indexEvents(url+'/artists',data=>{
             this.setState({
-                events:data,
+                artists:data,
+
             })
 
         })
     }
     render() {
-
-
+console.log('-----artists-----');
+console.log(this.state);
+let artists=this.state.artists
         return (
             <div>
 
@@ -43,17 +49,29 @@ export default class MoreArtists extends React.Component {
                         </div>
                         <div className="row">
 
-                            {this.state.events.map((event,i) => {
+                            {artists.map((artist,i) => {
                                 return (
-                                    <div className="col-md-6 col-lg-4 mb-5" data-aos="fade-up" data-aos-delay="100">
-                                        <Link to={"/EventDesc/"+event.id}><img src={team4} alt="Image" className="img-fluid"/></Link>
+                                    <div className="col-md-6 col-lg-4 mb-5 text-center" data-aos="fade-up" data-aos-delay="100">
+                                        {artist.media?
+
+                                                <Link to={"/Artist/"+artist.id}><img key={i} className="img-fluid eventImg" src={artist.media}/></Link>
+                                           :  <Link to={"/Artist/"+artist.id}><img  className="img-fluid eventImg" src={img}/></Link>
+                                        }
 
                                         <div className="p-4 bg-white">
-                                            <span style={{"color": "#6c757d",'textTransform': 'uppercase','fontSize':15}} className="d-block text-secondary small text-uppercase">Jan 20th, 2019</span>
-                                            <h2 className="h5 text-black mb-3" style={{'color': '#517b14;'}} ><Link to={"/EventDesc/"+event.id} >{event.title}</Link></h2>
-                                            <p>
-                                                {event.description}
-                                            </p>
+                                            <h2 className="h5 text-black mb-3" style={{'color': '#517b14;'}} ><Link to={"/Artist/"+artist.id} >{artist.name}</Link></h2>
+
+
+
+                                                        <span style={{"color": "#6c757d",'textTransform': 'uppercase','fontSize':15}} className="d-block text-secondary small text-uppercase">
+                                                            {artist.role}</span>
+
+
+                                            <span style={{"color": "#6c757d",'textTransform': 'uppercase','fontSize':15}} className="d-block text-secondary small text-uppercase">Membre depuis {artist.created_at.substring(0,10)}</span>
+                                            <i className="fa fa-facebook icon-social" aria-hidden="true"></i>
+                                            <i className="fa fa-instagram icon-social" aria-hidden="true"></i>
+                                            <i className="fa fa-envelope icon-social" aria-hidden="true"></i>
+
                                         </div>
                                     </div>
                                 )
@@ -61,43 +79,6 @@ export default class MoreArtists extends React.Component {
                             }
 
 
-                        </div>
-                        <div className="row">
-                            <div className="col-md-12 col-lg-4 mb-5" data-aos="fade-up" data-aos-delay="100">
-                                <h3 style={{'textTransform':'uppercase'}} >Upcoming Events</h3>
-                            </div>
-                        </div>
-                        <div className="row">
-                            <div className="col-md-6 col-lg-4 mb-5" data-aos="fade-up" data-aos-delay="100">
-                                <a href="#"><img src={team4} alt="Image" className="img-fluid"/></a>
-                                <div className="p-4 bg-white">
-                                    <span style={{"color": "#6c757d",'textTransform': 'uppercase','fontSize':15}} className="d-block text-secondary small text-uppercase">Jan 20th, 2019</span>
-                                    <h2 className="h5 text-black mb-3" style={{'color': '#517b14;'}} ><Link to="/" >title</Link></h2>
-                                    <p>
-                                        description
-                                    </p>
-                                </div>
-                            </div>
-                            <div className="col-md-6 col-lg-4 mb-5" data-aos="fade-up" data-aos-delay="100">
-                                <a href="#"><img src={team4} alt="Image" className="img-fluid"/></a>
-                                <div className="p-4 bg-white">
-                                    <span style={{"color": "#6c757d",'textTransform': 'uppercase','fontSize':15}} className="d-block text-secondary small text-uppercase">Jan 20th, 2019</span>
-                                    <h2 className="h5 text-black mb-3" style={{'color': '#517b14;'}} ><Link to="/" >title</Link></h2>
-                                    <p>
-                                        description
-                                    </p>
-                                </div>
-                            </div>
-                            <div className="col-md-6 col-lg-4 mb-5" data-aos="fade-up" data-aos-delay="100">
-                                <a href="#"><img src={team4} alt="Image" className="img-fluid"/></a>
-                                <div className="p-4 bg-white">
-                                    <span style={{"color": "#6c757d",'textTransform': 'uppercase','fontSize':15}} className="d-block text-secondary small text-uppercase">Jan 20th, 2019</span>
-                                    <h2 className="h5 text-black mb-3" style={{'color': '#517b14;'}} ><Link to="/" >title</Link></h2>
-                                    <p>
-                                        description
-                                    </p>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>

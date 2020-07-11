@@ -14,8 +14,8 @@ class AddForeignKeyToUserTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->biginteger('role_id')->unsigned();
-            $table->foreign('role_id')->references('id')->on('roles');
+//            $table->biginteger('role_id')->unsigned();
+//            $table->foreign('role_id')->references('id')->on('roles');
         });
     }
 
@@ -27,7 +27,7 @@ class AddForeignKeyToUserTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('role_id');
+//            $table->dropColumn('role_id');
         });
     }
 }

@@ -4180,3 +4180,10 @@ h6 {
     font-family: "League Spartan", sans-serif;
     margin-top: 40px;
 }
+.icon-social{
+    padding:8px 10px;
+    border:1px solid grey;
+    margin-left:40px;
+    margin-top:15px;
+    border-radius: 50%;
+}
