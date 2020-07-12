@@ -139,13 +139,14 @@ let medias=this.state.medias
                                             <div className="row">
                                             <div className="col-md-6 progress">
 
-                                        <span className="skill">{event.title}<br/> <i className="val">{event.created_at.substring(0,10)}</i></span>
+                                        <span className="skill text-center">{event.title}<br/>
+                                        <i className="val text-center">{event.created_at.substring(0,10)}</i></span>
                                     </div><br/>
                                                 <div className="col-md-12">
                                             {list.length>0?list.map(med =>
 
                                                     med.event_id === event.id ?(
-                                                 <img src={med.url} className="img-fluid" alt="ddd" style={{height:150,width:150}}/>
+                                                 <Link to={"/EventDesc/"+event.id}><img src={med.url} className="img-fluid" alt="ddd" style={{height:150,width:150}}/></Link>
                                                     ): null
                                             ):null}
                                         </div>
@@ -165,7 +166,7 @@ let medias=this.state.medias
 
                         </div>
                         <div className=" offset-5 col-md-6 button-all">
-                            <Link className="main_btn btn-events" to="/MoreArtists">Back to Artists</Link>
+                            <Link className="main_btn btn-artists" to="/MoreArtists">Back to Artists</Link>
                         </div>
                     </section>
 
