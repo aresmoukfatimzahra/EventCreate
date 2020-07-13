@@ -37,7 +37,7 @@
     <body>
 
     <!--================Welcome Area =================-->
-        <div  id="example" class="title m-b-md"> </div>
+        <div  id="root" class="title m-b-md"> </div>
 
 
         <!-- Optional JavaScript -->

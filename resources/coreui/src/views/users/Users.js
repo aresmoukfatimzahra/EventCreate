@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, Component } from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
 import {
   CBadge,
@@ -8,79 +8,84 @@ import {
   CCol,
   CDataTable,
   CRow,
-  CPagination
+  CPagination,
+  CLink
 } from '@coreui/react'
 
 import usersData from './UsersData'
+import { render } from 'enzyme'
+import Axios from 'axios'
 
-const getBadge = status => {
-  switch (status) {
-    case 'Active': return 'success'
-    case 'Inactive': return 'secondary'
-    case 'Pending': return 'warning'
-    case 'Banned': return 'danger'
-    default: return 'primary'
-  }
-}
-
-const Users = () => {
-  const history = useHistory()
-  const queryPage = useLocation().search.match(/page=([0-9]+)/, '')
-  const currentPage = Number(queryPage && queryPage[1] ? queryPage[1] : 1)
-  const [page, setPage] = useState(currentPage)
-
-  const pageChange = newPage => {
-    currentPage !== newPage && history.push(`/users?page=${newPage}`)
+export default class Users extends Component {
+  
+  constructor(props){
+    super(props);
+    this.state={
+      users: []
+    }
   }
 
-  useEffect(() => {
-    currentPage !== page && setPage(currentPage)
-  }, [currentPage, page])
+  componentDidMount = () =>{
+    const url=process.env.MIX_REACT_APP_ROOT
+    Axios.get(url+'/users/liste').then(
+      Response => {
+          this.setState(
+              {
+                  users: Response.data
+              }
+          )
+          console.log(this.state.users);
+      }
+  ).catch(err => console.log(err));
+  }
+
+  render() {
 
   return (
     <CRow>
-      <CCol xl={6}>
+      <CCol xl={12}>
         <CCard>
           <CCardHeader>
             Users
-            <small className="text-muted"> example</small>
+            <small className="text-muted"> liste</small>
           </CCardHeader>
           <CCardBody>
           <CDataTable
-            items={usersData}
+            items={this.state.users}
             fields={[
               { key: 'name', _classes: 'font-weight-bold' },
-              'registered', 'role', 'status'
+              'email', 'role_id', 'actions'
             ]}
             hover
             striped
             itemsPerPage={5}
-            activePage={page}
+            // activePage={page}
+            pagination
             clickableRows
-            onRowClick={(item) => history.push(`/users/${item.id}`)}
+            //onRowClick={(item) => history.push(`/users/${item.id}`)}
             scopedSlots = {{
-              'status':
+              // 'status':
+              //   (item)=>(
+              //     <td>
+              //       <CBadge color={getBadge(item.status)}>
+              //         {item.status}
+              //       </CBadge>
+              //     </td>
+              //   ),
+                'actions':
                 (item)=>(
                   <td>
-                    <CBadge color={getBadge(item.status)}>
-                      {item.status}
-                    </CBadge>
+                     <CLink to={`/users/${item.id}/update/`}  type="submit" size="sm" className="btn btn-warning">Update</CLink>
+                     <CLink size="sm" className="btn btn-danger">Delete</CLink>
+                     <CLink to={`/users/${item.id}`} size="sm" className="btn btn-danger">Details</CLink>
                   </td>
                 )
             }}
-          />
-          <CPagination
-            activePage={page}
-            onActivePageChange={pageChange}
-            pages={5}
-            doubleArrows={false} 
-            align="center"
           />
           </CCardBody>
         </CCard>
       </CCol>
     </CRow>
   )
+  }
 }
-
-export default Users

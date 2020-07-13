@@ -18,7 +18,7 @@ export default class IndexEvents extends React.Component {
 
     componentWillMount() {
         const url=process.env.MIX_REACT_APP_ROOT
-
+        console.log(url)
         indexEvents(url+'/events',data=>{
             this.setState({
                 events:data,
@@ -27,8 +27,6 @@ export default class IndexEvents extends React.Component {
         })
     }
     render() {
-
-        let events=this.state.events
         return (
 
     <section className="team_area p_120">

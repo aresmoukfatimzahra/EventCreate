@@ -1,33 +1,57 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { CCard, CCardBody, CCardHeader, CCol, CRow } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
+import axios from 'axios'
 
-import usersData from './UsersData'
+export default class User extends Component {
 
-const User = ({match}) => {
-  const user = usersData.find( user => user.id.toString() === match.params.id)
-  const userDetails = user ? Object.entries(user) : 
-    [['id', (<span><CIcon className="text-muted" name="cui-icon-ban" /> Not found</span>)]]
+  constructor(props){
+    super(props);
+    this.state={
+      user: []
+    }
+  }
 
+  componentDidMount=()=>{
+    const id = this.props.match.params.id;
+    console.log(this.props);
+    axios.get(`api/user/${id}/show`).then(
+        Response => {
+            this.setState({
+                user: Response.data,
+            })
+            console.log(Response.data);
+        }
+    ).catch(err => console.log(err));
+  }
+
+  render() {
+    // const user = usersData.find( user => user.id.toString() === match.params.id)
+    const userDetails = Object.entries(this.state.user) 
+      // [['id', (<span><CIcon className="text-muted" name="cui-icon-ban" /> Not found</span>)]]
   return (
+    
     <CRow>
-      <CCol lg={6}>
+      <CCol lg={12}>
         <CCard>
           <CCardHeader>
-            User id: {match.params.id}
           </CCardHeader>
           <CCardBody>
               <table className="table table-striped table-hover">
                 <tbody>
                   {
-                    userDetails.map(([key, value], index) => {
-                      return (
+                    userDetails !== null 
+                    ?
+                    userDetails.map(([key, value], index) => (
+                     
                         <tr key={index.toString()}>
                           <td>{`${key}:`}</td>
                           <td><strong>{value}</strong></td>
                         </tr>
-                      )
-                    })
+                      
+                    )) 
+                    :
+                    ''
                   }
                 </tbody>
               </table>
@@ -37,5 +61,4 @@ const User = ({match}) => {
     </CRow>
   )
 }
-
-export default User
+}

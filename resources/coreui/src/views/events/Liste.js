@@ -37,10 +37,6 @@ export default class Liste extends Component
         ).catch(err => console.log(err));
     }
 
-
-
-
-
     getBadge = status => {
         switch (status) {
           case 1 : return 'success'

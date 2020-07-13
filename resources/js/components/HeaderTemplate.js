@@ -5,11 +5,32 @@ import Index from "./Index";
 import MoreEvents from "./Events/MoreEvents";
 // import Routes from '../Routes'
 
-
-
-
-
 export default class HeaderTemplate extends React.Component {
+
+    constructor(props){
+        super(props);
+        this.state={
+            isLoggedIn: false,
+            user: []
+        }
+    }
+
+    componentWillMount() {
+        let state = localStorage["appState"];
+        if (state) {
+          let AppState = JSON.parse(state);
+          this.setState({isLoggedIn: AppState.isLoggedIn, user: AppState});
+        }
+      }
+
+    componentDidMount(){
+        let state=localStorage["appState"];
+        if (state) {
+            let AppState = JSON.parse(state);
+            this.setState({isLoggedIn:AppState.isLoggedIn, user: AppState.user});
+        }
+    }
+    
     render() {
         return (
 
@@ -58,8 +79,20 @@ export default class HeaderTemplate extends React.Component {
                                     </ul>
 
                                     <ul className="nav navbar-nav navbar-right">
-                                        <li className="nav-item"><Link to="/login" className="tickets_btn">LOGIN</Link></li>
+                                        
+                                        {this.state.isLoggedIn ? 
+                                        <>
+                                        {console.log(this.state.isLoggedIn)}
+                                        <li className="nav-item"><span className="tickets_btn">{this.state.user.name}</span></li>
+                                        </>
+                                        :
+                                        <>
+                                        {console.log(this.state.isLoggedIn)}
+                                        <li className="nav-item"><span className="tickets_btn"><Link to="/login">LOGIN</Link>/<Link to="/register">REGISTER</Link></span></li>
                                         <li className="nav-item"><a href="#" className="search"><i className="lnr lnr-magnifier"/></a></li>
+                                        </>
+                                        }
+                                        
                                     </ul>
                                 </div>
                             </div>
@@ -77,4 +110,3 @@ export default class HeaderTemplate extends React.Component {
                             );
                             }
                             }
-
