@@ -16,21 +16,33 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('events', 'EventController@index');
+Route::get('users', 'EventController@userss');
 
 Route::get('events/{event}','EventController@show');
 
 
 Route::post('events/create', 'EventController@store');
 
+
 Route::get('event/{id}/edit', 'EventController@edit');
 
 Route::put('event/{event}/update', 'EventController@update');
+Route::post('events', 'EventController@store');
+Route::get('event_medias/{event}','EventController@showMedia');
+Route::put('events/{event}', 'EventController@update');
 
 Route::delete('events/{event}','EventController@delete');
+//media
+Route::get('medias', 'MediaController@index');
 
-// Route::middleware('auth:api')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
+Route::get('medias/{media}','MediaController@show');
+
+
+
+Route::post('medias', 'MediaController@store');
+
+Route::put('medias/{media}', 'MediaController@update');
+
 
 Route::group([
     'prefix' => 'auth'
@@ -44,4 +56,12 @@ Route::group([
         Route::get('logout', 'AuthController@logout');
         Route::get('user', 'AuthController@user');
     });
+
+ });
+Route::get('users/liste','UserController@liste');
+Route::get('user/{id}/show','UserController@show');
+Route::delete('medias/{media}','MediaController@destroy');
+Route::middleware('auth:api')->get('/user', function (Request $request) {
+    return $request->user();
+
 });

@@ -31,6 +31,7 @@ class RegisterContainer extends Component {
         email: '',
         password: '',
         password_confirmation: '',
+        role_id: '2',
     },
     redirect: props.redirect,
     };
@@ -48,7 +49,8 @@ class RegisterContainer extends Component {
       this.setState({isLoggedIn: AppState.isLoggedIn, user: AppState});
     }
     if (this.state.isRegistered) {
-      return this.props.history.push("/dashboard");
+      this.props.history.push("/dashboard/");
+      location.reload();
     }
   }
 
@@ -64,6 +66,7 @@ class RegisterContainer extends Component {
     this.setState({formSubmitting: true});
     ReactDOM.findDOMNode(this).scrollIntoView();
     let userData = this.state.user;
+    console.log(userData);
     axios.post("/api/auth/register", userData)
       .then(response => {
         return response;
@@ -74,6 +77,7 @@ class RegisterContainer extends Component {
             name: json.data.name,
             email: json.data.email,
             activation_token: json.data.activation_token,
+            role_id: json.data.role_id,
           };
           let appState = {
             isRegistered: true,
@@ -84,7 +88,7 @@ class RegisterContainer extends Component {
             isRegistered: appState.isRegistered,
             user: appState.user
           });
-          this.props.history.push('/login');
+          this.props.history.push('/dashboard');
         } else {
             alert(`Our System Failed To Register Your Account!`);
         }
@@ -160,6 +164,7 @@ class RegisterContainer extends Component {
     return (
       
       <div>
+        
         <section className="banner_area">
               <div className="banner_inner d-flex align-items-center">
                 <div className="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0" data-background=""></div>
@@ -169,7 +174,7 @@ class RegisterContainer extends Component {
                         <a href="/">Home</a>
                         <a href="#">Register</a>
                       </div>
-                      <h2>Contact Us</h2>
+                      <h2>Registration</h2>
                     </div>
                 </div>
               </div>
@@ -227,6 +232,10 @@ class RegisterContainer extends Component {
                       required
                       onChange={this.handlePasswordConfirm}
                       />
+                      {/* <CInput type="number" min="1" max="5"
+                      required
+                      onChange={this.handleUserRole}
+                      /> */}
                     </CInputGroup>
                     <CButton type="submit" color="success" block >Create Account</CButton>
                   </CForm>
@@ -251,4 +260,4 @@ class RegisterContainer extends Component {
   }
 }
 
-export default RegisterContainer
+export default withRouter(RegisterContainer)

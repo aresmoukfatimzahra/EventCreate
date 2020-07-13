@@ -36,73 +36,71 @@ import {
   } from '@coreui/react'
 export default class Update extends Component
 {
-    // constructor(props){
-    //     super(props);
-    //     this.state={
-    //         title: '',
-    //         place: '',
-    //         status: false,
-    //         Description: '',
-    //         date: '',
-    //         showMessage: false
+    constructor(props){
+        super(props);
+        this.state={
+            name: '',
+            email: '',
+            password: '',
+            role_id: '2',
+            showMessage: false
 
-    //     }
-    //     this.handleTitle=this.handleTitle.bind(this);
-    //     this.handlePlace=this.handlePlace.bind(this);
-    //     this.handleStatus=this.handleStatus.bind(this);
-    //     this.handleDescription=this.handleDescription.bind(this);
-    //     this.handleDate=this.handleDate.bind(this);
-    //     this.handlesubmitform=this.handlesubmitform.bind(this);
-    // }
+        }
+        this.handleName=this.handleName.bind(this);
+        this.handlePassword=this.handlePassword.bind(this);
+        this.handleEmail=this.handleEmail.bind(this);
+        this.handleSelectChange=this.handleSelectChange.bind(this);
+        this.handlesubmitform=this.handlesubmitform.bind(this);
+    }
 
-    // handleTitle=(event)=>{
-    //     this.setState({
-    //         title: event.target.value
-    //     })   
-    // }
-    // handlePlace=(event)=>{
-    //     this.setState({
-    //         place: event.target.value
-    //     })   
-    // }
-    // handleStatus=()=>{
-    //     this.setState({
-    //         status: !this.state.status
-    //     })
-    // }
-    // handleDescription=(event)=>{
-    //     this.setState({
-    //         description: event.target.value
-    //     })   
-    // }
-    // handleDate=(event)=>{
-    //     this.setState({
-    //         date: event.target.value
-    //     })   
-    // }
-    // handlesubmitform=(event)=>{
-    //     this.setState({ showMessage: false });
-    //     event.preventDefault();
-    //     axios.post('/api/events/create',{
-    //         title: this.state.title,
-    //         place: this.state.place,
-    //         status: this.state.status,
-    //         description: this.state.description,
-    //         date: this.state.date
-    //     }).then(() => {
-    //         this.setState({ showMessage: true })
-    //     })
-    //     .then(Response =>{
-    //         this.setState({
-    //             title: '',
-    //             place: '',
-    //             status: false,
-    //             description: '',
-    //             date: ''
-    //         })
-    //     }).catch(err => console.log(err));
-    // }
+    handleName=(event)=>{
+        this.setState({
+            name: event.target.value
+        })   
+    }
+    handlePassword=(event)=>{
+        this.setState({
+            password: event.target.value
+        })   
+    }
+    handleEmail=(event)=>{
+        this.setState({
+            email: event.target.value
+        })
+    }
+ 
+    handleSelectChange = (event) => {
+       this.setState({ 
+           role_id: event.target.value
+        },()=>{
+            console.log(this.state.role_id)
+        });
+      }
+    handlesubmitform=(event)=>{
+        this.setState({ showMessage: false });
+        event.preventDefault();
+        axios.post('/api/events/create',{
+            name: this.state.name,
+            eamil: this.state.email,
+            password: this.state.password,
+            role_id: this.state.role_id,
+        }).then(() => {
+            this.setState({ showMessage: true })
+        })
+        .then(Response =>{
+            this.setState({
+                name: '',
+                email: '',
+                password: false,
+                role_id: '',
+            })
+        }).catch(err => console.log(err));
+    }
     render() {
+
+        // const { selectedOption } = this.state;
+        // const value = selectedOption && selectedOption.value;
+
         return(
         <CRow>
             <CCol xs="12" sm="12">
@@ -111,7 +109,7 @@ export default class Update extends Component
                    User
                   <small> Update</small>
                 </CCardHeader>
-                <form method="POST" >
+                <form method="POST" onSubmit={this.handlesubmitform}>
                     <CCardBody>
 
                             <CRow>
@@ -126,9 +124,9 @@ export default class Update extends Component
                                 <CCol xs="8">
                                 <CFormGroup>
                                     <CLabel htmlFor="name">Name</CLabel>
-                                    <CInput id="name" placeholder="Name"
+                                    <CInput type="text" id="name" placeholder="Name"
                                     required
-                                    
+                                    onChange={this.handleName}
                                      />
                                 </CFormGroup>
                                 </CCol>
@@ -136,10 +134,10 @@ export default class Update extends Component
                             <CRow>
                                 <CCol xs="8">
                                     <CFormGroup>
-                                        <CLabel htmlFor="name">email</CLabel>
-                                        <CInput id="email" placeholder="email" 
+                                        <CLabel htmlFor="email">email</CLabel>
+                                        <CInput type="email" id="email" placeholder="email" 
                                         required
-                                        
+                                        onChange={this.handleEmail}
                                         />
                                     </CFormGroup>
                                 </CCol>
@@ -147,33 +145,29 @@ export default class Update extends Component
                             <CRow>
                                 <CCol xs="8">
                                     <CFormGroup>
-                                        <CRow>
-                                        <CCol xs="1"> <CLabel htmlFor="name">Status</CLabel></CCol>
-                                        <CCol xs="11"> <CSwitch className={'mx-1'} variant={'3d'} color={'success'} 
-                                         
-                                        //  onChange={this.handleStatus}
-                                        //  value={this.state.status}
-                                         /></CCol> 
-                                        </CRow>
+                                        <CLabel htmlFor="role">role</CLabel>
+                                        <CSelect                                       
+                                            onChange={this.handleSelectChange}
+                                            // defaultValue={this.state.role_id}                            
+                                        >   
+                                            
+                                            <option value='1'>admin</option>
+                                            <option value='2'>user</option>                                          
+                                            <option value='3'>organisateur</option>
+                                            <option value='4'>artist</option>                                           
+                                            <option value='5'>super_admin</option>
+                                        </CSelect>
                                     </CFormGroup>
                                 </CCol>
                             </CRow>
                             <CRow>
                                 <CCol xs="8">
                                     <CFormGroup>
-                                        <CLabel htmlFor="name">Adress</CLabel>
-                                        <CInput id="adress" placeholder="adress" 
+                                        <CLabel htmlFor="password">Password</CLabel>
+                                        <CInput type="password" id="password" placeholder="pasword" 
+                                        required
+                                        onChange={this.handlePassword}
                                         
-                                        />
-                                    </CFormGroup>
-                                </CCol>
-                            </CRow>
-                            <CRow>
-                                <CCol xs="8">
-                                    <CFormGroup>
-                                        <CLabel htmlFor="name">Date</CLabel>
-                                        <CInput type="date" id="date-input" name="date-input" placeholder="date"
-                                       
                                         />
                                     </CFormGroup>
                                 </CCol>

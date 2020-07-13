@@ -13,6 +13,7 @@ import {
   CCallout
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
+import { Link, withRouter } from 'react-router-dom'
 
 const Users = lazy(() => import('../users/Users.js'))
 
@@ -25,4 +26,4 @@ const Dashboard = () => {
   )
 }
 
-export default Dashboard
+export default withRouter(Dashboard)

@@ -23,19 +23,19 @@ export default class TimeArea extends Component {
                     <div className="timer_inner">
                         <div id="timer" className="timer">
                             <div className="timer__section days">
-                                <div className="timer__number"></div>
+                                <div className="timer__number">09</div>
                                 <div className="timer__label">days</div>
                             </div>
                             <div className="timer__section hours">
-                                <div className="timer__number"></div>
+                                <div className="timer__number">3</div>
                                 <div className="timer__label">hours</div>
                             </div>
                             <div className="timer__section minutes">
-                                <div className="timer__number"></div>
+                                <div className="timer__number">20</div>
                                 <div className="timer__label">Minutes</div>
                             </div>
                             <div className="timer__section seconds">
-                                <div className="timer__number"></div>
+                                <div className="timer__number">55</div>
                                 <div className="timer__label">seconds</div>
                             </div>
                         </div>

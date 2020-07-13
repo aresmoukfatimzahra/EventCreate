@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import axios from 'axios'
 import {
   CButton,
@@ -25,6 +25,7 @@ class LoginContainer extends Component {
           isLoggedIn: false,
           error: '',
           formSubmitting: false,
+          role: '',
           user: {
             email: '',
             password: '',
@@ -45,8 +46,10 @@ class LoginContainer extends Component {
       componentDidMount() {
         const { prevLocation } = this.state.redirect.state || { prevLocation: { pathname: '/dashboard' } };
         if (prevLocation && this.state.isLoggedIn) {
-          return this.props.history.push(prevLocation);
+          this.props.history.push(prevLocation);
+          location.reload();
         }
+        
       }
       handleSubmit(e) {
         e.preventDefault();
@@ -60,6 +63,7 @@ class LoginContainer extends Component {
                  id: json.data.id,
                  name: json.data.name,
                  email: json.data.email,
+                 role: json.data.role_id,
                  access_token: json.data.access_token,
                };
                let appState = {
@@ -72,8 +76,8 @@ class LoginContainer extends Component {
                   user: appState.user,
                   error: ''
                });
-               location.reload()
-               //this.props.history.push("/dashboard");
+               this.props.history.push("/dashboard");
+               location.reload();
              }
              else {
                 alert(`Our System Failed To Register Your Account!`);
@@ -135,7 +139,7 @@ class LoginContainer extends Component {
                       <a href="/">Home</a>
                       <a href="#">Login</a>
                     </div>
-                    <h2>Contact Us</h2>
+                    <h2>Login page</h2>
                   </div>
               </div>
             </div>
@@ -205,4 +209,4 @@ class LoginContainer extends Component {
   }
  }
 
-export default LoginContainer
+export default withRouter(LoginContainer)

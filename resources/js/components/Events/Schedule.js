@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import ReactDOM from 'react-dom';
-import schedule from '../../../../public/img/schedule-1.jpg';
+import schedule from '../../../../public/assets/img/schedule-1.jpg';
 
 
 export default class Schedule extends React.Component {

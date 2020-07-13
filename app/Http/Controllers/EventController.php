@@ -3,18 +3,38 @@
 namespace App\Http\Controllers;
 
 use App\Event;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 
 class EventController extends Controller
 {
+    public function userss()
+    {
+//        return Event::all();
+        $users=  \App\User::all();
+        return $users;
+    }
     public function index()
     {
-        return Event::all();
+//        return Event::all();
+        $events= Event::with('media')->get();
+        return $events;
     }
 
     public function show(Event $event)
     {
-        return $event;
+        $events= Event::with('media')->get();
+        $re= $events->find($event);
+        return ['event'=>$re,"event_medias"=>$re->media];
+
+    }
+    public function showMedia(Event $event)
+    {
+        return[
+            'info' => $event->media
+        ];
+
     }
 
     public function store(Request $request)

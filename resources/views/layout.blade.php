@@ -16,8 +16,21 @@
         <link href="{{asset('vendors/nice-select/css/nice-select.css')}}" rel="stylesheet" >
         <link href="{{asset('vendors/animate-css/animate.css')}}" rel="stylesheet" >
 
+        <link href="{{asset('css/events/style.css')}}" rel="stylesheet" >
+        <link href="{{asset('css/events/fl-bigmug-line.css')}}" rel="stylesheet" >
+        <link href="{{asset('css/events/jquery-ui.css')}}" rel="stylesheet" >
+        <link href="{{asset('css/events/magnific-popup.css')}}" rel="stylesheet" >
+        <link href="{{asset('css/events/mediaelementplayer.css')}}" rel="stylesheet" >
+        <link href="{{asset('css/events/owl.carousel.min.css')}}" rel="stylesheet" >
+        <link href="{{asset('css/events/owl.carousel.min.css')}}" rel="stylesheet" >
+        <link href="{{asset('css/events/owl.theme.default.min.css')}}" rel="stylesheet" >
+        <link href="{{asset('css/events/progress-bar.css')}}" rel="stylesheet" >
+
+
+
         <!-- main css -->
         <link href="{{asset('css/style.css')}}" rel="stylesheet" >
+        <link href="{{asset('css/styleEvent.css')}}" rel="stylesheet" >
         <link href="{{asset('css/responsive.css')}}" rel="stylesheet" >
     </head>
     <body>

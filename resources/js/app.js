@@ -17,4 +17,4 @@ require('./bootstrap');
 
 // require('./components/Example');
 // require('./components/Events/IndexEvents');
-require('./components/Index');
+require('./components/App');
