@@ -33,6 +33,7 @@ export default class Artists extends React.Component {
 
     }
     render() {
+        //state
         let artists=this.state.artists
 console.log(this.state)
 console.log("this.staeeete")
