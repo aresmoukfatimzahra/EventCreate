@@ -90,8 +90,8 @@ const routes = [
   { path: '/notifications/toaster', name: 'Toaster', component: Toaster },
   { path: '/widgets', name: 'Widgets', component: Widgets },
   { path: '/users', exact: true,  name: 'Users', component: Users },
-  { path: '/users/:id', exact: true, name: 'User Details', component: User },
-  { path: '/users/:id/update', name: 'User Update', component: UpdateUser }
+  { path: '/user/:id', exact: true, name: 'User Details', component: User },
+  { path: '/user/:id/update', name: 'User Update', component: UpdateUser }
 ];
 
 export default routes;

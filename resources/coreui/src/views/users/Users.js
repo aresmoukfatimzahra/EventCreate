@@ -75,9 +75,9 @@ export default class Users extends Component {
                 'actions':
                 (item)=>(
                   <td>
-                     <CLink to={`/users/${item.id}/update/`}  type="submit" size="sm" className="btn btn-warning">Update</CLink>
+                     <CLink to={`/user/${item.id}/update/`}  type="submit" size="sm" className="btn btn-warning">Update</CLink>
                      <CLink size="sm" className="btn btn-danger">Delete</CLink>
-                     <CLink to={`/users/${item.id}`} size="sm" className="btn btn-danger">Details</CLink>
+                     <CLink to={`/user/${item.id}`} size="sm" className="btn btn-danger">Details</CLink>
                   </td>
                 )
             }}

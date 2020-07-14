@@ -60,6 +60,8 @@ Route::group([
  });
 Route::get('users/liste','UserController@liste');
 Route::get('user/{id}/show','UserController@show');
+Route::get('user/{id}/edit','UserController@edit');
+Route::put('user/{id}/update','UserController@update');
 Route::delete('medias/{media}','MediaController@destroy');
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();

@@ -42,7 +42,7 @@ export default class Update extends Component
             name: '',
             email: '',
             password: '',
-            role_id: '2',
+            role_id: '',
             showMessage: false
 
         }
@@ -76,10 +76,27 @@ export default class Update extends Component
             console.log(this.state.role_id)
         });
       }
+      componentDidMount=()=>{
+        const id = this.props.match.params.id;
+        console.log(this.props);
+        axios.get(`api/user/${id}/edit`).then(
+            Response => {
+                this.setState({
+                    name: Response.data.name,
+                    email: Response.data.email,
+                    password: Response.data.password,
+                    role_id: Response.data.role_id,
+                })
+                console.log(Response.data);
+            }
+        ).catch(err => console.log(err));
+    }
+
     handlesubmitform=(event)=>{
         this.setState({ showMessage: false });
         event.preventDefault();
-        axios.post('/api/events/create',{
+        const id=this.props.match.params.id;
+        axios.put(`/api/user/${id}/update`,{
             name: this.state.name,
             eamil: this.state.email,
             password: this.state.password,
@@ -91,9 +108,11 @@ export default class Update extends Component
             this.setState({
                 name: '',
                 email: '',
-                password: false,
+                password: '',
                 role_id: '',
             })
+            console.log(Response)
+            this.props.history.push('/users')
         }).catch(err => console.log(err));
     }
     render() {
@@ -127,6 +146,7 @@ export default class Update extends Component
                                     <CInput type="text" id="name" placeholder="Name"
                                     required
                                     onChange={this.handleName}
+                                    value={this.state.name}
                                      />
                                 </CFormGroup>
                                 </CCol>
@@ -138,6 +158,7 @@ export default class Update extends Component
                                         <CInput type="email" id="email" placeholder="email" 
                                         required
                                         onChange={this.handleEmail}
+                                        value={this.state.email}
                                         />
                                     </CFormGroup>
                                 </CCol>
@@ -148,7 +169,7 @@ export default class Update extends Component
                                         <CLabel htmlFor="role">role</CLabel>
                                         <CSelect                                       
                                             onChange={this.handleSelectChange}
-                                            // defaultValue={this.state.role_id}                            
+                                            valuee={this.state.role_id}                            
                                         >   
                                             
                                             <option value='1'>admin</option>

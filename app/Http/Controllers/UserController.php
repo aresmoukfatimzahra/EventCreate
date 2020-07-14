@@ -22,4 +22,16 @@ class UserController extends Controller
         $user=User::find($id);
         return response()->json($user, 201);
     }
+
+    public function edit($id){
+        $user=User::find($id);
+        return response()->json($user, 200);
+    }
+
+    public function update(Request $request, User $user)
+    {
+        $user->update($request->all());
+
+        return response()->json($user, 200);
+    }
 }
