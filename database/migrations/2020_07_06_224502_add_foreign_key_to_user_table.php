@@ -14,7 +14,7 @@ class AddForeignKeyToUserTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->biginteger('role_id')->unsigned();
+            $table->biginteger('role_id')->default(2)->unsigned();
             $table->foreign('role_id')->references('id')->on('roles');
         });
     }

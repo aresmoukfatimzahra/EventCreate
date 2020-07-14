@@ -49,13 +49,14 @@ class LoginContainer extends Component {
           this.props.history.push(prevLocation);
           location.reload();
         }
-        
+
       }
       handleSubmit(e) {
         e.preventDefault();
         this.setState({formSubmitting: true});
         let userData = this.state.user;
-        axios.post("/api/auth/login", userData).then(response => {
+        const url=process.env.MIX_REACT_APP_ROOT
+        axios.post(url+"/auth/login", userData).then(response => {
           return response;
         }).then(json => {
              if (json.data.success) {
@@ -108,7 +109,7 @@ class LoginContainer extends Component {
        }
      }).finally(this.setState({error: ''}));
     }
-    
+
     handleEmail(e) {
       let value = e.target.value;
       this.setState(prevState => ({

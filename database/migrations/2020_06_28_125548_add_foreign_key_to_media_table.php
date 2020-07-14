@@ -14,7 +14,7 @@ class AddForeignKeyToMediaTable extends Migration
     public function up()
     {
         Schema::table('media', function (Blueprint $table) {
-           $table->biginteger('event_id')->unsigned();
+           $table->biginteger('event_id')->nullable()->unsigned();
             $table->foreign('event_id')->references('id')->on('events');
         });
     }

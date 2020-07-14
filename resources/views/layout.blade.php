@@ -31,6 +31,7 @@
         <!-- main css -->
         <link href="{{asset('css/style.css')}}" rel="stylesheet" >
         <link href="{{asset('css/styleEvent.css')}}" rel="stylesheet" >
+        <link href="{{asset('css/styleArtist.css')}}" rel="stylesheet" >
         <link href="{{asset('css/responsive.css')}}" rel="stylesheet" >
     </head>
     <body>

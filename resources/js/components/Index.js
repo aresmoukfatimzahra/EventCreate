@@ -34,7 +34,6 @@ export default class Index extends Component {
                                  <p>Get started by creating an event . From there, you can quickly add content, import images or videos,
                                      customize your fonts. It's that easy.</p>]}/>
 
-                />
                      <TimeArea/>
                      <div className="container">
                        <WelcomeMessage/>
