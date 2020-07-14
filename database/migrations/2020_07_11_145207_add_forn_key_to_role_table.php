@@ -14,8 +14,8 @@ class AddFornKeyToRoleTable extends Migration
     public function up()
     {
         Schema::table('roles', function (Blueprint $table) {
-            $table->biginteger('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users');
+//            $table->biginteger('user_id')->unsigned();
+//            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
@@ -27,7 +27,7 @@ class AddFornKeyToRoleTable extends Migration
     public function down()
     {
         Schema::table('roles', function (Blueprint $table) {
-            $table->dropColumn('user_id');
+//            $table->dropColumn('user_id');
         });
     }
 }

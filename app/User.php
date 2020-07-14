@@ -40,7 +40,7 @@ class User extends Authenticatable
 
     public function role()
     {
-        return $this->hasMany('App\Role');
+        return $this->belongsTo('App\Role');
     }
     public function media()
     {

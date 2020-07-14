@@ -13,15 +13,21 @@ class MediaSeeder extends Seeder
     {
 
         $faker = \Faker\Factory::create();
-
-
+        $roles=['admin','user','organisateur','artist','super_admin'];
+        //4 artists
+        for($i=6;$i<=10;$i++){
+            \App\Role::create([
+                'libelle'=>$roles[3],
+//                'user_id'=>intval($i)
+            ]);
+        }
 
         for($i=0;$i<5;$i++){
             \App\User::create([
                 'name'=>$faker->text(10),
                 'email'=>$faker->email,
                 'password'=>sha1(1234),
-
+                 'role_id'=>1
             ]);
         }
 //        4 artistes fixtures
@@ -36,20 +42,14 @@ class MediaSeeder extends Seeder
             ]);
         }
 
-        $roles=['admin','user','organisateur','artist','super_admin'];
+
         for($i=0;$i<5;$i++){
             \App\Role::create([
                 'libelle'=>$roles[$i],
-                'user_id'=>intval($i+1)
+//                'user_id'=>intval($i+1)
             ]);
         }
-        //4 artists
-        for($i=6;$i<=10;$i++){
-            \App\Role::create([
-                'libelle'=>$roles[3],
-                'user_id'=>intval($i)
-            ]);
-        }
+
         $url=[
             "https://i.picsum.photos/id/1005/5760/3840.jpg?hmac=2acSJCOwz9q_dKtDZdSB-OIK1HUcwBeXco_RMMTUgfY",
             ' https://i.picsum.photos/id/1027/2848/4272.jpg?hmac=EAR-f6uEqI1iZJjB6-NzoZTnmaX0oI0th3z8Y78UpKM',

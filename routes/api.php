@@ -68,5 +68,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 //users
 Route::get('artists', 'UserController@index');
-Route::get('users/{user}','UserController@show');
+Route::get('users/{user}','UserController@showArtist');
 Route::get('usersShowEvents/{user}','UserController@showEvents');

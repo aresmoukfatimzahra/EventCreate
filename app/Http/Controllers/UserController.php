@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+
 use App\Event;
 use App\Role;
-use Illuminate\Http\Request;
-use App\User;
+
 use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
@@ -41,26 +41,27 @@ class UserController extends Controller
 //           'role'=>$role
 //       ];
        // return $events->first();
-      $qb=DB::table('users')
-            ->join('media','media.user_id','users.id')
-            ->join('roles','roles.user_id','users.id')
-          ->select('users.*', 'media.url as media','media.title as titleMedia' ,'roles.libelle as role')
-          ->where("roles.libelle","=","artist")
-           ->get();
-            return $qb;
+//      $qb=DB::table('users')
+//            ->join('media','media.user_id','users.id')
+//            ->join('roles','user.role','roles.id')
+//          ->select('users.*', 'media.url as media','media.title as titleMedia' ,'user.role as role')
+//          ->where("user.role_id","=",3)
+//           ->get();
+//            return $qb;
+        return User::with('role')->with('media')->get();
     }
-    public function show(User $user)
+    public function showArtist(User $user)
     {
-        $qb=DB::table('users')
-            ->join('media','media.user_id','users.id')
-            ->join('roles','roles.user_id','users.id')
-            ->select('users.*', 'media.url as media','media.title as titleMedia' ,'roles.libelle as role')
-            ->where("roles.libelle","=","artist")
-            ->where("users.id","=",$user->id)
-            ->get();
-     return $qb;
+//        $qb=DB::table('users')
+//            ->join('media','media.user_id','users.id')
+//            ->join('roles','roles.user_id','users.id')
+//            ->select('users.*', 'media.url as media','media.title as titleMedia' ,'roles.libelle as role')
+//            ->where("roles.libelle","=","artist")
+//            ->where("users.id","=",$user->id)
+//            ->get();
+//     return $qb;
 
-
+        return User::with('role')->with('media')->with('events')->with('media') ->whereBetween('role_id', [1, 5])->where('id','=',$user->id)->get();
     }
 
     public function showEvents(User $user)

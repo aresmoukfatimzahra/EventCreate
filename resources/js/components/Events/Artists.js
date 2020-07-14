@@ -35,7 +35,7 @@ export default class Artists extends React.Component {
     render() {
         let artists=this.state.artists
 console.log(this.state)
-console.log("this.state")
+console.log("this.staeeete")
         return (
 
             <section className="team_area p_120">
@@ -53,7 +53,7 @@ console.log("this.state")
                             <div className="team_img">
                                 {artist.media?
 
-                                        <Link to={"/Artist/"+artist.id}><img key={i} className="img-fluid eventImg" src={artist.media}/></Link>
+                                        <Link to={"/Artist/"+artist.id}><img key={i} className="img-fluid eventImg" src={artist.media.url}/></Link>
 
                                :  <Link to={"/Artist/"+artist.id}><img  className="img-fluid eventImg" src={img}/></Link>
                                 }
@@ -67,7 +67,7 @@ console.log("this.state")
                                 <h4>{artist.name}</h4>
 
                                 <span style={{"color": "#6c757d",'textTransform': 'uppercase','fontSize':15}} className="d-block text-secondary small text-uppercase">
-                                {artist.role}</span>
+                                {artist.role.libelle}</span>
 
                             </div>
                         </div>

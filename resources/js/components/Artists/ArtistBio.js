@@ -36,13 +36,14 @@ export default class ArtistBio extends React.Component {
             })
 
         })
+
     }
     render() {
 console.log('-----artists-----');
 console.log(this.state);
 let artists=this.state.artist
-let events=this.state.events
-let medias=this.state.medias
+        let events=this.state.events
+        let medias=this.state.medias
         let list=medias
         let artist=[]
         if(artists.length>0){  artist=artists[0]}
@@ -66,10 +67,16 @@ let medias=this.state.medias
 
                             <div className="row">
                                 <div className="col-lg-4">
-                                    <img src={artist.media} className="img-fluid" alt="" style={{height:350,width:350}}/>
+                                    {/*<img src={artist.media.url} className="img-fluid" alt="" style={{height:350,width:350}}/>*/}
+                                    {artist.media?
+
+                                        <Link to={"/Artist/"+artist.id}><img  className="img-fluid eventImg" src={artist.media.url}/></Link>
+
+                                        :  <Link to={"/Artist/"+artist.id}><img  className="img-fluid eventImg" src={img}/></Link>
+                                    }
                                 </div>
                                 <div className="col-lg-8 pt-4 pt-lg-0 content">
-                                    <h3 className="text-uppercase">{artist.role}</h3>
+                                    {artist.role ? <h3 className="text-uppercase">{artist.role.libelle}</h3> :null}
                                     <p className="font-italic">
                                         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
                                         incididunt ut labore et dolore
@@ -133,7 +140,7 @@ let medias=this.state.medias
                             <div className="row skills-content">
 
 
-                                    {events.map((event,i) => {
+                                    {events ?events.map((event,i) => {
                                         return (
                                             <div className="col-lg-4">
                                             <div className="row">
@@ -155,7 +162,7 @@ let medias=this.state.medias
 
                                         )
                                     })
-                                    }
+                                    :null}
 
 
 

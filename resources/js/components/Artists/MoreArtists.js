@@ -54,7 +54,7 @@ let artists=this.state.artists
                                     <div className="col-md-6 col-lg-4 mb-5 text-center" data-aos="fade-up" data-aos-delay="100">
                                         {artist.media?
 
-                                                <Link to={"/Artist/"+artist.id}><img key={i} className="img-fluid eventImg" src={artist.media}/></Link>
+                                                <Link to={"/Artist/"+artist.id}><img key={i} className="img-fluid eventImg" src={artist.media.url}/></Link>
                                            :  <Link to={"/Artist/"+artist.id}><img  className="img-fluid eventImg" src={img}/></Link>
                                         }
 
@@ -64,7 +64,7 @@ let artists=this.state.artists
 
 
                                                         <span style={{"color": "#6c757d",'textTransform': 'uppercase','fontSize':15}} className="d-block text-secondary small text-uppercase">
-                                                            {artist.role}</span>
+                                                            {artist.role.libelle}</span>
 
 
                                             <span style={{"color": "#6c757d",'textTransform': 'uppercase','fontSize':15}} className="d-block text-secondary small text-uppercase">Membre depuis {artist.created_at.substring(0,10)}</span>

@@ -69,6 +69,8 @@ class RegisterContainer extends Component {
     console.log(userData);
     axios.post("/api/auth/register", userData)
       .then(response => {
+        console.log('response')
+        console.log(response)
         return response;
     }).then(json => {
         if (json.data.success) {
@@ -127,7 +129,7 @@ class RegisterContainer extends Component {
       }
     }));
   }
-  
+
   handleEmail(e) {
     let value = e.target.value;
     this.setState(prevState => ({
@@ -154,7 +156,8 @@ class RegisterContainer extends Component {
   }
 
   render() {
-
+console.log('rrrr')
+console.log(this.state)
     let errorMessage = this.state.errorMessage;
     let arr = [];
     Object.values(errorMessage).forEach((value) => (
@@ -162,9 +165,9 @@ class RegisterContainer extends Component {
     ));
 
     return (
-      
+
       <div>
-        
+
         <section className="banner_area">
               <div className="banner_inner d-flex align-items-center">
                 <div className="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0" data-background=""></div>
