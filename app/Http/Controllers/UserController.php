@@ -33,22 +33,8 @@ class UserController extends Controller
 
     public function index()
     {
-//        $events= User::all();
-//      //  $events= User::with('media')->get();
-//        $artists = User::with("media")->first()->get();
-//        $role = Role::where('id', '=', 4)->get();
-//       return ["artists"=>$artists->role,
-//           'role'=>$role
-//       ];
-       // return $events->first();
-//      $qb=DB::table('users')
-//            ->join('media','media.user_id','users.id')
-//            ->join('roles','user.role','roles.id')
-//          ->select('users.*', 'media.url as media','media.title as titleMedia' ,'user.role as role')
-//          ->where("user.role_id","=",3)
-//           ->get();
-//            return $qb;
-        return User::with('role')->with('media')->get();
+
+        return User::with('role')->with('media')->whereBetween('role_id', [6, 11])->get();
     }
     public function showArtist(User $user)
     {
@@ -61,7 +47,7 @@ class UserController extends Controller
 //            ->get();
 //     return $qb;
 
-        return User::with('role')->with('media')->with('events')->with('media') ->whereBetween('role_id', [1, 5])->where('id','=',$user->id)->get();
+        return User::with('role')->with('media')->with('events')->with('media') ->whereBetween('role_id', [6, 11])->where('id','=',$user->id)->get();
     }
 
     public function showEvents(User $user)

@@ -45,17 +45,12 @@ console.log(data)
                         You may see some for as low as $.17 each.</p>
                 </div>
                 <div className="row team_inner">
-                    {medias.slice(0, 4).map((media,i) => {
+                    {medias.slice(5, 9).map((media,i) => {
                         return (
                     <div className="col-lg-3 col-sm-6">
                         <div className="team_item">
                             <div className="team_img">
-                                <Link to={'/EventDesc/'+media.event.id}><img className="img-fluid" src={media.url} style={{width:300,height:360}}/></Link>
-                                <div className="hover">
-                                    <a href="#"><i className="fa fa-facebook"></i></a>
-                                    <a href="#"><i className="fa fa-twitter"></i></a>
-                                    <a href="#"><i className="fa fa-linkedin"></i></a>
-                                </div>
+                                {media.event? <Link to={'/EventDesc/'+media.event.id}><img className="img-fluid" src={media.url} style={{width:300,height:260}}/></Link>:null}
                             </div>
                             <div className="team_name">
 

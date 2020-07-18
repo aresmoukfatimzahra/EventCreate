@@ -44,8 +44,8 @@ export default class MoreMedias extends React.Component {
                         <div className="row">
 
                             {medias.map((media,i) => {
-                                return (
-                                    <div className="col-md-6 col-lg-4 mb-5" data-aos="fade-up" data-aos-delay="100">
+                                return media.event ?
+                                    (<div className="col-md-6 col-lg-4 mb-5" data-aos="fade-up" data-aos-delay="100">
                                         <Link to={"/EventDesc/"+media.id}><img src={media.url} alt="Image" className="img-fluid" style={{width:340,height:300}}/></Link>
 
                                         <div className="p-4 bg-white">
@@ -58,7 +58,7 @@ export default class MoreMedias extends React.Component {
                                             </p>
                                         </div>
                                     </div>
-                                )
+                                ):null
                             })
                             }
 

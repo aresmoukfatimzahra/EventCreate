@@ -59,7 +59,7 @@ let artists=this.state.artists
                                         }
 
                                         <div className="p-4 bg-white">
-                                            <h2 className="h5 text-black mb-3" style={{'color': '#517b14;'}} ><Link to={"/Artist/"+artist.id} >{artist.name}</Link></h2>
+                                            <h2 className="h5 text-black mb-3" style={{'color': '#517b14;'}} ><Link to={"/Artist/"+artist.id} >{artist.name} {artist.last_name}</Link></h2>
 
 
 
@@ -67,11 +67,11 @@ let artists=this.state.artists
                                                             {artist.role.libelle}</span>
 
 
-                                            <span style={{"color": "#6c757d",'textTransform': 'uppercase','fontSize':15}} className="d-block text-secondary small text-uppercase">Membre depuis {artist.created_at.substring(0,10)}</span>
-                                            <i className="fa fa-facebook icon-social" aria-hidden="true"></i>
-                                            <i className="fa fa-instagram icon-social" aria-hidden="true"></i>
-                                            <i className="fa fa-envelope icon-social" aria-hidden="true"></i>
+                                            <span style={{"color": "#6c757d",'fontSize':15}} className="d-block text-secondary small ">Membre depuis {artist.created_at.substring(0,10)}</span>
 
+                                            <a href={artist.facebook} target="_blank"> <i className="fa fa-facebook icon-social" aria-hidden="true"></i></a>
+                                            <a href={artist.instagram} target="_blank"> <i className="fa fa-instagram icon-social" aria-hidden="true"></i></a>
+                                            <a href={"mailto: "+ artist.email}>  <i className="fa fa-envelope icon-social" aria-hidden="true"></i></a>
                                         </div>
                                     </div>
                                 )

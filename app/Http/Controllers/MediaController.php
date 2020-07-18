@@ -9,7 +9,7 @@ class MediaController extends Controller
 {
     public function index()
     {
-        return Media::with('event')->get();
+        return Media::with('event')->with('user')->get();
     }
 
 

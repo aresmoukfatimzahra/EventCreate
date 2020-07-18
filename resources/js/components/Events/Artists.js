@@ -59,13 +59,13 @@ console.log("this.staeeete")
                                :  <Link to={"/Artist/"+artist.id}><img  className="img-fluid eventImg" src={img}/></Link>
                                 }
                                 <div className="hover">
-                                    <a href="#"><i className="fa fa-facebook"></i></a>
-                                    <a href="#"><i className="fa fa-twitter"></i></a>
-                                    <a href="#"><i className="fa fa-linkedin"></i></a>
+                                    <a href={artist.facebook} target="_blank"><i className="fa fa-facebook"></i></a>
+                                    <a href={artist.instagram} target="_blank"><i className="fa fa-instagram"></i></a>
+                                    <a href={"mailto: "+ artist.email}><i className="fa fa-envelope"></i></a>
                                 </div>
                             </div>
                             <div className="team_name">
-                                <h4>{artist.name}</h4>
+                                <h4>{artist.name} {artist.last_name}</h4>
 
                                 <span style={{"color": "#6c757d",'textTransform': 'uppercase','fontSize':15}} className="d-block text-secondary small text-uppercase">
                                 {artist.role.libelle}</span>

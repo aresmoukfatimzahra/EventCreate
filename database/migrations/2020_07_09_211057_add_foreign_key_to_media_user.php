@@ -14,7 +14,7 @@ class AddForeignKeyToMediaUser extends Migration
     public function up()
     {
         Schema::table('media', function (Blueprint $table) {
-            $table->biginteger('user_id')->unsigned();
+            $table->biginteger('user_id')->nullable()->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
         });
     }

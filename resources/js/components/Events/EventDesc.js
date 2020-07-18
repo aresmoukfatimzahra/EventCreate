@@ -13,6 +13,7 @@ import event03 from '../../../../public/assets/img/event-03.jpg';
 import event04 from '../../../../public/assets/img/event-04.jpg';
 import event05 from '../../../../public/assets/img/event-05.jpg';
 import { Link } from 'react-router-dom';
+import Program from "./Program";
 
 
 
@@ -21,36 +22,41 @@ export default class EventDesc extends React.Component {
         super(props);
         this.state = {
             event: [],
-            medias: [],
+
         }
     }
 
-    componentWillMount() {
+    componentDidMount() {
         const url=process.env.MIX_REACT_APP_ROOT
 
         indexEvents(url+'/events/'+this.props.match.params.id,data=>{
             this.setState({
                 event:data.event,
-                medias:data.event_medias,
             })
 
         })
     }
     render() {
         console.log(this.state)
-        let pics=[event01,event02,event03,event04
-        ]
+        let pics=[event01,event02,event03,event04]
         let medias=[];
-        for(var i=0;i<this.state.medias.length;i++){
-            medias.push(this.state.medias[i].url);
+
+// let n=this.state.medias.length;
+//         let rest=4-n;
+//         let gallery=[];
+//         gallery=medias.concat(pics);
+        let event=this.state.event
+        let img=guitarist
+        if(event.media) {
+            img = event.media[0].url
         }
-let n=this.state.medias.length;
-        let rest=4-n;
-        let gallery=[];
-        gallery=medias.concat(pics);
-        console.log(pics)
-        console.log(medias)
-        console.log(gallery)
+        console.log("this.srrtate")
+        console.log(this.state)
+        let users=[]
+        if(this.state.event.user){
+             users=this.state.event.user
+        }
+
         return (
      <div>
 
@@ -94,7 +100,7 @@ let n=this.state.medias.length;
             <div className="site-mobile-menu-body"></div>
         </div>
 
-        <div className="site-blocks-cover overlay"   style={{ backgroundImage: `url(${guitarist})` }} data-aos="fade" data-stellar-background-ratio="0.5" data-aos="fade">
+        <div className="site-blocks-cover overlay"   style={{ backgroundImage: `url(${img})` }} data-aos="fade" data-stellar-background-ratio="0.5" data-aos="fade">
             <div className="container">
                 <div className="row align-items-center justify-content-center">
                     <div className="col-md-7 text-center" data-aos="fade-up" data-aos-delay="400">
@@ -113,10 +119,10 @@ let n=this.state.medias.length;
         <div className="container-fluid">
 
                     <div className="row no-gutters">
-                        {this.state.event && this.state.medias.length>0  ?
+                        {this.state.event && this.state.event.media ?
 
                             (
-                                this.state.medias.slice(0, 4).map((media,i) => {
+                                this.state.event.media.slice(0, 4).map((media,i) => {
                             return (
 
                                 <div className="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
@@ -152,95 +158,12 @@ let n=this.state.medias.length;
                                 )}))
                         }
 
-
-                        {/*<div className="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">*/}
-                        {/*    <a href="#" className="unit-9">*/}
-                        {/*        <div className="image"   style={{ backgroundImage: `url(${event02})` }}></div>*/}
-                        {/*        <div className="unit-9-content">*/}
-                        {/*            <h2>Good Morning Show</h2>*/}
-                        {/*            <span>Friday {this.state.event.date}</span>*/}
-                        {/*        </div>*/}
-                        {/*    </a>*/}
-                        {/*</div>*/}
-                        {/*<div className="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="300">*/}
-                        {/*    <a href="#" className="unit-9">*/}
-                        {/*        <div className="image"  style={{ backgroundImage: `url(${event03})` }}></div>*/}
-                        {/*        <div className="unit-9-content">*/}
-                        {/*            <h2>Blues Radio</h2>*/}
-                        {/*            <span>Friday {this.state.event.date}</span>*/}
-                        {/*        </div>*/}
-                        {/*    </a>*/}
-                        {/*</div>*/}
-                        {/*<div className="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="400">*/}
-                        {/*    <a href="#" className="unit-9">*/}
-                        {/*        <div className="image"    style={{ backgroundImage: `url(${event04})` }}></div>*/}
-                        {/*        <div className="unit-9-content">*/}
-                        {/*            <h2>classNameic Songs</h2>*/}
-                        {/*            <span>Friday {this.state.event.date}</span>*/}
-                        {/*        </div>*/}
-                        {/*    </a>*/}
-                        {/*</div>*/}
                     </div>
-
 
         </div>
     </div>
 
-    <div className="site-section">
-
-        <div className="container">
-
-            <div className="row">
-                <div className="site-section-heading text-center mb-5 w-border col-md-6 mx-auto" data-aos="fade-up">
-                    <h2 className="mb-5">event Program</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet, fugit nam obcaecati fuga itaque deserunt officia, error reiciendis ab quod?</p>
-                </div>
-            </div>
-
-            <div className="site-block-retro d-block d-md-flex">
-
-                <a href="#" className="col1 unit-9 no-height" data-aos="fade-up" data-aos-delay="100">
-                    <div className="image"  style={{ backgroundImage: `url(${event01})` }}></div>
-                    <div className="unit-9-content">
-                        <h2>classNameic Songs For classNameic People</h2>
-                        <span>Friday 1:00pm &mdash; 2:30pm</span>
-                    </div>
-                </a>
-
-                <div className="col2 ml-auto">
-
-                    <a href="#" className="col2-row1 unit-9 no-height" data-aos="fade-up" data-aos-delay="200">
-                        <div className="image"   style={{ backgroundImage: `url(${event02})` }}></div>
-                        <div className="unit-9-content">
-                            <h2>classNameic Songs For classNameic People</h2>
-                            <span>Friday 1:00pm &mdash; 2:30pm</span>
-                        </div>
-                    </a>
-
-                    <a href="#" className="col2-row2 unit-9 no-height" data-aos="fade-up" data-aos-delay="300">
-                        <div className="image"   style={{ backgroundImage: `url(${event03})` }}></div>
-                        <div className="unit-9-content">
-                            <h2>classNameic Songs For classNameic People</h2>
-                            <span>Friday 1:00pm &mdash; 2:30pm</span>
-                        </div>
-                    </a>
-
-
-                </div>
-
-            </div>
-            <div className="site-block-retro d-block d-md-flex" style={{marginTop:100}}>
-                <div className="row videoEvent">
-                    <div className="col-md-12">
-                        <iframe width="560" height="315" src="https://www.youtube.com/embed/TeaDE1magRk" frameBorder="0"
-                                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                                allowFullScreen></iframe>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
+  <Program/>
 
 
     <div className="site-section bg-light block-13">
@@ -377,127 +300,27 @@ let n=this.state.medias.length;
                 </div>
             </div>
             <div className="row">
-                <div className="col-md-6 col-lg-4 mb-5 mb-lg-5">
+                {users?users.map((artist,i) => {
+                    return (
+                <div key={i} className="col-md-6 col-lg-4 mb-5 mb-lg-5">
                     <div className="team-member">
-
-                        <img src={event01} alt="Image" className="img-fluid"/>
+                        {artist.media.url?
+                            <Link to={"/Artist/"+artist.id}><img  className="img-fluid eventImg" src={artist.media.url} style={{width: 400}}/></Link>
+                            :
+                            <Link to={"/Artist/"+artist.id}><img  className="img-fluid eventImg" src={event01} style={{width: 400}}/></Link>
+                        }
 
                         <div className="text">
-
-                            <h2 className="mb-2 font-weight-light h4">Megan Smith</h2>
-                            <span className="d-block mb-2 text-white-opacity-05">Creative Director</span>
-                            <p className="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit ullam reprehenderit nemo.</p>
-                            <p>
-                                <a href="#" className="text-white p-2"><span className="icon-facebook"></span></a>
-                                <a href="#" className="text-white p-2"><span className="icon-twitter"></span></a>
-                                <a href="#" className="text-white p-2"><span className="icon-linkedin"></span></a>
-                            </p>
+                            <Link to={"/Artist/"+artist.id} className="infos-artists">
+                                <h2 className="mb-2 font-weight-light h4">{artist.name} {artist.last_name}</h2>
+                                <span className="d-block mb-2 text-white-opacity-05 text-uppercase">{artist.role.libelle}</span>
+                                <p className="mb-4">{artist.biography}.</p>
+                            </Link>
                         </div>
 
                     </div>
                 </div>
-
-                <div className="col-md-6 col-lg-4 mb-5 mb-lg-5">
-                    <div className="team-member">
-
-                        <img src={event02} alt="Image" className="img-fluid"/>
-
-                        <div className="text">
-
-                            <h2 className="mb-2 font-weight-light h4">Brooke Cagle</h2>
-                            <span className="d-block mb-2 text-white-opacity-05">Creative Director</span>
-                            <p className="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit ullam reprehenderit nemo.</p>
-                            <p>
-                                <a href="#" className="text-white p-2"><span className="icon-facebook"></span></a>
-                                <a href="#" className="text-white p-2"><span className="icon-twitter"></span></a>
-                                <a href="#" className="text-white p-2"><span className="icon-linkedin"></span></a>
-                            </p>
-                        </div>
-
-                    </div>
-                </div>
-
-                <div className="col-md-6 col-lg-4 mb-5 mb-lg-5">
-                    <div className="team-member">
-
-                        <img src={event05} alt="Image" className="img-fluid"/>
-
-                        <div className="text">
-
-                            <h2 className="mb-2 font-weight-light h4">Philip Martin</h2>
-                            <span className="d-block mb-2 text-white-opacity-05">Creative Director</span>
-                            <p className="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit ullam reprehenderit nemo.</p>
-                            <p>
-                                <a href="#" className="text-white p-2"><span className="icon-facebook"></span></a>
-                                <a href="#" className="text-white p-2"><span className="icon-twitter"></span></a>
-                                <a href="#" className="text-white p-2"><span className="icon-linkedin"></span></a>
-                            </p>
-                        </div>
-
-                    </div>
-                </div>
-
-                <div className="col-md-6 col-lg-4 mb-5 mb-lg-5">
-                    <div className="team-member">
-
-                        <img src={event02} alt="Image" className="img-fluid"/>
-
-                        <div className="text">
-
-                            <h2 className="mb-2 font-weight-light h4">Steven Ericson</h2>
-                            <span className="d-block mb-2 text-white-opacity-05">Creative Director</span>
-                            <p className="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit ullam reprehenderit nemo.</p>
-                            <p>
-                                <a href="#" className="text-white p-2"><span className="icon-facebook"></span></a>
-                                <a href="#" className="text-white p-2"><span className="icon-twitter"></span></a>
-                                <a href="#" className="text-white p-2"><span className="icon-linkedin"></span></a>
-                            </p>
-                        </div>
-
-                    </div>
-                </div>
-
-                <div className="col-md-6 col-lg-4 mb-5 mb-lg-5">
-                    <div className="team-member">
-
-                        <img src={event05} alt="Image" className="img-fluid"/>
-
-                        <div className="text">
-
-                            <h2 className="mb-2 font-weight-light h4">Nathan Dumlao</h2>
-                            <span className="d-block mb-2 text-white-opacity-05">Creative Director</span>
-                            <p className="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit ullam reprehenderit nemo.</p>
-                            <p>
-                                <a href="#" className="text-white p-2"><span className="icon-facebook"></span></a>
-                                <a href="#" className="text-white p-2"><span className="icon-twitter"></span></a>
-                                <a href="#" className="text-white p-2"><span className="icon-linkedin"></span></a>
-                            </p>
-                        </div>
-
-                    </div>
-                </div>
-
-                <div className="col-md-6 col-lg-4 mb-5 mb-lg-5">
-                    <div className="team-member">
-
-                        <img src={event01} alt="Image" className="img-fluid"/>
-
-                        <div className="text">
-
-                            <h2 className="mb-2 font-weight-light h4">Nathan Dumlao</h2>
-                            <span className="d-block mb-2 text-white-opacity-05">Creative Director</span>
-                            <p className="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit ullam reprehenderit nemo.</p>
-                            <p>
-                                <a href="#" className="text-white p-2"><span className="icon-facebook"></span></a>
-                                <a href="#" className="text-white p-2"><span className="icon-twitter"></span></a>
-                                <a href="#" className="text-white p-2"><span className="icon-linkedin"></span></a>
-                            </p>
-                        </div>
-
-                    </div>
-                </div>
-
-
+                        )}):null}
             </div>
         </div>
     </div>

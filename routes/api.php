@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('events', 'EventController@index');
+Route::get('events/indexOfEventsThisMonth', 'EventController@indexOfEventsThisMonth');
+Route::get('events/indexOfEventsNextMonth', 'EventController@indexOfEventsNextMonth');
 Route::get('users', 'EventController@userss');
 
 Route::get('events/{event}','EventController@show');
