@@ -19,6 +19,10 @@ Route::get('events', 'EventController@index');
 Route::get('events/indexOfEventsThisMonth', 'EventController@indexOfEventsThisMonth');
 Route::get('events/indexOfEventsNextMonth', 'EventController@indexOfEventsNextMonth');
 Route::get('users', 'EventController@userss');
+Route::get('events/getRecommendedEvents/{eventId}', 'EventController@getRecommendedEvents');
+Route::get('events/getdateEvents', 'EventController@getdateEvents');
+Route::get('events/getFirstdateEvents', 'EventController@getFirstdateEvents');
+Route::get('events/getEventByDate/{date}', 'EventController@getEventByDate');
 
 Route::get('events/{event}','EventController@show');
 
@@ -36,6 +40,8 @@ Route::put('events/{event}', 'EventController@update');
 Route::delete('events/{event}','EventController@delete');
 //media
 Route::get('medias', 'MediaController@index');
+Route::get('tickets', 'TicketController@index');
+
 
 Route::get('medias/{media}','MediaController@show');
 

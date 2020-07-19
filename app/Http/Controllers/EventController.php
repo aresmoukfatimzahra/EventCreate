@@ -47,7 +47,7 @@ class EventController extends Controller
     }
     public function show(Event $event)
     {
-        $events= Event::with('media')->with('user')->get();
+        $events= Event::with('media')->with('user')->with('categories')->get();
         $re= $events->find($event);
         return ['event'=>$re,"event_medias"=>$re->media];
 
@@ -91,5 +91,48 @@ class EventController extends Controller
         $event->delete();
 
         return response()->json(null, 204);
+    }
+
+    public function getRecommendedEvents(Event $eventId){
+
+        $event= Event::with('media')->with('categories')->get()
+            ->find($eventId);
+
+        foreach($event->categories as $category) {
+            $events = $category->events;
+        }
+        return  ["events"=>compact(array('events'))];
+
+    }
+    public function getdateEvents(){
+
+        $data = DB::table("events")
+            ->select("date")
+            ->distinct()
+            ->orderBy('date')
+            ->get();
+
+        return ['dates'=>$data];
+    }
+    public function getFirstdateEvents(){
+
+        $data = DB::table("events")
+            ->select("events.*")
+            ->distinct()
+            ->orderBy('date')
+            ->first();
+
+
+        return ['events'=>array($data)];
+    }
+    public function getEventByDate($date){
+
+        $data = DB::table("events")
+            ->join('media','media.event_id','events.id')
+            ->select('events.*','media.url')
+            ->where("date",'=',$date)
+            ->get();
+
+        return ['events'=>$data];
     }
 }

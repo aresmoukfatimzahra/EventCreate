@@ -21,23 +21,42 @@ export default class EventDesc extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            id:this.props.match.params.id,
             event: [],
+            recommended_events: [],
 
         }
     }
+  getEventInfos(id){
+      this.setState({
+          id:id
+      })
+      const url=process.env.MIX_REACT_APP_ROOT
+      indexEvents(url+'/events/'+id,data=>{
+          this.setState({
+              event:data.event,
+          })
+
+      })
+      indexEvents(url+'/events/getRecommendedEvents/'+id,data=>{
+          this.setState({
+              recommended_events:data.events.events,
+          })
+
+      })
+  }
+
+        changeEvent=(id)=>{
+         this.getEventInfos(id)
+    }
 
     componentDidMount() {
-        const url=process.env.MIX_REACT_APP_ROOT
-
-        indexEvents(url+'/events/'+this.props.match.params.id,data=>{
-            this.setState({
-                event:data.event,
-            })
-
-        })
+        this.getEventInfos(this.state.id)
     }
     render() {
+        console.log("teeeehis.state")
         console.log(this.state)
+        let recommended=this.state.recommended_events
         let pics=[event01,event02,event03,event04]
         let medias=[];
 
@@ -56,7 +75,7 @@ export default class EventDesc extends React.Component {
         if(this.state.event.user){
              users=this.state.event.user
         }
-
+let id=this.props.match.params.id
         return (
      <div>
 
@@ -305,7 +324,7 @@ export default class EventDesc extends React.Component {
                 <div key={i} className="col-md-6 col-lg-4 mb-5 mb-lg-5">
                     <div className="team-member">
                         {artist.media.url?
-                            <Link to={"/Artist/"+artist.id}><img  className="img-fluid eventImg" src={artist.media.url} style={{width: 400}}/></Link>
+                            <Link to={"/Artist/"+artist.id} ><img  className="img-fluid eventImg" src={artist.media.url} style={{width: 400}}/></Link>
                             :
                             <Link to={"/Artist/"+artist.id}><img  className="img-fluid eventImg" src={event01} style={{width: 400}}/></Link>
                         }
@@ -334,30 +353,24 @@ export default class EventDesc extends React.Component {
                 </div>
             </div>
             <div className="row">
-                <div className="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
-                    <a href="#"><img src={img} alt="Image" className="img-fluid"/></a>
+
+                {recommended.map((event,i) =>
+                    event.id!==this.state.event.id?(
+                <div key={i} className="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                    {event.media?
+                        event.media.slice(0, 3).map((m,i) =>
+                        <Link to={"/EventDesc/"+event.id} onClick={(e)=>this.changeEvent(event.id)}><img  className="img-fluid eventImg" src={m.url} style={{width: 400}}/></Link>
+                        ):
+                        <Link to={"/EventDesc/"+event.id} onClick={(e)=>this.changeEvent(event.id)}><img  className="img-fluid eventImg" src={img} style={{width: 400}}/></Link>
+                    }
+
                     <div className="p-4 bg-white">
-                        <span className="d-block text-secondary small text-uppercase">Jan 20th, 2019</span>
-                        <h2 className="h5 text-black mb-3"><a href="#" style={{color:'#7cbd1e'}}>Art Gossip by Mike Charles</a></h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias enim, ipsa exercitationem veniam quae sunt</p>
+                        <span className="d-block text-secondary small text-uppercase">{event.date}</span>
+                        <h2 className="h5 text-black mb-3"> <Link to={"/EventDesc/"+event.id} onClick={(e)=>this.changeEvent(event.id)} >{event.title}</Link></h2>
+                        <p>{event.description}</p>
                     </div>
                 </div>
-                <div className="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
-                    <a href="#"><img src={img} alt="Image" className="img-fluid"/></a>
-                    <div className="p-4 bg-white">
-                        <span className="d-block text-secondary small text-uppercase">Jan 20th, 2019</span>
-                        <h2 className="h5 text-black mb-3"><a href="#" style={{color:'#7cbd1e'}}>Art Gossip by Mike Charles</a></h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias enim, ipsa exercitationem veniam quae sunt</p>
-                    </div>
-                </div>
-                <div className="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="300">
-                    <a href="#"><img src={img} alt="Image" className="img-fluid"/></a>
-                    <div className="p-4 bg-white">
-                        <span className="d-block text-secondary small text-uppercase">Jan 20th, 2019</span>
-                        <h2 className="h5 text-black mb-3"><a href="#" style={{color:'#7cbd1e'}}>Art Gossip by Mike Charles</a></h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias enim, ipsa exercitationem veniam quae sunt</p>
-                    </div>
-                </div>
+                     ):null)}
                 <div className=" offset-5 col-md-6 button-all">  <Link className="main_btn btn-events" to="/MoreEvents">Back to Events</Link></div>
 
             </div>

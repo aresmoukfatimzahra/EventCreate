@@ -14,7 +14,8 @@ class TicketController extends Controller
      */
     public function index()
     {
-        //
+        return  Ticket::all();
+
     }
 
     /**

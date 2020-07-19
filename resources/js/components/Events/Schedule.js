@@ -1,10 +1,60 @@
 import React,{Component} from 'react';
 import ReactDOM from 'react-dom';
 import schedule from '../../../../public/assets/img/schedule-1.jpg';
+import {getResults} from "../../services";
+import Calendar from "./Calendar";
+import {Link} from "react-router-dom";
 
 
 export default class Schedule extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            dates: [],
+            events: [],
+            date:"",
+        }
+    }
+
+    componentWillMount() {
+        const url=process.env.MIX_REACT_APP_ROOT
+        console.log(url)
+        getResults(url+'/events/getdateEvents',data=>{
+            this.setState({
+                dates:data.dates,
+
+            })
+
+        })
+
+        getResults(url+'/events/getFirstdateEvents',data=>{
+            this.setState({
+                events:data.events,
+                date:data.events[0].date,
+            })
+
+        })
+
+
+
+    }
+
+    changeDate=(date)=>{
+        const url=process.env.MIX_REACT_APP_ROOT
+        getResults(url+'/events/getEventByDate/'+date,data=>{
+            this.setState({
+                events:data.events,
+                date:date
+            })
+
+        })
+    }
     render() {
+        let dates=this.state.dates
+        let date=this.state.date
+        let events=this.state.events
+        console.log('rrr')
+        console.log(this.state)
         return (
            <section className="event_schedule_area p_120">
     <div className="container">
@@ -15,71 +65,35 @@ export default class Schedule extends React.Component {
         </div>
         <div className="event_schedule_inner">
             <ul className="nav nav-tabs" id="myTab" role="tablist">
+                {dates.map((date,i) => {
+                    return (
                 <li className="nav-item">
-                    <a className="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
-                       aria-controls="home" aria-selected="true">Day 01</a>
+                    <a className="nav-link active" id="home-tab" data-toggle="tab" href={"#"+date.date} role="tab" onClick={(e)=>this.changeDate(date.date)}
+                       aria-controls="home" aria-selected="true">{date.date}</a>
                 </li>
-                <li className="nav-item">
-                    <a className="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
-                       aria-controls="profile" aria-selected="false">Day 02</a>
-                </li>
-                <li className="nav-item">
-                    <a className="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab"
-                       aria-controls="contact" aria-selected="false">Day 03</a>
-                </li>
+                        )})}
+
             </ul>
             <div className="tab-content" id="myTabContent">
-                <div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                <div className="tab-pane fade show active" id={date.date} role="tabpanel" aria-labelledby="home-tab">
+                    {events.map((event,i) => {
+                        return (
                     <div className="media">
                         <div className="d-flex">
-                            <img src={schedule} alt=""/>
+                            {event.url?
+                                <Link to={"/EventDesc/"+event.id}><img src={event.url} alt="" width={100} height={100}/></Link>:
+                                <Link to={"/EventDesc/"+event.id}><img src={schedule} alt="" width={100} height={100}/></Link>
+                            }
+
                         </div>
                         <div className="media-body">
                             <h5>09.00 am</h5>
-                            <h4>Opening Ceremony</h4>
+                            <h4> <Link to={"/EventDesc/"+event.id}>{event.title}</Link></h4>
                             <p>Speech by: Mark weins</p>
                         </div>
                     </div>
-                    <div className="media">
-                        <div className="d-flex">
-                            <img src={schedule} alt=""/>
-                        </div>
-                        <div className="media-body">
-                            <h5>09.00 am</h5>
-                            <h4>Opening Ceremony</h4>
-                            <p>Speech by: Mark weins</p>
-                        </div>
-                    </div>
-                    <div className="media">
-                        <div className="d-flex">
-                            <img src={schedule} alt=""/>
-                        </div>
-                        <div className="media-body">
-                            <h5>09.00 am</h5>
-                            <h4>Opening Ceremony</h4>
-                            <p>Speech by: Mark weins</p>
-                        </div>
-                    </div>
-                    <div className="media">
-                        <div className="d-flex">
-                            <img src={schedule} alt=""/>
-                        </div>
-                        <div className="media-body">
-                            <h5>09.00 am</h5>
-                            <h4>Opening Ceremony</h4>
-                            <p>Speech by: Mark weins</p>
-                        </div>
-                    </div>
-                    <div className="media">
-                        <div className="d-flex">
-                            <img src={schedule} alt=""/>
-                        </div>
-                        <div className="media-body">
-                            <h5>09.00 am</h5>
-                            <h4>Opening Ceremony</h4>
-                            <p>Speech by: Mark weins</p>
-                        </div>
-                    </div>
+                            )})}
+
                 </div>
                 <div className="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                     <div className="media">
