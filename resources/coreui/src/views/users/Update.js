@@ -34,6 +34,7 @@ import {
     CIcon,
     CAlert
   } from '@coreui/react'
+import { data } from 'autoprefixer';
 export default class Update extends Component
 {
     constructor(props){
@@ -43,6 +44,7 @@ export default class Update extends Component
             email: '',
             password: '',
             role_id: '',
+            activation_token: '',
             showMessage: false
 
         }
@@ -86,6 +88,7 @@ export default class Update extends Component
                     email: Response.data.email,
                     password: Response.data.password,
                     role_id: Response.data.role_id,
+                    activation_token: Response.data.activation_token
                 })
                 console.log(Response.data);
             }
@@ -93,26 +96,19 @@ export default class Update extends Component
     }
 
     handlesubmitform=(event)=>{
-        this.setState({ showMessage: false });
         event.preventDefault();
+        this.setState({ showMessage: false });
         const id=this.props.match.params.id;
-        axios.put(`/api/user/${id}/update`,{
+        axios.put(`api/user/${id}/update`,{
             name: this.state.name,
             eamil: this.state.email,
             password: this.state.password,
             role_id: this.state.role_id,
-        }).then(() => {
+            // activation_token: this.state.activation_token,
+        }).then((response) => {
+            console.log(response)
             this.setState({ showMessage: true })
-        })
-        .then(Response =>{
-            this.setState({
-                name: '',
-                email: '',
-                password: '',
-                role_id: '',
-            })
-            console.log(Response)
-            this.props.history.push('/users')
+            return response;
         }).catch(err => console.log(err));
     }
     render() {

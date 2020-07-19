@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\User;
 
@@ -85,8 +87,9 @@ class UserController extends Controller
 
     public function update(Request $request, User $user)
     {
-        $user->update($request->all());
-
-        return response()->json($user, 200);
+       if($user->update($request->all())){
+            // dd($user);die;
+            return response()->json($user,201);
+        }
     }
 }
