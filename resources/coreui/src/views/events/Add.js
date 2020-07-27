@@ -1,200 +1,142 @@
 import React, {Component} from 'react';
+import { Redirect } from 'react-router';
 import axios from 'axios'
 import {
-    CButton,
-    CCard,
-    CCardBody,
-    CCardFooter,
-    CCardHeader,
-    CCol,
-    CCollapse,
-    CDropdownItem,
-    CDropdownMenu,
-    CDropdownToggle,
-    CFade,
-    CForm,
-    CFormGroup,
-    CFormText,
-    CValidFeedback,
-    CInvalidFeedback,
-    CTextarea,
-    CInput,
-    CInputFile,
-    CInputCheckbox,
-    CInputRadio,
-    CInputGroup,
-    CInputGroupAppend,
-    CInputGroupPrepend,
-    CDropdown,
-    CInputGroupText,
-    CLabel,
-    CSelect,
-    CRow,
-    CSwitch,
-    CIcon,
-    CAlert
+  CButton,
+  CCard,
+  CCardBody,
+  CCardFooter,
+  CCardHeader,
+  CCol,
+  CCollapse,
+  CDropdownItem,
+  CDropdownMenu,
+  CDropdownToggle,
+  CFade,
+  CForm,
+  CFormGroup,
+  CFormText,
+  CValidFeedback,
+  CInvalidFeedback,
+  CTextarea,
+  CInput,
+  CInputFile,
+  CInputCheckbox,
+  CInputRadio,
+  CInputGroup,
+  CInputGroupAppend,
+  CInputGroupPrepend,
+  CDropdown,
+  CInputGroupText,
+  CLabel,
+  CSelect,
+  CRow
   } from '@coreui/react'
-export default class Add extends Component
-{
-    constructor(props){
-        super(props);
-        this.state={
-            title: '',
-            place: '',
-            status: false,
-            Description: '',
-            date: '',
-            showMessage: false
+import CIcon from '@coreui/icons-react'
+import Step1 from "./Steps/Step1";
+import Step2 from "./Steps/Step2";
+import Step3 from "./Steps/Step3";
+import Step4 from "./Steps/Step4";
+import Step5 from "./Steps/Step5";
+import Step6 from "./Steps/Step6";
+export default class Add extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      title: '',
+      place: '',
+      status: false,
+      description: '',
+      date: '',
+      categories: '',
+      tags  : '',
+      images  : '',
+      showMessage: false,
+      redirect: false,
+      step: 1,
 
+    }
+
+  }
+
+  nextStep = () => {
+    const {step} = this.state;
+    this.setState({step: step + 1});
+  };
+
+  prevStep = () => {
+    const {step} = this.state;
+    this.setState({step: step - 1});
+  };
+  inputChange = input => e => {
+    console.log(e)
+    this.setState({
+      [input]: e.target.value
+    });
+  };
+
+      render() {
+        const {step} = this.state;
+        const {title, place, status, description, date} = this.state;
+        const values = {title, place, status, description, date};
+        if (this.state.redirect) {
+          return <Redirect to="/events/liste"/>;
         }
-        this.handleTitle=this.handleTitle.bind(this);
-        this.handlePlace=this.handlePlace.bind(this);
-        this.handleStatus=this.handleStatus.bind(this);
-        this.handleDescription=this.handleDescription.bind(this);
-        this.handleDate=this.handleDate.bind(this);
-        this.handlesubmitform=this.handlesubmitform.bind(this);
-    }
 
-    handleTitle=(event)=>{
-        this.setState({
-            title: event.target.value
-        })   
-    }
-    handlePlace=(event)=>{
-        this.setState({
-            place: event.target.value
-        })   
-    }
-    handleStatus=()=>{
-        this.setState({
-            status: !this.state.status
-        })
-    }
-    handleDescription=(event)=>{
-        this.setState({
-            description: event.target.value
-        })   
-    }
-    handleDate=(event)=>{
-        this.setState({
-            date: event.target.value
-        })   
-    }
-    handlesubmitform=(event)=>{
-        this.setState({ showMessage: false });
-        event.preventDefault();
-        axios.post('/api/events/create',{
-            title: this.state.title,
-            place: this.state.place,
-            status: this.state.status,
-            description: this.state.description,
-            date: this.state.date
-        }).then(() => {
-            this.setState({ showMessage: true })
-        })
-        .then(Response =>{
-            this.setState({
-                title: '',
-                place: '',
-                status: false,
-                description: '',
-                date: ''
-            })
-        }).catch(err => console.log(err));
-    }
-    render() {
-        return(
-        <CRow>
-            <CCol xs="12" sm="12">
-              <CCard>
-                <CCardHeader>
-                   Create
-                  <small> Event</small>
-                </CCardHeader>
-                <form method="POST" onSubmit={this.handlesubmitform}>
-                    <CCardBody>
+          switch (step) {
+            case 1:
+              return (
+                <Step1
+                  nextStep={this.nextStep}
+                  inputChange={this.inputChange}
+                  values={values}
+                />
+              );
+            case 2:
+              return (
+                <Step2
+                  nextStep={this.nextStep}
+                  prevStep={this.prevStep}
+                  inputChange={this.inputChange}
+                  values={values}
+                  />
+              )
+            case 3:
+              return (
+              <Step3
+                nextStep={this.nextStep}
+                prevStep={this.prevStep}
+                inputChange={this.inputChange}
+                values={values}
+              />
+            )
+            case 4:
+              return (
+                <Step4
+                  nextStep={this.nextStep}
+                  prevStep={this.prevStep}
+                  inputChange={this.inputChange}
+                  values={values}
+                  />
+              )
+            case 5:
+              return (
+                <Step5
+                  nextStep={this.nextStep}
+                  prevStep={this.prevStep}
+                  inputChange={this.inputChange}
+                  values={values}
+                />
+              )
+            case 6:
+              return (
+                <Step6
+                  prevStep={this.prevStep}
+                  inputChange={this.inputChange}
+                  values={values}
+                />
+              )
+          }
 
-                            <CRow>
-                                { this.state.showMessage &&  
-                                        <CAlert color="success" duration={5000}>
-                                            <strong>Added successfully !</strong>                                       
-                                        </CAlert>
-                                }
-                            </CRow>
-                        
-                            <CRow>
-                                <CCol xs="8">
-                                <CFormGroup>
-                                    <CLabel htmlFor="name">title</CLabel>
-                                    <CInput id="name" placeholder="Title"
-                                    required
-                                    onChange={this.handleTitle}
-                                    value={this.state.title}
-                                     />
-                                </CFormGroup>
-                                </CCol>
-                            </CRow>
-                            <CRow>
-                                <CCol xs="8">
-                                    <CFormGroup>
-                                        <CLabel htmlFor="name">Place</CLabel>
-                                        <CInput id="name" placeholder="adress" 
-                                        required
-                                        onChange={this.handlePlace}
-                                        value={this.state.place}
-                                        />
-                                    </CFormGroup>
-                                </CCol>
-                            </CRow>
-                            <CRow>
-                                <CCol xs="8">
-                                    <CFormGroup>
-                                        <CRow>
-                                        <CCol xs="1"> <CLabel htmlFor="name">Status</CLabel></CCol>
-                                        <CCol xs="11"> <CSwitch className={'mx-1'} variant={'3d'} color={'success'} 
-                                         
-                                         onChange={this.handleStatus}
-                                         value={this.state.status}
-                                         /></CCol> 
-                                        </CRow>
-                                    </CFormGroup>
-                                </CCol>
-                            </CRow>
-                            <CRow>
-                                <CCol xs="8">
-                                    <CFormGroup>
-                                        <CLabel htmlFor="name">Description</CLabel>
-                                        <CTextarea 
-                                        name="description" 
-                                        required
-                                        onChange={this.handleDescription}
-                                        value={this.state.description}
-                                        id="description" 
-                                        rows="9"
-                                        placeholder="Description..." 
-                                        />
-                                    </CFormGroup>
-                                </CCol>
-                            </CRow>
-                            <CRow>
-                                <CCol xs="8">
-                                    <CFormGroup>
-                                        <CLabel htmlFor="name">Date</CLabel>
-                                        <CInput type="date" id="date-input" name="date-input" placeholder="date"
-                                        onChange={this.handleDate}
-                                        value={this.state.date}
-                                        />
-                                    </CFormGroup>
-                                </CCol>
-                            </CRow>
-                    </CCardBody>
-                    <CCardFooter>
-                        <CButton type="submit" size="sm" color="primary"> Submit</CButton>
-                    </CCardFooter>
-                </form>
-              </CCard>
-            </CCol>
-          </CRow>
-        );
-    }
+      }
 }

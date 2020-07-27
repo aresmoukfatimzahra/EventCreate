@@ -16,7 +16,7 @@ class UserController extends Controller
      * liste users
      */
     public function liste(){
-        $users=User::all();
+        $users=User::with('role')->get();
         return response()->json($users, 201);
     }
 
@@ -62,5 +62,19 @@ class UserController extends Controller
 
         return  ['events'=>$events,"media"=>compact(array('media'))];
 
+    }
+
+    public function showUserByRole(string  $libelle)
+    {
+        $role=Role::where('libelle','=',$libelle)->firstOrFail();
+        $users=[];
+        if($role){
+            $users= User::with('role')->with('media')
+                ->with('events')->with('media')
+            ->where('role_id',"=",$role->id)->get();
+
+        }
+
+        return ['artists'=>$users];
     }
 }

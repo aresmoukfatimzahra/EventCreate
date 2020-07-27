@@ -68,6 +68,8 @@ Route::group([
  });
 Route::get('users/liste','UserController@liste');
 Route::get('user/{id}/show','UserController@show');
+Route::get('showUserByRole/{libelle}','UserController@showUserByRole');
+
 Route::delete('medias/{media}','MediaController@destroy');
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
@@ -78,3 +80,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('artists', 'UserController@index');
 Route::get('users/{user}','UserController@showArtist');
 Route::get('usersShowEvents/{user}','UserController@showEvents');
+
+//category
+Route::get('categories', 'CategoryController@index');
+//tags
+Route::get('tags', 'TagsController@index');
