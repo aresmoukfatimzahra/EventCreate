@@ -20,4 +20,8 @@ class Event extends Model
     {
         return $this->belongsToMany('App\Category','category_event')->withTimestamps();
     }
+    public function tags()
+    {
+        return $this->belongsToMany('App\Tags','tag_event')->withTimestamps();
+    }
 }

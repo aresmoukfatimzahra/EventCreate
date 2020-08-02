@@ -39,6 +39,7 @@ import Step3 from "./Steps/Step3";
 import Step4 from "./Steps/Step4";
 import Step5 from "./Steps/Step5";
 import Step6 from "./Steps/Step6";
+import {getResults} from "../../../../js/services";
 export default class Add extends Component {
   constructor(props) {
     super(props);
@@ -49,10 +50,14 @@ export default class Add extends Component {
       description: '',
       date: '',
       categories: '',
+      categoryID: '',
+      tagsID: '',
       tags  : '',
-      images  : '',
+      media  : "",
       showMessage: false,
       redirect: false,
+      users:[],
+      keyboardplayer:[],
       step: 1,
 
     }
@@ -69,16 +74,70 @@ export default class Add extends Component {
     this.setState({step: step - 1});
   };
   inputChange = input => e => {
-    console.log(e)
-    this.setState({
+    console.log(input)
+    console.log("input")
+    if(input==="users"){
+      this.state.users.push(e.target.value);
+      this.setState({[input]:this.state.users});
+
+    }
+    else if(input==="keyboardplayer"){
+
+      this.setState({ [input]: [...this.state.keyboardplayer, ...e.target.value] });
+    }
+    else if(input==="media"){
+
+       const data=new FormData();
+
+       let names=[];
+       let names2=[];
+      for (let i = 0; i < e.target.files.length; i++) {
+          data.append('image[]',e.target.files[i],e.target.files[i].name)
+        if(!Array.isArray(e.target.files[i])){
+          names.push(e.target.files[i].name,names)
+        }
+
+      }
+      for (let i = 0; i < names.length; i++) {
+        if(!Array.isArray(names[i])){
+          names2.push(names[i])
+        }
+      }
+        console.log( names)
+        console.log( "names")
+        axios.post('api/upload',data)
+          .then(res=>{
+            console.log(res)
+          })
+
+      this.setState({ [input]: [...this.state.media,names2] });
+    }
+    else if(input==="autorisation" || input==="assurance" ){
+
+      const data=new FormData();
+
+
+      data.append(input,e.target.files[0],e.target.files[0].name)
+
+      axios.post('api/upload',data)
+        .then(res=>{
+          console.log(res)
+        })
+
+    }
+    else if(input==="tagsID"){
+      this.setState({ [input]: [...this.state.tagsID, ...e.target.value] });
+    }
+    else{this.setState({
       [input]: e.target.value
-    });
+    });}
+
   };
 
       render() {
         const {step} = this.state;
-        const {title, place, status, description, date} = this.state;
-        const values = {title, place, status, description, date};
+        const {title, place, status, description, date,categoryID,tagsID,users,keyboardplayer,media} = this.state;
+        const values = {title, place, status, description, date,categoryID,tagsID,users,keyboardplayer,media};
         if (this.state.redirect) {
           return <Redirect to="/events/liste"/>;
         }

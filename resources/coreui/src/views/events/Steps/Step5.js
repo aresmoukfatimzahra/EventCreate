@@ -44,13 +44,14 @@ export default class Step5 extends Component
       title: '',
       place: '',
       status: false,
-      Description: '',
+      description: '',
       date: '',
+      categories: '',
+      categoryID: '',
+      tags  : '',
+      images  : '',
       showMessage: false,
       redirect: false,
-      categories: [],
-      tags: [],
-      source : [ "Albania", "Andorra", "Armenia", "Austria", "Azerbaijan" ]
 
     }
     this.handleTitle=this.handleTitle.bind(this);

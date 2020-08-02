@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
 import ReactDOM from 'react-dom';
 
-import {indexEvents} from "../../services";
+import {indexEvents,getResults} from "../../services";
 import img from "../../../../public/assets/img/event1.jpg";
 import team1 from '../../../../public/assets/img/team/team-1.jpg';
 import team2 from '../../../../public/assets/img/team/team-2.jpg';
@@ -28,17 +28,18 @@ export default class EventDesc extends React.Component {
         }
     }
   getEventInfos(id){
+      const url=process.env.MIX_REACT_APP_ROOT
       this.setState({
           id:id
       })
-      const url=process.env.MIX_REACT_APP_ROOT
+
       indexEvents(url+'/events/'+id,data=>{
           this.setState({
               event:data.event,
           })
 
       })
-      indexEvents(url+'/events/getRecommendedEvents/'+id,data=>{
+      getResults(url+'/events/getRecommendedEvents/'+id,data=>{
           this.setState({
               recommended_events:data.events.events,
           })
@@ -60,13 +61,9 @@ export default class EventDesc extends React.Component {
         let pics=[event01,event02,event03,event04]
         let medias=[];
 
-// let n=this.state.medias.length;
-//         let rest=4-n;
-//         let gallery=[];
-//         gallery=medias.concat(pics);
         let event=this.state.event
         let img=guitarist
-        if(event.media) {
+        if(event.media ) {
             img = event.media[0].url
         }
         console.log("this.srrtate")
@@ -323,7 +320,7 @@ let id=this.props.match.params.id
                     return (
                 <div key={i} className="col-md-6 col-lg-4 mb-5 mb-lg-5">
                     <div className="team-member">
-                        {artist.media.url?
+                        {artist.media?
                             <Link to={"/Artist/"+artist.id} ><img  className="img-fluid eventImg" src={artist.media.url} style={{width: 400}}/></Link>
                             :
                             <Link to={"/Artist/"+artist.id}><img  className="img-fluid eventImg" src={event01} style={{width: 400}}/></Link>

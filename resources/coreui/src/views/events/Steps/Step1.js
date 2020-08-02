@@ -39,10 +39,15 @@ export default class Step1 extends Component
     super(props);
     this.state={
       title: '',
+      users: '',
       place: '',
       status: false,
-      Description: '',
+      description: '',
       date: '',
+      categories: '',
+      categoryID: '',
+      tags  : '',
+      images  : '',
       showMessage: false,
       redirect: false,
 
@@ -62,31 +67,73 @@ export default class Step1 extends Component
     const { values, inputChange } = this.props;
     return(
 
-    <div className="form-container">
-      <h1 className="mb-5">Account Setup</h1>
-      <div className="form-group">
-        <label htmlFor="name">title</label>
-        <input type="text" className="form-control" name="title" onChange={inputChange('title')} value={values.title} />
-      </div>
-      <div className="form-group">
-        <label htmlFor="email">place</label>
-        <input type="text" className="form-control" name="place" onChange={inputChange('place')} value={values.place} />
-      </div>
-      <div className="form-group">
-        <label htmlFor="phone">description</label>
-        <input type="text" className="form-control" name="description" onChange={inputChange('description')} value={values.description} />
-      </div>
-      <div className="form-group">
-        <label htmlFor="password">date</label>
-        <input type="date" className="form-control" name="date" onChange={inputChange('date')} value={values.date} />
-      </div>
 
-      <br />
+    <CRow>
+      <CCol xs="12" md="12">
+        <CCard>
+          <CCardHeader>
+            Event Info
+            <small> Step 1</small>
+          </CCardHeader>
+          <CCardBody>
+            <form method="POST" >
 
-      <div className="text-right">
-        <button className="btn btn-primary" onClick={this.continue}>Continue</button>
-      </div>
-    </div>
+              <CFormGroup row>
+                <CCol xs="12" md="3">
+                  <CLabel htmlFor="password-input">title</CLabel>
+                </CCol>
+                <CCol xs="12" md="6">
+                  <CInput type="text" className="form-control" id="title" name="title" onChange={inputChange('title')} value={values.title}/>
+
+
+                </CCol>
+              </CFormGroup>
+
+              <CFormGroup row>
+                <CCol xs="12" md="3">
+                  <CLabel htmlFor="password-input">place</CLabel>
+                </CCol>
+                <CCol xs="12" md="6">
+                  <CInput type="text" className="form-control" id="place" name="place" onChange={inputChange('place')} value={values.place}/>
+
+                </CCol>
+              </CFormGroup>
+
+              <CFormGroup row>
+                <CCol xs="12" md="3">
+                  <CLabel htmlFor="password-input">description</CLabel>
+                </CCol>
+                <CCol xs="12" md="6">
+
+                  <CInput type="text" className="form-control" id="description" name="description" onChange={inputChange('description')} value={values.description}/>
+                </CCol>
+              </CFormGroup>
+
+              <CFormGroup row>
+                <CCol xs="12" md="3">
+                  <CLabel htmlFor="password-input">date</CLabel>
+                </CCol>
+                <CCol xs="12" md="6">
+
+                  <CInput type="date" className="form-control" id="date" name="date" onChange={inputChange('date')} value={values.date}/>
+                </CCol>
+              </CFormGroup>
+
+            </form>
+          </CCardBody>
+          <CCardFooter>
+
+            <div className="row">
+
+              <div className="col-12 text-right">
+                <button className="btn btn-primary" onClick={this.continue}>Continue</button>
+              </div>
+            </div>
+          </CCardFooter>
+        </CCard>
+
+      </CCol>
+    </CRow>
     );
   }
 }

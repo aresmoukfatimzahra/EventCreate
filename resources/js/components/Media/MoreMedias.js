@@ -46,7 +46,7 @@ export default class MoreMedias extends React.Component {
                             {medias.map((media,i) => {
                                 return media.event ?
                                     (<div className="col-md-6 col-lg-4 mb-5" data-aos="fade-up" data-aos-delay="100">
-                                        <Link to={"/EventDesc/"+media.id}><img src={media.url} alt="Image" className="img-fluid" style={{width:340,height:300}}/></Link>
+                                        <Link to={"/EventDesc/"+media.event.id}><img src={media.url} alt="Image" className="img-fluid" style={{width:340,height:300}}/></Link>
 
                                         <div className="p-4 bg-white">
                                             <h2 className="h5 text-black mb-3 text-center" style={{'color': '#517b14;'}} >EVENT <Link to={"/EventDesc/"+media.event.id} > {media.event.title}</Link></h2>

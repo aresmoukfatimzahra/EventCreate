@@ -44,20 +44,17 @@ export default class Step1 extends Component
       title: '',
       place: '',
       status: false,
-      Description: '',
+      description: '',
       date: '',
+      categories: '',
+      categoryID: '',
+      tags  : '',
+      images  : '',
       showMessage: false,
       redirect: false,
-      categories: [],
-      tags: [],
-      source : [ "Albania", "Andorra", "Armenia", "Austria", "Azerbaijan" ]
 
     }
-    this.handleTitle=this.handleTitle.bind(this);
-    this.handlePlace=this.handlePlace.bind(this);
-    this.handleStatus=this.handleStatus.bind(this);
-    this.handleDescription=this.handleDescription.bind(this);
-    this.handleDate=this.handleDate.bind(this);
+
     this.handlesubmitform=this.handlesubmitform.bind(this);
     this.continue=this.continue.bind(this);
     this.back=this.back.bind(this);
@@ -87,54 +84,25 @@ export default class Step1 extends Component
     e.preventDefault();
     this.props.prevStep();
   };
-  handleTitle=(event)=>{
-    this.setState({
-      title: event.target.value
-    })
-  }
-  handlePlace=(event)=>{
-    this.setState({
-      place: event.target.value
-    })
-  }
-  handleStatus=()=>{
-    this.setState({
-      status: !this.state.status
-    })
-  }
-  handleDescription=(event)=>{
-    this.setState({
-      description: event.target.value
-    })
-  }
-  handleDate=(event)=>{
-    this.setState({
-      date: event.target.value
-    })
-  }
+
   handlesubmitform=(event)=>{
     this.setState({ showMessage: false });
     event.preventDefault();
-    axios.post('/api/events/create',{
-      title: this.state.title,
-      place: this.state.place,
-      status: this.state.status,
-      description: this.state.description,
-      date: this.state.date
+    axios.post('/api/media/create',{
+      url: this.props.values.media,
+      title: this.props.values.media,
+
     }).then(() => {
       this.setState({ showMessage: true,redirect:true })
     })
       .then(Response =>{
         this.setState({
+          url: '',
           title: '',
-          place: '',
-          status: false,
-          description: '',
-          date: '',
-          redirect:true
+
         })
       }).catch(err => console.log(err));
-    console.log('rrrddd')
+    console.log('error')
   }
   render() {
     if(this.state.redirect) {
@@ -151,21 +119,21 @@ export default class Step1 extends Component
               <small> Step 2</small>
             </CCardHeader>
             <CCardBody>
-              <form method="POST" onSubmit={this.handlesubmitform}>
+              <form method="POST" encType="multipart/form-data" >
 
                 <CFormGroup row>
                   <CCol xs="12" md="3">
                     <CLabel htmlFor="password-input">Category</CLabel>
                   </CCol>
                   <CCol xs="12" md="6">
-                   <CSelect onChange={inputChange('categories')} value={values.categories} name="category">
+                   <select onChange={inputChange('categoryID')}  name="categoryID" value={values.categoryID}>
                      <option>--- Category ---</option>
                      { this.state.categories ?this.state.categories.map((category,i) => {
                      return (
-                     <option value={category.libelle}>{category.libelle}</option>
+                     <option value={category.id}>{category.libelle}</option>
                        )}):null}
 
-                   </CSelect>
+                   </select>
 
                   </CCol>
                 </CFormGroup>
@@ -175,11 +143,11 @@ export default class Step1 extends Component
                     <CLabel htmlFor="password-input">Tags</CLabel>
                   </CCol>
                   <CCol xs="12" md="6">
-                    <CSelect multiple onChange={inputChange('tags')} value={values.tags} name="tags">
+                    <CSelect multiple onChange={inputChange('tagsID')}  name="tagsID[]" value={values.tagsID}>
                       <option>--- Tags ---</option>
                       { this.state.tags ?this.state.tags.map((tag,i) => {
                         return (
-                          <option value={tag.libelle}>{tag.libelle}</option>
+                          <option value={tag.id}>{tag.libelle}</option>
                         )}):null}
                     </CSelect>
                   </CCol>
@@ -190,7 +158,8 @@ export default class Step1 extends Component
                       <CLabel htmlFor="password-input">Images</CLabel>
                     </CCol>
                     <CCol xs="12" md="6">
-                      <CInput type="file" id="images" name="images" multiple placeholder="images" onChange={inputChange('images')} value={values.images}/>
+
+                      <CInput type="file" id="images" name="media[]" multiple  onChange={inputChange('media')} />
                     </CCol>
                   </CFormGroup>
 

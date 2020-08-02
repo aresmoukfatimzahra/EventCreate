@@ -34,6 +34,7 @@ import {
   CRow
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
+import {getResults} from "../../../../../js/services";
 export default class Step6 extends Component
 {
   constructor(props){
@@ -42,8 +43,12 @@ export default class Step6 extends Component
       title: '',
       place: '',
       status: false,
-      Description: '',
+      description: '',
       date: '',
+      categories: '',
+      categoryID: '',
+      tags  : '',
+      images  : '',
       showMessage: false,
       redirect: false,
 
@@ -51,6 +56,17 @@ export default class Step6 extends Component
 
     this.back=this.back.bind(this);
   }
+  componentDidMount() {
+    const { values, inputChange } = this.props;
+    const url=process.env.MIX_REACT_APP_ROOT
+    getResults(url+'/categories/'+values.categoryID,data=> {
+      this.setState({
+        categories: data.categories,
+      })
+    })
+    console.log('ffffff'+values.categoryID)
+  }
+
   back = e => {
     e.preventDefault();
     this.props.prevStep();
@@ -63,19 +79,35 @@ export default class Step6 extends Component
     this.setState({ showMessage: false });
 
     const { values, inputChange } = this.props;
+let reducedArray=(this.state.categories)
+
+
+    const headers = {
+      'Content-Type': 'multipart/form-data',
+    }
+    const url="/api/events/create"
     axios.post('/api/events/create',{
       title:values.title,
       place: values.place,
       status: values.status,
       description: values.description,
-      date: values.date
+      date: values.date,
+      categories: values.categoryID,
+      tags: values.tagsID,
+      user: values.users,
+      media:  values.media[0],
     }).then(() => {
       this.setState({ showMessage: true,redirect:true })
     })
-    console.log('ffff')
+
+
 
   }
   render() {
+    console.log('rrfff')
+    console.log(this.state)
+    console.log('finnnnnnnn')
+    console.log(this.props)
     if(this.state.redirect) {
       return  <Redirect to="/events/liste" />;
     }
@@ -90,7 +122,7 @@ export default class Step6 extends Component
             </CCardHeader>
             <CCardBody>
 
-              <form method="POST" onSubmit={this.handlesubmitform}>
+              <form method="POST" onSubmit={this.handlesubmitform} encType="multipart/form-data">
                 <CCardBody>
 
                   <CRow>
@@ -119,6 +151,17 @@ export default class Step6 extends Component
                         <CInput id="place" placeholder="place"
 
                                 value={values.place}
+                        />
+                      </CFormGroup>
+                    </CCol>
+                  </CRow>
+                  <CRow>
+                    <CCol xs="8">
+                      <CFormGroup>
+                        <CLabel htmlFor="place">categories</CLabel>
+                        <CInput id="place" placeholder="categories"
+
+                                value={values.categoryID} name="categoryID"
                         />
                       </CFormGroup>
                     </CCol>

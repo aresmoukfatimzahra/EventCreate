@@ -44,38 +44,19 @@ export default class Step4 extends Component
       title: '',
       place: '',
       status: false,
-      Description: '',
+      description: '',
       date: '',
+      categories: '',
+      categoryID: '',
+      tags  : '',
+      images  : '',
       showMessage: false,
       redirect: false,
-      categories: [],
-      tags: [],
-      source : [ "Albania", "Andorra", "Armenia", "Austria", "Azerbaijan" ]
 
     }
-    this.handleTitle=this.handleTitle.bind(this);
-    this.handlePlace=this.handlePlace.bind(this);
-    this.handleStatus=this.handleStatus.bind(this);
-    this.handleDescription=this.handleDescription.bind(this);
-    this.handleDate=this.handleDate.bind(this);
-    this.handlesubmitform=this.handlesubmitform.bind(this);
+
     this.continue=this.continue.bind(this);
     this.back=this.back.bind(this);
-  }
-  componentDidMount() {
-    const url=process.env.MIX_REACT_APP_ROOT
-    getResults(url+'/categories',data=>{
-      this.setState({
-        categories:data.categories,
-      })
-
-    })
-    getResults(url+'/tags',data=>{
-      this.setState({
-        tags:data.tags,
-      })
-
-    })
   }
 
   continue = e => {
@@ -87,60 +68,13 @@ export default class Step4 extends Component
     e.preventDefault();
     this.props.prevStep();
   };
-  handleTitle=(event)=>{
-    this.setState({
-      title: event.target.value
-    })
-  }
-  handlePlace=(event)=>{
-    this.setState({
-      place: event.target.value
-    })
-  }
-  handleStatus=()=>{
-    this.setState({
-      status: !this.state.status
-    })
-  }
-  handleDescription=(event)=>{
-    this.setState({
-      description: event.target.value
-    })
-  }
-  handleDate=(event)=>{
-    this.setState({
-      date: event.target.value
-    })
-  }
-  handlesubmitform=(event)=>{
-    this.setState({ showMessage: false });
-    event.preventDefault();
-    axios.post('/api/events/create',{
-      title: this.state.title,
-      place: this.state.place,
-      status: this.state.status,
-      description: this.state.description,
-      date: this.state.date
-    }).then(() => {
-      this.setState({ showMessage: true,redirect:true })
-    })
-      .then(Response =>{
-        this.setState({
-          title: '',
-          place: '',
-          status: false,
-          description: '',
-          date: '',
-          redirect:true
-        })
-      }).catch(err => console.log(err));
-  }
+
   render() {
     if(this.state.redirect) {
       return  <Redirect to="/events/liste" />;
     }
     console.log(this.state)
-
+    const { values, inputChange } = this.props;
     return(
       <CRow>
         <CCol xs="12" md="12">
@@ -157,7 +91,8 @@ export default class Step4 extends Component
                       <CLabel htmlFor="password-input">Autorisation</CLabel>
                     </CCol>
                     <CCol xs="12" md="6">
-                      <CInput type="file" id="autorisation" name="autorisation"  />
+                      <CInput type="file" id="autorisation" name="autorisation"  onChange={inputChange('autorisation')}/>
+
                     </CCol>
                   </CFormGroup>
                   <CFormGroup row>
@@ -173,7 +108,8 @@ export default class Step4 extends Component
                     <CLabel htmlFor="password-input">Assurance</CLabel>
                   </CCol>
                   <CCol xs="12" md="6">
-                    <CInput type="file" id="assurance" name="assurance"  />
+                    <CInput type="file" id="assurance" name="assurance"  onChange={inputChange('assurance')}/>
+
                   </CCol>
                 </CFormGroup>
                 <CFormGroup row>

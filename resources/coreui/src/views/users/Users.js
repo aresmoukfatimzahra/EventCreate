@@ -54,7 +54,7 @@ export default class Users extends Component {
             items={this.state.users}
             fields={[
               { key: 'name', _classes: 'font-weight-bold' },
-              { key: 'role[0].libelle', _classes: 'font-weight-bold' },
+              { key: 'role_id', _classes: 'font-weight-bold' },
 
               'email', 'role_id', 'actions'
             ]}

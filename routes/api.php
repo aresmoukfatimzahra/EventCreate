@@ -25,6 +25,7 @@ Route::get('events/getFirstdateEvents', 'EventController@getFirstdateEvents');
 Route::get('events/getEventByDate/{date}', 'EventController@getEventByDate');
 
 Route::get('events/{event}','EventController@show');
+Route::post('upload','EventController@upload');
 
 
 Route::post('events/create', 'EventController@store');
@@ -83,5 +84,6 @@ Route::get('usersShowEvents/{user}','UserController@showEvents');
 
 //category
 Route::get('categories', 'CategoryController@index');
+Route::get('categories/{category}', 'CategoryController@show');
 //tags
 Route::get('tags', 'TagsController@index');

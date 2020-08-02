@@ -2,12 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\Event;
+use App\Media;
+use App\Tags;
 use App\User;
+use Faker\Provider\Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 Use \Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class EventController extends Controller
 {
@@ -20,7 +25,7 @@ class EventController extends Controller
     public function index()
     {
 //        return Event::all();
-        $events= Event::with('media')->get();
+        $events= Event::with('media')->with('categories')->get();
         return $events;
     }
     public function indexOfEventsThisMonth()
@@ -28,6 +33,7 @@ class EventController extends Controller
         $currentMonth = date('m');
         $currentYear= date('Y');
         $data = DB::table("events")
+            ->select("media.url","events.id as id","events.title as title","events.description as description")
             ->join('media','media.event_id','events.id')
             ->whereRaw('MONTH(events.created_at) = ? ',[$currentMonth])
             ->whereRaw('YEAR(events.created_at) = ? ',[$currentYear])
@@ -38,15 +44,19 @@ class EventController extends Controller
     {
         $currentMonth = date('m', strtotime('+1 month'));
         $currentYear= date('Y');
-        $data = DB::table("events")
-            ->join('media','media.event_id','events.id')
-            ->whereRaw('MONTH(events.date) = ? ',[$currentMonth])
-            ->whereRaw('YEAR(events.date) = ? ',[$currentYear])
-            ->get();
-        return   ['events'=>$data];
+
+      $data = Event::select("events.id as id","events.title as title","events.description as description")
+           ->whereRaw('MONTH(events.date) = ? ',[$currentMonth])
+           ->whereRaw('YEAR(events.date) = ? ',[$currentYear]);
+           $y=$data->with('media')->get();
+        return   ['events'=>$y];
     }
-    public function show(Event $event)
+    public function show( $event)
     {
+        $exist=Event::find($event);
+        if(is_null($exist)){
+            return response()->json("Event not found !", 404);
+        }
         $events= Event::with('media')->with('user')->with('categories')->get();
         $re= $events->find($event);
         return ['event'=>$re,"event_medias"=>$re->media];
@@ -62,6 +72,16 @@ class EventController extends Controller
 
     public function store(Request $request)
     {
+
+
+        $id=$request->input('categories');
+       $tags=($request->input('tags'));
+        $uniqueItems = array_unique($tags);
+
+        $id_user=$request->input('user');
+        $medias=$request->input('media');
+
+
         $this->validate($request, [
             'title' => 'required|max:50',
             'description' => 'required',
@@ -69,9 +89,38 @@ class EventController extends Controller
 
         ]);
 
-        $event = Event::create($request->all());
+        $event = new Event();
+        $event->title=$request->get('title');
+        $event->place=$request->get('place');
+        $event->status=$request->get('status');
+        $event->description=$request->get('description');
+        $event->date=$request->get('date');
+        $event->save();
+
+        foreach ($uniqueItems as $tag){
+            $item=Tags::find($tag);
+            $event->tags()->sync($item);
+        }
+        $cat=Category::find($id);
+        $event->categories()->sync($cat);
+
+        foreach ($medias as $url) {
+
+                $column = 'title';
+                $media = Media::where($column, '=', $url)->first();
+
+                if ($media) {
+                    $event->media()->save($media);
+                }
+        }
+        foreach ($id_user as $id){
+            $user=User::find($id);
+            $event->user()->save($user);
+        }
+
 
         return response()->json($event, 201);
+
     }
 
     public function edit($id){
@@ -95,13 +144,17 @@ class EventController extends Controller
 
     public function getRecommendedEvents(Event $eventId){
 
+        $events=[];
         $event= Event::with('media')->with('categories')->get()
             ->find($eventId);
-
+        if(is_null(($event))){
+            return response()->json('no recommendations', 200);
+        }
         foreach($event->categories as $category) {
             $events = $category->events;
         }
         return  ["events"=>compact(array('events'))];
+//        return  ["events"=>$event];
 
     }
     public function getdateEvents(){
@@ -134,5 +187,45 @@ class EventController extends Controller
             ->get();
 
         return ['events'=>$data];
+    }
+
+    public function upload(Request $request){
+
+        $path = public_path() . '/images/';
+        //autorisation
+        $autorisation=$request->files->get('autorisation');
+        if($autorisation){
+            $autorisation->move($path, $autorisation->getClientOriginalName());
+
+            $media = new Media();
+            $media->url = '/images/' . $autorisation->getClientOriginalName();
+            $media->title = "autorisation";
+            $media->save();
+        }
+
+        //assurance
+        $assurance=$request->files->get('assurance');
+        if($assurance){
+            $assurance->move($path, $assurance->getClientOriginalName());
+
+            $media = new Media();
+            $media->url = '/images/' . $assurance->getClientOriginalName();
+            $media->title = "assurance";
+            $media->save();
+        }
+        //medias
+       if($request->files->get('image')) {
+           $file_names = $request->files->get('image');
+
+           foreach ($file_names as $file) {
+
+               $file->move($path, $file->getClientOriginalName());
+
+               $media = new Media();
+               $media->url = '/images/' . $file->getClientOriginalName();
+               $media->title = $file->getClientOriginalName();
+               $media->save();
+           }
+       }
     }
 }

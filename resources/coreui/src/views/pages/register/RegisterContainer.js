@@ -49,13 +49,13 @@ class RegisterContainer extends Component {
       this.setState({isLoggedIn: AppState.isLoggedIn, user: AppState});
     }
     if (this.state.isRegistered) {
-      this.props.history.push("/dashboard/");
+      this.props.history.push("/dashboard#/dashboard");
       location.reload();
     }
   }
 
   componentDidMount() {
-    const { prevLocation } = this.state.redirect.state || {prevLocation: { pathname: '/dashboard' } };
+    const { prevLocation } = this.state.redirect.state || {prevLocation: { pathname: '/dashboard#/dashboard' } };
     if (prevLocation && this.state.isLoggedIn) {
       return this.props.history.push(prevLocation);
     }
@@ -90,7 +90,7 @@ class RegisterContainer extends Component {
             isRegistered: appState.isRegistered,
             user: appState.user
           });
-          this.props.history.push('/dashboard');
+          this.props.history.push('/dashboard#/dashboard');
         } else {
             alert(`Our System Failed To Register Your Account!`);
         }
