@@ -1,10 +1,34 @@
 import React,{Component} from 'react';
 import ReactDOM from 'react-dom';
+import {indexEvents} from "../../services";
 
 
 
 export default class TimeArea extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            event: [],
+        }
+    }
+
+    componentWillMount() {
+        const url=process.env.MIX_REACT_APP_ROOT
+
+        indexEvents(url+'/events/countdownNextEvent',data=>{
+            console.log('timeArea')
+            console.log(data)
+            this.setState({
+                event:data.date,
+            })
+
+        })
+    }
     render() {
+        let event=this.state.event
+        if(event.leading>0){
+            event=event[0]
+        }
         return (
 
 <section className="event_time_area">
@@ -23,7 +47,7 @@ export default class TimeArea extends Component {
                     <div className="timer_inner">
                         <div id="timer" className="timer">
                             <div className="timer__section days">
-                                <div className="timer__number">09</div>
+                                <div className="timer__number">{event.diff}</div>
                                 <div className="timer__label">days</div>
                             </div>
                             <div className="timer__section hours">

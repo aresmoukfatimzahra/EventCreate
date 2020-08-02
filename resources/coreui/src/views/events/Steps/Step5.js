@@ -52,31 +52,22 @@ export default class Step5 extends Component
       images  : '',
       showMessage: false,
       redirect: false,
+      tickets: '',
 
     }
-    this.handleTitle=this.handleTitle.bind(this);
-    this.handlePlace=this.handlePlace.bind(this);
-    this.handleStatus=this.handleStatus.bind(this);
-    this.handleDescription=this.handleDescription.bind(this);
-    this.handleDate=this.handleDate.bind(this);
-    this.handlesubmitform=this.handlesubmitform.bind(this);
+
     this.continue=this.continue.bind(this);
     this.back=this.back.bind(this);
   }
   componentDidMount() {
     const url=process.env.MIX_REACT_APP_ROOT
-    getResults(url+'/categories',data=>{
+    getResults(url+'/tickets',data=>{
       this.setState({
-        categories:data.categories,
+        tickets:data.tickets,
       })
 
     })
-    getResults(url+'/tags',data=>{
-      this.setState({
-        tags:data.tags,
-      })
 
-    })
   }
 
   continue = e => {
@@ -88,60 +79,13 @@ export default class Step5 extends Component
     e.preventDefault();
     this.props.prevStep();
   };
-  handleTitle=(event)=>{
-    this.setState({
-      title: event.target.value
-    })
-  }
-  handlePlace=(event)=>{
-    this.setState({
-      place: event.target.value
-    })
-  }
-  handleStatus=()=>{
-    this.setState({
-      status: !this.state.status
-    })
-  }
-  handleDescription=(event)=>{
-    this.setState({
-      description: event.target.value
-    })
-  }
-  handleDate=(event)=>{
-    this.setState({
-      date: event.target.value
-    })
-  }
-  handlesubmitform=(event)=>{
-    this.setState({ showMessage: false });
-    event.preventDefault();
-    axios.post('/api/events/create',{
-      title: this.state.title,
-      place: this.state.place,
-      status: this.state.status,
-      description: this.state.description,
-      date: this.state.date
-    }).then(() => {
-      this.setState({ showMessage: true,redirect:true })
-    })
-      .then(Response =>{
-        this.setState({
-          title: '',
-          place: '',
-          status: false,
-          description: '',
-          date: '',
-          redirect:true
-        })
-      }).catch(err => console.log(err));
-  }
+
   render() {
     if(this.state.redirect) {
       return  <Redirect to="/events/liste" />;
     }
-    console.log(this.state)
 
+    const { values, inputChange } = this.props;
     return(
       <CRow>
         <CCol xs="12" md="12">
@@ -159,7 +103,7 @@ export default class Step5 extends Component
                     <CLabel htmlFor="password-input">Budget</CLabel>
                   </CCol>
                   <CCol xs="12" md="6">
-                    <CInput type="number" id="budget" name="budget"  />
+                    <CInput type="number" id="budget" name="budget"  onChange={inputChange('budget')} value={values.budget}  />
                   </CCol>
                 </CFormGroup>
 
@@ -168,7 +112,15 @@ export default class Step5 extends Component
                     <CLabel htmlFor="password-input">Ticket Price </CLabel>
                   </CCol>
                   <CCol xs="12" md="6">
-                    <CInput type="number" id="price" name="price"  />
+
+                    <CSelect  onChange={inputChange('ticket')}  name="ticket" value={values.ticket}>
+                      <option>--- Ticket Price ---</option>
+                      { this.state.tickets ?this.state.tickets.map((t,i) => {
+                        return (
+                          <option value={t.id}>{t.name } - {t.price} $</option>
+                        )}):null}
+
+                    </CSelect >
                   </CCol>
                 </CFormGroup>
               </CForm>

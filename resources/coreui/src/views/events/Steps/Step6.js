@@ -72,36 +72,55 @@ export default class Step6 extends Component
     this.props.prevStep();
   };
 
-  handlesubmitform=(e)=>{
-    e.preventDefault();
-    console.log('rrrrrrrrrrrrrr')
-    console.log(this.props)
-    this.setState({ showMessage: false });
+//   handlesubmitform=(e)=>{
+//     e.preventDefault();
+//     console.log('rrrrrrrrrrrrrr')
+//     console.log(this.props)
+//     this.setState({ showMessage: false });
+//
+//     const { values, inputChange } = this.props;
+// let reducedArray=(this.state.categories)
+//
+//
+//     const headers = {
+//       'Content-Type': 'multipart/form-data',
+//     }
+//     const url="/api/events/create"
+//     axios.post('/api/events/create',{
+//       title:values.title,
+//       place: values.place,
+//       status: values.status,
+//       description: values.description,
+//       date: values.date,
+//       categories: values.categoryID,
+//       tags: values.tagsID,
+//       user: values.users,
+//       media:  values.media[0],
+//     }).then(() => {
+//       this.setState({ showMessage: true,redirect:true })
+//     })
+//
+//
+//
+//   }
+  handlesubmitform=(event)=>{
 
-    const { values, inputChange } = this.props;
-let reducedArray=(this.state.categories)
+    event.preventDefault();
+    axios.post('/api/event/new',{
+      data: this.props.values
 
 
-    const headers = {
-      'Content-Type': 'multipart/form-data',
-    }
-    const url="/api/events/create"
-    axios.post('/api/events/create',{
-      title:values.title,
-      place: values.place,
-      status: values.status,
-      description: values.description,
-      date: values.date,
-      categories: values.categoryID,
-      tags: values.tagsID,
-      user: values.users,
-      media:  values.media[0],
     }).then(() => {
       this.setState({ showMessage: true,redirect:true })
     })
+      .then(Response =>{
+        this.setState({
+          place: '',
+          title: '',
 
-
-
+        })
+      }).catch(err => console.log(err));
+    console.log('error create event')
   }
   render() {
     console.log('rrfff')

@@ -126,14 +126,14 @@ export default class Step1 extends Component
                     <CLabel htmlFor="password-input">Category</CLabel>
                   </CCol>
                   <CCol xs="12" md="6">
-                   <select onChange={inputChange('categoryID')}  name="categoryID" value={values.categoryID}>
+                   <CSelect onChange={inputChange('categoryID')}  name="categoryID" value={values.categoryID}>
                      <option>--- Category ---</option>
                      { this.state.categories ?this.state.categories.map((category,i) => {
                      return (
                      <option value={category.id}>{category.libelle}</option>
                        )}):null}
 
-                   </select>
+                   </CSelect>
 
                   </CCol>
                 </CFormGroup>

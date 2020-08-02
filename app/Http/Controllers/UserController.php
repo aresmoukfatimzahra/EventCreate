@@ -38,16 +38,13 @@ class UserController extends Controller
     }
     public function showArtist(User $user)
     {
-//        $qb=DB::table('users')
-//            ->join('media','media.user_id','users.id')
-//            ->join('roles','roles.user_id','users.id')
-//            ->select('users.*', 'media.url as media','media.title as titleMedia' ,'roles.libelle as role')
-//            ->where("roles.libelle","=","artist")
-//            ->where("users.id","=",$user->id)
-//            ->get();
-//     return $qb;
-
         return User::with('role')->with('media')->with('events')->with('media') ->whereBetween('role_id', [6, 11])->where('id','=',$user->id)->get();
+    }
+
+    public function showUser(User $user)
+    {
+
+        return User::with('role')->with('media')->with('events')->with('media')->where('id','=',$user->id)->get();
     }
 
     public function showEvents(User $user)

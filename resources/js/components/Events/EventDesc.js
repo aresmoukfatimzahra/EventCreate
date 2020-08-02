@@ -147,7 +147,10 @@ let id=this.props.match.params.id
                                         <div className="image"   style={{ backgroundImage: `url(${media.url})` }}></div>
 
                                         <div className="unit-9-content">
-                                            <h2>Art Gossip</h2>
+                                            {this.state.event.categories && this.state.event.categories.length>0?
+                                                this.state.event.categories.slice(0, 1).map((category,i) => {
+                                                    return (<h2>{category.libelle}</h2>)}):
+                                                (<h2>Art Gossip</h2>)}
                                             <span>Friday {this.state.event.date}</span>
                                         </div>
                                     </a>
@@ -179,7 +182,7 @@ let id=this.props.match.params.id
         </div>
     </div>
 
-  <Program/>
+  <Program event={event}/>
 
 
     <div className="site-section bg-light block-13">
@@ -317,9 +320,13 @@ let id=this.props.match.params.id
             </div>
             <div className="row">
                 {users?users.map((artist,i) => {
-                    return (
+                    return artist.role.libelle!=="organisateur" &&(
+
+
                 <div key={i} className="col-md-6 col-lg-4 mb-5 mb-lg-5">
+
                     <div className="team-member">
+
                         {artist.media?
                             <Link to={"/Artist/"+artist.id} ><img  className="img-fluid eventImg" src={artist.media.url} style={{width: 400}}/></Link>
                             :
@@ -336,10 +343,54 @@ let id=this.props.match.params.id
 
                     </div>
                 </div>
-                        )}):null}
+
+                    )}): null  }
+
+
             </div>
         </div>
     </div>
+         <div className="site-section">
+             <div className="container" data-aos="fade-up">
+
+                 <div className="row">
+                     <div className="site-section-heading text-center mb-5 w-border col-md-6 mx-auto">
+                         <h2 className="mb-5">Organised by</h2>
+                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet, fugit nam obcaecati fuga itaque deserunt officia, error reiciendis ab quod?</p>
+                     </div>
+                 </div>
+                 <div className="row">
+                     {users?users.map((artist,i) => {
+                         return artist.role.libelle==="organisateur" &&(
+
+
+                             <div key={i} className="col-md-6 col-lg-4 mb-5 mb-lg-5">
+
+                                 <div className="team-member">
+
+                                     {artist.media?
+                                         <Link to={"/Artist/"+artist.id} ><img  className="img-fluid eventImg" src={artist.media.url} style={{width: 400}}/></Link>
+                                         :
+                                         <Link to={"/Artist/"+artist.id}><img  className="img-fluid eventImg" src={event01} style={{width: 400}}/></Link>
+                                     }
+
+                                     <div className="text">
+                                         <Link to={"/Artist/"+artist.id} className="infos-artists">
+                                             <h2 className="mb-2 font-weight-light h4">{artist.name} {artist.last_name}</h2>
+                                             <span className="d-block mb-2 text-white-opacity-05 text-uppercase">{artist.role.libelle}</span>
+                                             <p className="mb-4">{artist.biography}.</p>
+                                         </Link>
+                                     </div>
+
+                                 </div>
+                             </div>
+
+                         )}): null  }
+
+
+                 </div>
+             </div>
+         </div>
 
     <div className="site-section bg-light">
         <div className="container">
@@ -355,7 +406,7 @@ let id=this.props.match.params.id
                     event.id!==this.state.event.id?(
                 <div key={i} className="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
                     {event.media?
-                        event.media.slice(0, 3).map((m,i) =>
+                        event.media.slice(0, 1).map((m,i) =>
                         <Link to={"/EventDesc/"+event.id} onClick={(e)=>this.changeEvent(event.id)}><img  className="img-fluid eventImg" src={m.url} style={{width: 400}}/></Link>
                         ):
                         <Link to={"/EventDesc/"+event.id} onClick={(e)=>this.changeEvent(event.id)}><img  className="img-fluid eventImg" src={img} style={{width: 400}}/></Link>

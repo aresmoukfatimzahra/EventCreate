@@ -23,9 +23,11 @@ Route::get('events/getRecommendedEvents/{eventId}', 'EventController@getRecommen
 Route::get('events/getdateEvents', 'EventController@getdateEvents');
 Route::get('events/getFirstdateEvents', 'EventController@getFirstdateEvents');
 Route::get('events/getEventByDate/{date}', 'EventController@getEventByDate');
+Route::get('events/countdownNextEvent/', 'EventController@countdownNextEvent');
 
 Route::get('events/{event}','EventController@show');
 Route::post('upload','EventController@upload');
+Route::post('event/new','EventController@stepsCreateEvent');
 
 
 Route::post('events/create', 'EventController@store');
@@ -80,6 +82,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 //users
 Route::get('artists', 'UserController@index');
 Route::get('users/{user}','UserController@showArtist');
+Route::get('allUsers/{user}','UserController@showUser');
 Route::get('usersShowEvents/{user}','UserController@showEvents');
 
 //category

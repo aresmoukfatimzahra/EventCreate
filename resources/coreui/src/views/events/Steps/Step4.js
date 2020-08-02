@@ -91,7 +91,7 @@ export default class Step4 extends Component
                       <CLabel htmlFor="password-input">Autorisation</CLabel>
                     </CCol>
                     <CCol xs="12" md="6">
-                      <CInput type="file" id="autorisation" name="autorisation"  onChange={inputChange('autorisation')}/>
+                      <CInput type="file" id="autorisation" name="autorisation"  onChange={inputChange('autorisation')}  value={values.autorisation}/>
 
                     </CCol>
                   </CFormGroup>
@@ -100,7 +100,7 @@ export default class Step4 extends Component
                       <CLabel htmlFor="password-input">Limite Age</CLabel>
                     </CCol>
                     <CCol xs="12" md="6">
-                      <CInput type="number" id="age" name="age"  />
+                      <CInput type="number" id="age" name="age" name="limit_age"  onChange={inputChange('limit_age')} value={values.limit_age} />
                     </CCol>
                   </CFormGroup>
                 <CFormGroup row>
@@ -108,7 +108,7 @@ export default class Step4 extends Component
                     <CLabel htmlFor="password-input">Assurance</CLabel>
                   </CCol>
                   <CCol xs="12" md="6">
-                    <CInput type="file" id="assurance" name="assurance"  onChange={inputChange('assurance')}/>
+                    <CInput type="file" id="assurance" name="assurance"  onChange={inputChange('assurance')} value={values.assurance}/>
 
                   </CCol>
                 </CFormGroup>
@@ -117,7 +117,7 @@ export default class Step4 extends Component
                     <CLabel htmlFor="password-input">Limite des Places</CLabel>
                   </CCol>
                   <CCol xs="12" md="6">
-                    <CInput type="number" id="limite" name="limite"  />
+                    <CInput type="number" id="limite" name="limit_places"  onChange={inputChange('limit_places')} value={values.limit_places}  />
                   </CCol>
                 </CFormGroup>
               </CForm>

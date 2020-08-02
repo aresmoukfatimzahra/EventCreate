@@ -15,6 +15,7 @@ export default class ArtistBio extends React.Component {
         super(props);
         this.state = {
             artist: [],
+            user: [],
             events: [],
             medias: [],
         }
@@ -34,6 +35,12 @@ export default class ArtistBio extends React.Component {
             })
 
         })
+        showUser(url+'/allUsers/'+this.props.match.params.id,data=>{
+            this.setState({
+                user:data,
+            })
+
+        })
         indexEvents(url+'/usersShowEvents/'+this.props.match.params.id,data=>{
             this.setState({
                 events:data.events,
@@ -47,11 +54,19 @@ export default class ArtistBio extends React.Component {
         console.log('-----artists-----');
         console.log(this.state);
         let artists=this.state.artist
+        let users=this.state.user
         let events=this.state.events
         let medias=this.state.medias
         let list=medias
         let artist=[]
-        if(artists.length>0){  artist=artists[0]}
+        if(artists.length>0)
+            {  artist=artists[0] }
+        else{
+            if(events.length>0){
+                artist=users[0]
+            }
+
+        }
 
         return (
             <div>

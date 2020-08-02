@@ -24,4 +24,12 @@ class Event extends Model
     {
         return $this->belongsToMany('App\Tags','tag_event')->withTimestamps();
     }
+    public function critere()
+    {
+        return $this->hasOne('App\Critere');
+    }
+    public function tickets()
+    {
+        return $this->belongsToMany('App\Ticket','event_ticket')->withTimestamps();
+    }
 }

@@ -7,7 +7,8 @@ import event04 from "../../../../public/assets/img/event-04.jpg";
 import guitarist from "../../../../public/assets/img/guitar.jpg";
 export default class Program extends React.Component {
     render() {
-
+      let event=this.props.event;
+      let medias=event.media
         return (
             <div className="site-section">
 
@@ -23,9 +24,13 @@ export default class Program extends React.Component {
                     <div className="site-block-retro d-block d-md-flex">
 
                         <a href="#" className="col1 unit-9 no-height" data-aos="fade-up" data-aos-delay="100">
+                            {medias && medias.length>0?
+                            <div className="image"  style={{backgroundImage: `url(${medias[0].url})`}}></div>:
                             <div className="image"  style={{backgroundImage: `url(${event01})`}}></div>
+                            }
+
                             <div className="unit-9-content">
-                                <h2>classNameic Songs For classNameic People</h2>
+                                <h2>{event.title}</h2>
                                 <span>Friday 1:00pm &mdash; 2:30pm</span>
                             </div>
                         </a>
@@ -33,17 +38,23 @@ export default class Program extends React.Component {
                         <div className="col2 ml-auto">
 
                             <a href="#" className="col2-row1 unit-9 no-height" data-aos="fade-up" data-aos-delay="200">
-                                <div className="image"   style={{backgroundImage: `url(${event02})`}}></div>
+                                {medias && medias.length>1?
+                                    <div className="image"  style={{backgroundImage: `url(${medias[1].url})`}}></div>:
+                                    <div className="image"  style={{backgroundImage: `url(${event02})`}}></div>
+                                }
                                 <div className="unit-9-content">
-                                    <h2>classNameic Songs For classNameic People</h2>
+                                    <h2>{event.title}</h2>
                                     <span>Friday 1:00pm &mdash; 2:30pm</span>
                                 </div>
                             </a>
 
                             <a href="#" className="col2-row2 unit-9 no-height" data-aos="fade-up" data-aos-delay="300">
-                                <div className="image"   style={{backgroundImage: `url(${event03})`}}></div>
+                                {medias && medias.length>2?
+                                    <div className="image"  style={{backgroundImage: `url(${medias[2].url})`}}></div>:
+                                    <div className="image"  style={{backgroundImage: `url(${event03})`}}></div>
+                                }
                                 <div className="unit-9-content">
-                                    <h2>classNameic Songs For classNameic People</h2>
+                                    <h2>{event.title}</h2>
                                     <span>Friday 1:00pm &mdash; 2:30pm</span>
                                 </div>
                             </a>

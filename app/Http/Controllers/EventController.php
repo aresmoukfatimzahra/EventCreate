@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Critere;
 use App\Event;
 use App\Media;
 use App\Tags;
@@ -39,6 +40,16 @@ class EventController extends Controller
             ->whereRaw('YEAR(events.created_at) = ? ',[$currentYear])
             ->get();
         return   ['events'=>$data];
+    }
+    public function countdownNextEvent()
+    {
+       $date=
+        \DB::table('events')
+            ->selectRaw('id,date, datediff(date, now()) as diff')
+            ->whereRaw('datediff(date, now()) > ?', [0])
+            ->orderBy("events.date","asc")
+            ->get();
+       return ['date'=>$date];
     }
     public function indexOfEventsNextMonth()
     {
@@ -162,7 +173,7 @@ class EventController extends Controller
         $data = DB::table("events")
             ->select("date")
             ->distinct()
-            ->orderBy('date')
+            ->orderBy('date','desc')
             ->get();
 
         return ['dates'=>$data];
@@ -172,19 +183,14 @@ class EventController extends Controller
         $data = DB::table("events")
             ->select("events.*")
             ->distinct()
-            ->orderBy('date')
+            ->orderBy('date',"desc")
             ->first();
-
 
         return ['events'=>array($data)];
     }
     public function getEventByDate($date){
 
-        $data = DB::table("events")
-            ->join('media','media.event_id','events.id')
-            ->select('events.*','media.url')
-            ->where("date",'=',$date)
-            ->get();
+         $data =   Event::select('events.*') ->where("date",'=',$date)->with('media')->get();
 
         return ['events'=>$data];
     }
@@ -227,5 +233,102 @@ class EventController extends Controller
                $media->save();
            }
        }
+    }
+
+    public function  stepsCreateEvent(Request $request){
+       // dd($request);
+$data=$request->input('data');
+
+        $id=$data['categoryID'];
+        $tags=$data['tagsID'];
+        $uniqueItems = array_unique($tags);
+
+        $id_user=$data['users'];
+        $medias=$data['media'];
+
+        $assurance=$data['assurance'];
+        $autorisation=$data['autorisation'];
+
+       //critere
+        $age=$data['limit_age'];
+        $places=$data['limit_places'];
+
+//        $this->validate($data, [
+//            'title' => 'required|max:50',
+//            'description' => 'required',
+//            'date' => 'required',
+//
+//        ]);
+
+        $event = new Event();
+
+        $event->title=$data['title'];
+        $event->place=$data['place'];
+        $event->status=$data['status'];
+        $event->description=$data['description'];
+        $event->date=$data['date'];
+        $event->budget=$data['budget'];
+
+        $event->save();
+
+        foreach ($uniqueItems as $tag){
+            $item=Tags::find($tag);
+            $event->tags()->sync($item);
+        }
+        $cat=Category::find($id);
+        $event->categories()->sync($cat);
+
+        foreach ($medias as $url) {
+           foreach ($url as $item) {
+
+            $column = 'title';
+            $media = Media::where($column, '=', $item)->first();
+             dump($media);
+            if ($media) {
+                $event->media()->save($media);
+            }
+        }
+        }
+        //assurance
+        if ($assurance) {
+
+            $column = 'title';
+            $column2 = 'url';
+            $name=explode('\\',$assurance);
+            $media_assurance = Media::where($column, '=', "assurance")->where($column2,"=",'/images/'.$name[2])->first();
+            dump($media_assurance);
+            if ($media_assurance) {
+                $event->media()->save($media_assurance);
+            }
+        }
+        //autorisation
+        if ($autorisation) {
+
+            $column = 'title';
+            $column2 = 'url';
+            $name=explode('\\',$autorisation);
+            $media_at = Media::where($column, '=', "autorisation")->where($column2,"=",'/images/'.$name[2])->first();
+            dump($media_at);
+            if ($media_at) {
+                $event->media()->save($media_at);
+            }
+        }
+        //artists
+        foreach ($id_user as $id){
+            $user=User::find($id);
+            $event->user()->save($user);
+        }
+        //critere
+        if($age && $places){
+            $critere=new Critere();
+            $critere->limite_age=(int)$age;
+            $critere->limite_places=(int)$places;
+            $critere->save();
+            dump($critere);
+            $event->critere()->save($critere);
+        }
+
+
+        return response()->json($event, 201);
     }
 }

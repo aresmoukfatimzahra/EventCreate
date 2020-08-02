@@ -59,6 +59,12 @@ export default class Add extends Component {
       users:[],
       keyboardplayer:[],
       step: 1,
+      assurance:'',
+      autorisation:'',
+      limit_age:'',
+      limit_places:'',
+      budget:'',
+      ticket:'',
 
     }
 
@@ -116,14 +122,13 @@ export default class Add extends Component {
 
       const data=new FormData();
 
-
       data.append(input,e.target.files[0],e.target.files[0].name)
 
       axios.post('api/upload',data)
         .then(res=>{
           console.log(res)
         })
-
+      this.setState({ [input]:  e.target.value });
     }
     else if(input==="tagsID"){
       this.setState({ [input]: [...this.state.tagsID, ...e.target.value] });
@@ -136,8 +141,8 @@ export default class Add extends Component {
 
       render() {
         const {step} = this.state;
-        const {title, place, status, description, date,categoryID,tagsID,users,keyboardplayer,media} = this.state;
-        const values = {title, place, status, description, date,categoryID,tagsID,users,keyboardplayer,media};
+        const {title, place, status, description, date,categoryID,tagsID,users,media,assurance,autorisation,limit_age,limit_places,budget,ticket} = this.state;
+        const values = {title, place, status, description, date,categoryID,tagsID,users,media,assurance,autorisation,limit_age,limit_places,budget,ticket};
         if (this.state.redirect) {
           return <Redirect to="/events/liste"/>;
         }

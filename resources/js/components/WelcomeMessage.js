@@ -1,10 +1,15 @@
 import React,{Component} from 'react';
 
 import pic from '../../../public/assets/img/gens.jpg';
-
-
+import { Link } from 'react-router-dom';
+import { Redirect } from 'react-router';
 
 export default class WelcomeMessage extends Component {
+    redirect=()=>{
+
+            return  <Redirect to="/dashboard#/events/add" />;
+
+    }
     render() {
         return (
 
@@ -30,7 +35,10 @@ export default class WelcomeMessage extends Component {
                         In addition, a number of legal obligations must be observed, such as taking out insurance or fulfilling a declaration formality with the competent authority.
 
                         In addition, there is the management of members and volunteers of the association before and during the event. Also, to guarantee the success of your festival, take these few points into account during your preparations.</p>
-                    <a className="main_btn" href="#">Create an Event</a>
+
+
+                        <Link to={"/dashboard#/events/add"} className="main_btn"  onClick={() => this.redirect()}>Create an Event</Link>
+
                 </div>
             </div>
         </div>
