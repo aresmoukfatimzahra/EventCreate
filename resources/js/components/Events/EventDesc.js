@@ -95,7 +95,7 @@ let id=this.props.match.params.id
                                     </li>
                                     <li><Link to="/MoreArtists">Artists</Link></li>
                                     <li><a href="about.html">About</a></li>
-                                    <li><a href="about.html">Music News</a></li>
+                                    {/*<li><a href="about.html">Music News</a></li>*/}
                                     <li><a href="contact.html">Contact</a></li>
                                 </ul>
                             </nav>
@@ -139,7 +139,7 @@ let id=this.props.match.params.id
 
                             (
                                 this.state.event.media.slice(0, 4).map((media,i) => {
-                            return (
+                            return media.title!=="assurance" && media.title!=="autorisation"?(
 
                                 <div className="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
                                     <a href="#" className="unit-9">
@@ -155,7 +155,7 @@ let id=this.props.match.params.id
                                         </div>
                                     </a>
                                 </div>
-                            )
+                            ):null
                         }
 
                         )
@@ -301,7 +301,9 @@ let id=this.props.match.params.id
                     <form action="#" method="post" className="site-block-subscribe">
                         <div className="input-group mb-3">
 
-                            <button style={{marginLeft:220,backgroundColor:'#7cbd1e',color:'white'}} className="btn" type="button" id="button-addon2"><strong>Get ticket</strong></button>
+                            <Link to={"/Tickets/"+event.id} style={{marginLeft:220,backgroundColor:'#7cbd1e',color:'white'}} className="btn" type="button" id="button-addon2">
+                                <strong>Get ticket</strong>
+                            </Link>
 
                         </div>
                     </form>

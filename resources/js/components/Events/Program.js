@@ -24,7 +24,7 @@ export default class Program extends React.Component {
                     <div className="site-block-retro d-block d-md-flex">
 
                         <a href="#" className="col1 unit-9 no-height" data-aos="fade-up" data-aos-delay="100">
-                            {medias && medias.length>0?
+                            {medias && medias.length>0 &&  medias[0].title!=="assurance" && medias[0].title!=="autorisation"?
                             <div className="image"  style={{backgroundImage: `url(${medias[0].url})`}}></div>:
                             <div className="image"  style={{backgroundImage: `url(${event01})`}}></div>
                             }
@@ -38,7 +38,7 @@ export default class Program extends React.Component {
                         <div className="col2 ml-auto">
 
                             <a href="#" className="col2-row1 unit-9 no-height" data-aos="fade-up" data-aos-delay="200">
-                                {medias && medias.length>1?
+                                {medias && medias.length>1  &&  medias[1].title!=="assurance" && medias[1].title!=="autorisation"?
                                     <div className="image"  style={{backgroundImage: `url(${medias[1].url})`}}></div>:
                                     <div className="image"  style={{backgroundImage: `url(${event02})`}}></div>
                                 }
@@ -49,7 +49,7 @@ export default class Program extends React.Component {
                             </a>
 
                             <a href="#" className="col2-row2 unit-9 no-height" data-aos="fade-up" data-aos-delay="300">
-                                {medias && medias.length>2?
+                                {medias && medias.length>2  &&  medias[2].title!=="assurance" && medias[2].title!=="autorisation"?
                                     <div className="image"  style={{backgroundImage: `url(${medias[2].url})`}}></div>:
                                     <div className="image"  style={{backgroundImage: `url(${event03})`}}></div>
                                 }

@@ -105,7 +105,7 @@ export default class Step1 extends Component
                 </CCol>
                 <CCol xs="12" md="6">
 
-                  <CInput type="text" className="form-control" id="description" name="description" onChange={inputChange('description')} value={values.description}/>
+                  <CTextarea cols={10} rows={5} className="form-control" id="description" name="description" onChange={inputChange('description')} value={values.description}/>
                 </CCol>
               </CFormGroup>
 
@@ -115,7 +115,7 @@ export default class Step1 extends Component
                 </CCol>
                 <CCol xs="12" md="6">
 
-                  <CInput type="date" className="form-control" id="date" name="date" onChange={inputChange('date')} value={values.date}/>
+                  <CInput type="datetime-local" className="form-control" id="date" name="date" onChange={inputChange('date')} value={values.date}/>
                 </CCol>
               </CFormGroup>
 

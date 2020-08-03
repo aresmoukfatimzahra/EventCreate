@@ -113,7 +113,7 @@ export default class Step5 extends Component
                   </CCol>
                   <CCol xs="12" md="6">
 
-                    <CSelect  onChange={inputChange('ticket')}  name="ticket" value={values.ticket}>
+                    <CSelect  multiple onChange={inputChange('ticket')}  name="ticket[]" value={values.ticket}>
                       <option>--- Ticket Price ---</option>
                       { this.state.tickets ?this.state.tickets.map((t,i) => {
                         return (

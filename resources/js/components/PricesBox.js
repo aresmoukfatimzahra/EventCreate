@@ -16,7 +16,7 @@ export default class PricesBox extends React.Component {
         console.log(url)
         getResults(url+'/tickets/',data=>{
             this.setState({
-                tickets:data,
+                tickets:data.tickets,
             })
 
         })

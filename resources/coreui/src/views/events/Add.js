@@ -133,6 +133,9 @@ export default class Add extends Component {
     else if(input==="tagsID"){
       this.setState({ [input]: [...this.state.tagsID, ...e.target.value] });
     }
+    else if(input==="ticket"){
+      this.setState({ [input]: [...this.state.ticket, ...e.target.value] });
+    }
     else{this.setState({
       [input]: e.target.value
     });}

@@ -7,6 +7,7 @@ use App\Critere;
 use App\Event;
 use App\Media;
 use App\Tags;
+use App\Ticket;
 use App\User;
 use Faker\Provider\Image;
 use Illuminate\Http\Request;
@@ -68,7 +69,7 @@ class EventController extends Controller
         if(is_null($exist)){
             return response()->json("Event not found !", 404);
         }
-        $events= Event::with('media')->with('user')->with('categories')->get();
+        $events= Event::with('media')->with('user')->with('categories')->with("tickets")->get();
         $re= $events->find($event);
         return ['event'=>$re,"event_medias"=>$re->media];
 
@@ -259,7 +260,9 @@ $data=$request->input('data');
 //            'date' => 'required',
 //
 //        ]);
-
+        //tickets
+        $tickets=$data['ticket'];
+        $uniqueTickets = array_unique($tickets);
         $event = new Event();
 
         $event->title=$data['title'];
@@ -273,8 +276,14 @@ $data=$request->input('data');
 
         foreach ($uniqueItems as $tag){
             $item=Tags::find($tag);
-            $event->tags()->sync($item);
+            $event->tags()->save($item);
         }
+        //tickets
+        foreach ($uniqueTickets as $ticket){
+            $item=Ticket::find($ticket);
+            $event->tickets()->save($item);
+        }
+
         $cat=Category::find($id);
         $event->categories()->sync($cat);
 

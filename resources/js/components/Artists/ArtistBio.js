@@ -168,7 +168,7 @@ export default class ArtistBio extends React.Component {
                                                 <div className="col-md-12">
                                             {list.length>0?list.map(med =>
 
-                                                    med.event_id === event.id ?(
+                                                    med.event_id === event.id && med.title!=="assurance" && med.title!=="autorisation"?(
                                                  <Link to={"/EventDesc/"+event.id}><img src={med.url} className="img-fluid" alt="ddd" style={{height:150,width:150}}/></Link>
                                                     ): null
                                             ):null}
