@@ -4,7 +4,7 @@ export default [
     name: 'Dashboard',
     to: '/dashboard',
     icon: 'cil-speedometer',
-    
+
   },
   {
     _tag: 'CSidebarNavDropdown',
@@ -24,6 +24,34 @@ export default [
       }
     ],
   },
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'Categories',
+    to: '/Categories',
+    icon: 'cil-speedometer',
+
+  },
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'Tags',
+    to: '/Tags',
+    icon: 'cil-speedometer',
+
+  },
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'Tickets',
+    to: '/Tickets',
+    icon: 'cil-speedometer',
+
+  },
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'Roles',
+    to: '/Roles',
+    icon: 'cil-speedometer',
+
+  }
  /* {
     _tag: 'CSidebarNavTitle',
     _children: ['Theme']

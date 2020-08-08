@@ -53,12 +53,13 @@ class TicketController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Ticket  $ticket
+
      * @return \Illuminate\Http\Response
      */
-    public function edit(Ticket $ticket)
+    public function edit($id)
     {
-        //
+        $ticket=Ticket::find($id);
+        return response()->json($ticket, 200);
     }
 
     /**
@@ -70,7 +71,9 @@ class TicketController extends Controller
      */
     public function update(Request $request, Ticket $ticket)
     {
-        //
+        $ticket->update($request->all());
+
+        return response()->json($ticket, 200);
     }
 
     /**
@@ -82,5 +85,11 @@ class TicketController extends Controller
     public function destroy(Ticket $ticket)
     {
         //
+    }
+    public function delete(Ticket $ticket)
+    {
+        $ticket->delete();
+
+        return response()->json(null, 204);
     }
 }

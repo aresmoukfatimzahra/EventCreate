@@ -34,16 +34,30 @@ Route::post('events/create', 'EventController@store');
 
 
 Route::get('event/{id}/edit', 'EventController@edit');
+Route::get('category/{id}/edit', 'CategoryController@edit');
+Route::get('tags/{id}/edit', 'TagsController@edit');
+Route::get('ticket/{id}/edit', 'TicketController@edit');
+Route::get('role/{id}/edit', 'RoleController@edit');
 
 Route::put('event/{event}/update', 'EventController@update');
+Route::put('category/{category}/update', 'CategoryController@update');
+Route::put('tags/{tags}/update', 'TagsController@update');
+Route::put('ticket/{ticket}/update', 'TicketController@update');
+Route::put('role/{role}/update', 'RoleController@update');
 Route::post('events', 'EventController@store');
 Route::get('event_medias/{event}','EventController@showMedia');
 Route::put('events/{event}', 'EventController@update');
 
+
 Route::delete('events/{event}','EventController@delete');
+Route::delete('categories/{category}','CategoryController@delete');
+Route::delete('tags/{category}','TagsController@delete');
+Route::delete('tickets/{ticket}','TicketController@delete');
+Route::delete('roles/{role}','RoleController@delete');
 //media
 Route::get('medias', 'MediaController@index');
 Route::get('tickets', 'TicketController@index');
+Route::get('roles', 'RoleController@index');
 
 
 Route::get('medias/{media}','MediaController@show');

@@ -26,7 +26,9 @@ export default class TimeArea extends Component {
     }
     render() {
         let event=this.state.event
-        if(event.leading>0){
+        console.log('event')
+        console.log(event)
+        if(event.length>0){
             event=event[0]
         }
         return (
