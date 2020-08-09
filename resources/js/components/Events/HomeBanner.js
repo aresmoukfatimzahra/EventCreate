@@ -20,7 +20,7 @@ export default class HomeBanner extends React.Component {
                 {/*<p>Get started by creating an event . From there, you can quickly add content, import images or videos,*/}
                 {/*    customize your fonts. It's that easy.</p>*/}
                 <p>{this.props.text}</p>
-                <a className="banner_btn" href="#welcome_area">View More Details</a>
+                <a className="banner_btn" href="/#welcome_area">View More Details</a>
             </div>
         </div>
     </div>

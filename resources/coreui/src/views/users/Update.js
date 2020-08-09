@@ -74,14 +74,11 @@ export default class Update extends Component
     handleSelectChange = (event) => {
        this.setState({ 
            role_id: event.target.value
-        },()=>{
-            console.log(this.state.role_id)
         });
       }
       componentDidMount=()=>{
         const id = this.props.match.params.id;
-        console.log(this.props);
-        axios.get(`api/user/${id}/edit`).then(
+        axios.get(`/api/user/${id}/edit`).then(
             Response => {
                 this.setState({
                     name: Response.data.name,
@@ -90,7 +87,6 @@ export default class Update extends Component
                     role_id: Response.data.role_id,
                     activation_token: Response.data.activation_token
                 })
-                console.log(Response.data);
             }
         ).catch(err => console.log(err));
     }
@@ -98,17 +94,13 @@ export default class Update extends Component
     handlesubmitform=(event)=>{
         event.preventDefault();
         this.setState({ showMessage: false });
+        const userdata={name: this.state.name, email: this.state.email, password: this.state.password, role_id: this.state.role_id,}
         const id=this.props.match.params.id;
-        axios.put(`api/user/${id}/update`,{
-            name: this.state.name,
-            eamil: this.state.email,
-            password: this.state.password,
-            role_id: this.state.role_id,
-            // activation_token: this.state.activation_token,
-        }).then((response) => {
+        axios.put(`/api/user/${id}/update`,userdata)
+        .then((response) => {
             console.log(response)
             this.setState({ showMessage: true })
-            return response;
+            this.props.history.push('/users')
         }).catch(err => console.log(err));
     }
     render() {
@@ -124,7 +116,7 @@ export default class Update extends Component
                    User
                   <small> Update</small>
                 </CCardHeader>
-                <form method="POST" onSubmit={this.handlesubmitform}>
+                <form onSubmit={this.handlesubmitform}>
                     <CCardBody>
 
                             <CRow>
@@ -165,7 +157,7 @@ export default class Update extends Component
                                         <CLabel htmlFor="role">role</CLabel>
                                         <CSelect                                       
                                             onChange={this.handleSelectChange}
-                                            valuee={this.state.role_id}                            
+                                            value={this.state.role_id}                            
                                         >   
                                             
                                             <option value='1'>admin</option>

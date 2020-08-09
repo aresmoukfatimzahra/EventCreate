@@ -39,6 +39,22 @@ export default class Users extends Component {
   ).catch(err => console.log(err));
   }
 
+  /**
+   * delete user
+   */
+  handledelete = (id) =>{
+    console.log('click', id)
+    const isnotid = userid=>userid.id !=id;
+    const userliste = this.state.users.filter(isnotid);
+    this.setState({ users: userliste });
+    Axios.delete(`/api/user/${id}/delete`)
+    .then(
+      response => {
+        console.log(response)
+    })
+    .catch(err => console.log(err));
+  }
+
   render() {
 
   return (
@@ -76,7 +92,7 @@ export default class Users extends Component {
                 (item)=>(
                   <td>
                      <CLink to={`/user/${item.id}/update/`}  type="submit" size="sm" className="btn btn-warning">Update</CLink>
-                     <CLink size="sm" className="btn btn-danger">Delete</CLink>
+                     <CLink size="sm" type="submit" onClick={this.handledelete.bind(this,item.id)} className="btn btn-danger">Delete</CLink>
                      <CLink to={`/user/${item.id}`} size="sm" className="btn btn-danger">Details</CLink>
                   </td>
                 )

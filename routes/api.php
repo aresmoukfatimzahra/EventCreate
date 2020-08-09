@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('events', 'EventController@index');
+Route::get('events/indexOfEventsThisMonth', 'EventController@indexOfEventsThisMonth');
+Route::get('events/indexOfEventsNextMonth', 'EventController@indexOfEventsNextMonth');
 Route::get('users', 'EventController@userss');
 
 Route::get('events/{event}','EventController@show');
@@ -62,6 +64,7 @@ Route::get('users/liste','UserController@liste');
 Route::get('user/{id}/show','UserController@show');
 Route::get('user/{id}/edit','UserController@edit');
 Route::put('user/{id}/update','UserController@update');
+Route::delete('user/{id}/delete','UserController@delete');
 Route::delete('medias/{media}','MediaController@destroy');
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();

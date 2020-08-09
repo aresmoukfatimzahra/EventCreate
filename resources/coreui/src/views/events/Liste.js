@@ -45,7 +45,7 @@ export default class Liste extends Component
       }
       handleDelete=(id)=>{
           console.log('clicked',id);
-          const isnotid=contact=>contact.id !=id;
+          const isnotid=eventid=>eventid.id !=id;
           const updateevent=this.state.events.filter(isnotid);
           this.setState({events : updateevent});
           Axios.delete(`/api/events/${id}`).then(Response =>{

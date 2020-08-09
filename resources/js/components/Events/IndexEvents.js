@@ -19,9 +19,9 @@ export default class IndexEvents extends React.Component {
     componentWillMount() {
         const url=process.env.MIX_REACT_APP_ROOT
         console.log(url)
-        indexEvents(url+'/events',data=>{
+        indexEvents(url+'/events/indexOfEventsThisMonth',data=>{
             this.setState({
-                events:data,
+                events:data.events,
             })
 
         })
@@ -41,19 +41,14 @@ export default class IndexEvents extends React.Component {
             <div key={i} className="col-lg-3 col-sm-6">
                 <div className="team_item">
                     <div className="team_img">
-                        {event.media.length>0?(event.media.slice(0, 1).map((media,i) => {
-                            return (
+                        {event.url?
 
-                                <Link to={"/EventDesc/"+event.id}><img key={i} className="img-fluid eventImg" src={media.url}/></Link>
-                            )
-                        })):  <Link to={"/EventDesc/"+event.id}><img  className="img-fluid eventImg" src={img}/></Link>
+
+                                <Link to={"/EventDesc/"+event.id}><img key={i} className="img-fluid eventImg" src={event.url}/></Link>
+
+                      :  <Link to={"/EventDesc/"+event.id}><img  className="img-fluid eventImg" src={img}/></Link>
                         }
 
-                            <div className="hover">
-                                <a href="#"><i className="fa fa-facebook"></i></a>
-                                <a href="#"><i className="fa fa-twitter"></i></a>
-                                <a href="#"><i className="fa fa-linkedin"></i></a>
-                            </div>
                     </div>
                     <div className="team_name">
                         <h4><Link to={"/EventDesc/"+event.id}>{event.title}</Link></h4>

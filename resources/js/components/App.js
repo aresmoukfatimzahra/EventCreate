@@ -13,7 +13,7 @@ import Footer from "./Footer";
 import WelcomeMessage from "./WelcomeMessage";
 import Artists from "./Events/Artists";
 import Media from "./Events/Media";
-import { BrowserRouter as Router,Route,Switch,MemoryRouter } from 'react-router-dom';
+import { BrowserRouter as Router,Route,Switch,MemoryRouter,HashRouter } from 'react-router-dom';
 
 import Routes from '../Routes';
 import MoreEvents from "./Events/MoreEvents";
@@ -27,10 +27,15 @@ import Register from '../../coreui/src/views/pages/register/Register';
 
  class App extends Component {
     render() {
+        const loading = (
+            <div className="pt-3 text-center">
+              <div className="sk-spinner sk-spinner-pulse"></div>
+            </div>
+          )
         return (
 
-
-                <Router>
+        <HashRouter>
+          <React.Suspense fallback={loading}>
                     <Switch>
                         <Route path="/"  component={Index}  exact={true}/>
                         <Route path="/MoreEvents" component={MoreEvents} exact={true} />
@@ -41,7 +46,8 @@ import Register from '../../coreui/src/views/pages/register/Register';
                         <Route path="/login" component={Login} exact={true} />
                         <Route path="/register" component={Register} exact={true} />
                     </Switch>
-                </Router>
+          </React.Suspense>
+        </HashRouter>
 
         );
     }

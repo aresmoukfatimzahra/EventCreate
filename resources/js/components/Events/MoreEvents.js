@@ -14,6 +14,7 @@ export default class MoreEvents extends React.Component {
         super(props);
         this.state = {
             events: [],
+            upcomming_events: [],
         }
     }
 
@@ -26,9 +27,15 @@ export default class MoreEvents extends React.Component {
             })
 
         })
+        indexEvents(url+'/events/indexOfEventsNextMonth',data=>{
+            this.setState({
+                upcomming_events:data.events,
+            })
+
+        })
     }
     render() {
-
+    let nextEvents=this.state.upcomming_events
 
         return (
 <div>
@@ -76,36 +83,25 @@ export default class MoreEvents extends React.Component {
                 </div>
             </div>
             <div className="row">
+                {nextEvents.length>0? nextEvents.map((event,i) => {
+                    return (
                 <div className="col-md-6 col-lg-4 mb-5" data-aos="fade-up" data-aos-delay="100">
-                    <a href="#"><img src={team4} alt="Image" className="img-fluid"/></a>
+                    {event.url?
+                        <Link to={"/EventDesc/"+event.id}><img key={i} className="img-fluid eventImg" src={event.url} style={{width:340,height:300}}/></Link>
+                        :
+                        <Link to={"/EventDesc/"+event.id}><img key={i} className="img-fluid eventImg" src={img} style={{width:340,height:300}}/></Link>
+                    }
                     <div className="p-4 bg-white">
-                        <span style={{"color": "#6c757d",'textTransform': 'uppercase','fontSize':15}} className="d-block text-secondary small text-uppercase">Jan 20th, 2019</span>
-                        <h2 className="h5 text-black mb-3" style={{'color': '#517b14;'}} ><Link to="/" >title</Link></h2>
+                        <span style={{"color": "#6c757d",'textTransform': 'uppercase','fontSize':15}} className="d-block text-secondary small text-uppercase">{event.date}</span>
+                        <h2 className="h5 text-black mb-3" style={{'color': '#517b14;'}} >
+                            <Link to={"/EventDesc/"+event.id}>{event.title}</Link>
+                        </h2>
                         <p>
-                            description
+                            {event.description}
                         </p>
                     </div>
                 </div>
-                <div className="col-md-6 col-lg-4 mb-5" data-aos="fade-up" data-aos-delay="100">
-                    <a href="#"><img src={team4} alt="Image" className="img-fluid"/></a>
-                    <div className="p-4 bg-white">
-                        <span style={{"color": "#6c757d",'textTransform': 'uppercase','fontSize':15}} className="d-block text-secondary small text-uppercase">Jan 20th, 2019</span>
-                        <h2 className="h5 text-black mb-3" style={{'color': '#517b14;'}} ><Link to="/" >title</Link></h2>
-                        <p>
-                            description
-                        </p>
-                    </div>
-                </div>
-                <div className="col-md-6 col-lg-4 mb-5" data-aos="fade-up" data-aos-delay="100">
-                    <a href="#"><img src={team4} alt="Image" className="img-fluid"/></a>
-                    <div className="p-4 bg-white">
-                        <span style={{"color": "#6c757d",'textTransform': 'uppercase','fontSize':15}} className="d-block text-secondary small text-uppercase">Jan 20th, 2019</span>
-                        <h2 className="h5 text-black mb-3" style={{'color': '#517b14;'}} ><Link to="/" >title</Link></h2>
-                        <p>
-                            description
-                        </p>
-                    </div>
-                </div>
+                        )}):<h4 className="alert alert-success commingsoon">Comming Soon ...</h4>}
             </div>
         </div>
     </div>

@@ -32,6 +32,7 @@ export default class HeaderTemplate extends React.Component {
     }
     
     render() {
+        const myurl=`/dashboard#/user/${this.state.user.id}`;
         return (
 
             <div>
@@ -82,8 +83,9 @@ export default class HeaderTemplate extends React.Component {
                                         
                                         {this.state.isLoggedIn ? 
                                         <>
+                                        
                                         {console.log(this.state.isLoggedIn)}
-                                        <li className="nav-item"><span className="tickets_btn">{this.state.user.name}</span></li>
+                                        <li className="nav-item"><Link to={myurl} className="tickets_btn">{this.state.user.name}</Link></li>
                                         </>
                                         :
                                         <>

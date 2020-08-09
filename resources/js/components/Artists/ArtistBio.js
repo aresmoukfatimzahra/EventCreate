@@ -19,7 +19,12 @@ export default class ArtistBio extends React.Component {
             medias: [],
         }
     }
-
+    getAge=(dateN)=>{
+        if(dateN) {
+            var tempDate = new Date()
+            return tempDate.getFullYear() - dateN.substring(0,4);
+        }
+    }
     componentWillMount() {
         const url=process.env.MIX_REACT_APP_ROOT
 
@@ -39,9 +44,9 @@ export default class ArtistBio extends React.Component {
 
     }
     render() {
-console.log('-----artists-----');
-console.log(this.state);
-let artists=this.state.artist
+        console.log('-----artists-----');
+        console.log(this.state);
+        let artists=this.state.artist
         let events=this.state.events
         let medias=this.state.medias
         let list=medias
@@ -52,16 +57,16 @@ let artists=this.state.artist
             <div>
 
                 <HeaderTemplate/>
-                <HomeBanner pic={banner} text={[<h2><strong>{artist.name}</strong></h2>]}/>
+                <HomeBanner pic={banner} text={[<h2><strong>{artist.name} {artist.last_name}</strong></h2>,<br/>, <h3 className="text-uppercase">{artist.role ? artist.role.libelle :null}</h3>]}/>
 
                 <main id="main">
 
 
                     <section id="about" className="about">
-                        <div className="container" data-aos="fade-up" id="welcome-area">
+                        <div className="container" data-aos="fade-up" id="welcome_area">
 
                             <div className="section-title">
-                                <h2 className="text-uppercase">{artist.name}</h2>
+                                <h2 className="text-uppercase">{artist.name} {artist.last_name} </h2>
 
                             </div>
 
@@ -87,38 +92,34 @@ let artists=this.state.artist
                                             <ul>
                                                 <li><i className="fa fa-arrow-circle-right" aria-hidden="true"></i>
 
-                                                    <strong>Birthday:</strong> 1 May 1995
+                                                    <strong>Birthday:</strong> {artist.date_naissance}
                                                 </li>
                                                 <li><i className="fa fa-arrow-circle-right" aria-hidden="true"></i>
-                                                    <strong>Facebook:</strong> www.example.com
+                                                    <strong>Facebook:</strong>  <a href={artist.facebook} target="_blank">{artist.facebook}</a>
                                                 </li>
 
                                                 <li><i className="fa fa-arrow-circle-right" aria-hidden="true"></i>
-                                                    <strong>Email:</strong> {artist.email}
+                                                    <strong>Email:</strong> <a href={"mailto: "+ artist.email}>{artist.email}</a>
                                                 </li>
                                             </ul>
                                         </div>
                                         <div className="col-lg-6">
+
                                             <ul>
-                                                <li><i className="fa fa-arrow-circle-right" aria-hidden="true"></i> <strong>Age:</strong> 30
+                                                <li><i className="fa fa-arrow-circle-right" aria-hidden="true"></i> <strong>Age:</strong>&nbsp;{this.getAge(artist.date_naissance)}
                                                 </li>
                                                 <li><i className="fa fa-arrow-circle-right" aria-hidden="true"></i>
-                                                    <strong>Instagram:</strong> Master
+                                                    <strong>Instagram:</strong>  <a href={artist.instagram} target="_blank">{artist.instagram}</a>
                                                 </li>
                                                 <li><i className="fa fa-arrow-circle-right" aria-hidden="true"></i>
-                                                    <strong>City:</strong> Lorem ipsum
+                                                    <strong>City:</strong>  {artist.city}
                                                 </li>
 
                                             </ul>
                                         </div>
                                     </div>
                                     <p>
-                                        Officiis eligendi itaque labore et dolorum mollitia officiis optio vero.
-                                        Quisquam sunt adipisci omnis et ut. Nulla accusantium dolor incidunt officia
-                                        tempore. Et eius omnis.
-                                        Cupiditate ut dicta maxime officiis quidem quia. Sed et consectetur qui quia
-                                        repellendus itaque neque. Aliquid amet quidem ut quaerat cupiditate. Ab et eum
-                                        qui repellendus omnis culpa magni laudantium dolores.
+                                        {artist.biography}
                                     </p>
                                 </div>
                             </div>

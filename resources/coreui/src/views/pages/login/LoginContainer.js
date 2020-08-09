@@ -77,7 +77,10 @@ class LoginContainer extends Component {
                   user: appState.user,
                   error: ''
                });
-               this.props.history.push("/dashboard");
+               let ur="";
+               this.state.user.role===1 || this.state.user.role===5 ? ur="/#/dashboard" : this.state.user.role===2 ? ur="/#/dashboard#/user/"+this.state.user.id : ur="/";
+               console.log(ur);
+               this.props.history.push(ur);
                location.reload();
              }
              else {
