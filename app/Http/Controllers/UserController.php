@@ -49,10 +49,11 @@ class UserController extends Controller
 
     public function showEvents(User $user)
     {
-        $events= Event::with('media')->get()->find(1);
+       // $events= Event::with('media')->get()->find(1);
 
 
       $events=$user->events;
+        $media=[];
         foreach($events as $event) {
             $media = $event->media;
         }

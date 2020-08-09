@@ -47,7 +47,8 @@ export default class Schedule extends React.Component {
         let dates=this.state.dates
         let date=this.state.date
         let events=this.state.events
-
+console.log('schedule')
+console.log(events)
         return (
            <section className="event_schedule_area p_120">
              <div className="container" style={{paddingRight:0,paddingLeft:0}}>
@@ -72,7 +73,7 @@ export default class Schedule extends React.Component {
                                 return (
                             <div className="media">
                                 <div className="d-flex">
-                                    {event.media?
+                                    {event.media && event.media.length>0?
                                         (event.media.slice(0, 1).map((media,i) => {
                                                 return (
 

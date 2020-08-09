@@ -67,7 +67,8 @@ export default class ArtistBio extends React.Component {
             }
 
         }
-
+console.log('list')
+console.log(list)
         return (
             <div>
 
@@ -156,7 +157,7 @@ export default class ArtistBio extends React.Component {
                             <div className="row skills-content">
 
 
-                                    {events ?events.map((event,i) => {
+                                    {events &&  events.length>0 ?events.map((event,i) => {
                                         return (
                                             <div className="col-lg-4">
                                             <div className="row">
@@ -166,19 +167,23 @@ export default class ArtistBio extends React.Component {
                                         <i className="val text-center">{event.created_at.substring(0,10)}</i></span>
                                     </div><br/>
                                                 <div className="col-md-12">
-                                            {list.length>0?list.map(med =>
+                                            { event.media && event.media.length>0?event.media.map(med =>
 
-                                                    med.event_id === event.id && med.title!=="assurance" && med.title!=="autorisation"?(
+                                                   med.title!=="assurance" && med.title!=="autorisation"?(
                                                  <Link to={"/EventDesc/"+event.id}><img src={med.url} className="img-fluid" alt="ddd" style={{height:150,width:150}}/></Link>
-                                                    ): null
-                                            ):null}
+                                                    ):   null
+
+                                                ):
+                                                <Link to={"/EventDesc/"+event.id}><img src={img} className="img-fluid" alt="ddd" style={{height:150,width:150}}/></Link>
+
+                                            }
                                         </div>
                                     </div>
                                             </div>
 
                                         )
                                     })
-                                    :null}
+                                        :<p className="text-uppercase mt-5 offset-4 alert alert-success">{artist.name} n'a participé a aucun event</p>}
 
 
 

@@ -274,10 +274,13 @@ $data=$request->input('data');
 
         $event->save();
 
-        foreach ($uniqueItems as $tag){
-            $item=Tags::find($tag);
-            $event->tags()->save($item);
+        if($uniqueItems){
+            foreach ($uniqueItems as $tag){
+                $item=Tags::find($tag);
+                $event->tags()->save($item);
+            }
         }
+
         //tickets
         foreach ($uniqueTickets as $ticket){
             $item=Ticket::find($ticket);

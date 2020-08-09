@@ -115,7 +115,7 @@ export default class Step1 extends Component
                 </CCol>
                 <CCol xs="12" md="6">
 
-                  <CInput type="datetime-local" className="form-control" id="date" name="date" onChange={inputChange('date')} value={values.date}/>
+                  <CInput type="date" className="form-control" id="date" name="date" onChange={inputChange('date')} value={values.date}/>
                 </CCol>
               </CFormGroup>
 

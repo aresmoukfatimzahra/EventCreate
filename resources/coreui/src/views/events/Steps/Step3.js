@@ -46,6 +46,7 @@ export default class Step3 extends Component
       artists: [],
       guitarists: [],
       drumsplayers: [],
+      organisateur: [],
       vocals: [],
       bassists: [],
       keyboardplayers: [],
@@ -76,6 +77,21 @@ export default class Step3 extends Component
     const vocal=this.state.roles[3]
     const bassist=this.state.roles[4]
     const keyboardplayer=this.state.roles[5]
+
+    let organisateur = JSON.parse(localStorage.getItem("appState"));
+    console.log("organisateur")
+    let idOrg=organisateur.user.id
+    console.log(organisateur.user.id)
+
+
+      const url=process.env.MIX_REACT_APP_ROOT
+      getResults(url+'/allUsers/'+idOrg,data=>{
+        this.setState({
+          organisateur:data,
+        })
+
+      })
+
 
     //singers
     this.getUsersByRole(singer,"artists")

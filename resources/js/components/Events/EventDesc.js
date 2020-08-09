@@ -57,6 +57,8 @@ export default class EventDesc extends React.Component {
     render() {
         console.log("teeeehis.state")
         console.log(this.state)
+
+
         let recommended=this.state.recommended_events
         let pics=[event01,event02,event03,event04]
         let medias=[];
@@ -358,6 +360,7 @@ let id=this.props.match.params.id
                  <div className="row">
                      <div className="site-section-heading text-center mb-5 w-border col-md-6 mx-auto">
                          <h2 className="mb-5">Organised by</h2>
+
                          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet, fugit nam obcaecati fuga itaque deserunt officia, error reiciendis ab quod?</p>
                      </div>
                  </div>
@@ -407,11 +410,11 @@ let id=this.props.match.params.id
                 {recommended.map((event,i) =>
                     event.id!==this.state.event.id?(
                 <div key={i} className="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
-                    {event.media?
+                    {event.media && event.media.length>0?
                         event.media.slice(0, 1).map((m,i) =>
                         <Link to={"/EventDesc/"+event.id} onClick={(e)=>this.changeEvent(event.id)}><img  className="img-fluid eventImg" src={m.url} style={{width: 400}}/></Link>
                         ):
-                        <Link to={"/EventDesc/"+event.id} onClick={(e)=>this.changeEvent(event.id)}><img  className="img-fluid eventImg" src={img} style={{width: 400}}/></Link>
+                        <Link to={"/EventDesc/"+event.id} onClick={(e)=>this.changeEvent(event.id)}><img  className="img-fluid eventImg" src={event05} style={{width: 400}}/></Link>
                     }
 
                     <div className="p-4 bg-white">

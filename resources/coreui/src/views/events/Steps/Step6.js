@@ -72,37 +72,7 @@ export default class Step6 extends Component
     this.props.prevStep();
   };
 
-//   handlesubmitform=(e)=>{
-//     e.preventDefault();
-//     console.log('rrrrrrrrrrrrrr')
-//     console.log(this.props)
-//     this.setState({ showMessage: false });
-//
-//     const { values, inputChange } = this.props;
-// let reducedArray=(this.state.categories)
-//
-//
-//     const headers = {
-//       'Content-Type': 'multipart/form-data',
-//     }
-//     const url="/api/events/create"
-//     axios.post('/api/events/create',{
-//       title:values.title,
-//       place: values.place,
-//       status: values.status,
-//       description: values.description,
-//       date: values.date,
-//       categories: values.categoryID,
-//       tags: values.tagsID,
-//       user: values.users,
-//       media:  values.media[0],
-//     }).then(() => {
-//       this.setState({ showMessage: true,redirect:true })
-//     })
-//
-//
-//
-//   }
+
   handlesubmitform=(event)=>{
 
     event.preventDefault();
@@ -123,8 +93,7 @@ export default class Step6 extends Component
     console.log('error create event')
   }
   render() {
-    console.log('rrfff')
-    console.log(this.state)
+
     console.log('finnnnnnnn')
     console.log(this.props)
     if(this.state.redirect) {
@@ -140,105 +109,107 @@ export default class Step6 extends Component
 
             </CCardHeader>
             <CCardBody>
-
               <form method="POST" onSubmit={this.handlesubmitform} encType="multipart/form-data">
                 <CCardBody>
-
-                  <CRow>
-                    { this.state.showMessage &&
-                    <CAlert color="success" duration={5000}>
-                      <strong>Added successfully !</strong>
-                    </CAlert>
-                    }
-                  </CRow>
-
-                  <CRow>
-                    <CCol xs="8">
-                      <CFormGroup>
-                        <CLabel htmlFor="title">title</CLabel>
-                        <CInput id="title" placeholder="Title"
-
-                                value={values.title}
-                        />
-                      </CFormGroup>
-                    </CCol>
-                  </CRow>
-                  <CRow>
-                    <CCol xs="8">
-                      <CFormGroup>
-                        <CLabel htmlFor="place">Place</CLabel>
-                        <CInput id="place" placeholder="place"
-
-                                value={values.place}
-                        />
-                      </CFormGroup>
-                    </CCol>
-                  </CRow>
-                  <CRow>
-                    <CCol xs="8">
-                      <CFormGroup>
-                        <CLabel htmlFor="place">categories</CLabel>
-                        <CInput id="place" placeholder="categories"
-
-                                value={values.categoryID} name="categoryID"
-                        />
-                      </CFormGroup>
-                    </CCol>
-                  </CRow>
-                  <CRow>
-                    <CCol xs="8">
-                      <CFormGroup>
-                        <CRow>
-                          <CCol xs="1"> <CLabel htmlFor="name">Status</CLabel></CCol>
-                          <CCol xs="11"> <CSwitch className={'mx-1'} variant={'3d'} color={'success'}
-
-
-                                                  value={values.status}
-                          /></CCol>
-                        </CRow>
-                      </CFormGroup>
-                    </CCol>
-                  </CRow>
-                  <CRow>
-                    <CCol xs="8">
-                      <CFormGroup>
-                        <CLabel htmlFor="name">Description</CLabel>
-                        <CTextarea
-                          name="description"
-
-                          value={values.description}
-                          id="description"
-                          rows="9"
-                          placeholder="Description..."
-                        />
-                      </CFormGroup>
-                    </CCol>
-                  </CRow>
-                  <CRow>
-                    <CCol xs="8">
-                      <CFormGroup>
-                        <CLabel htmlFor="name">Date</CLabel>
-                        <CInput type="date" id="date" name="date" placeholder="date"
-
-                                value={values.date}
-                        />
-                      </CFormGroup>
-                    </CCol>
-                  </CRow>
-                </CCardBody>
-                <CCardFooter>
-                  <CButton type="submit" size="sm" color="primary" style={{float:"right"}}> Submit</CButton>
-                  <CButton  size="sm" color="danger"  onClick={this.back}> back</CButton>
-                </CCardFooter>
-              </form>
-
-
+                  <div className="container" style={divContainer}>
+                      <section className="section" style={SectionStyle}>
+                <div className="left" style={left}>
+                  <div className="event" style={event}>Live in concert</div>
+                  <div className="title"  style={title}>{values.title}</div>
+                  <div className="info" style={info}>{values.date} // {values.place}</div>
+                </div>
+                <div className="right" style={right}>
+                  <div className="seats" style={seats}>section<span style={span}>A</span></div>
+                  <div className="seats" style={seats}>row<span style={span}>13</span></div>
+                  <div className="seats"  style={seats}>seat<span style={span}>120</span></div>
+                </div>
+              </section>
+                   </div>
+              </CCardBody>
+            <CCardFooter>
+              <CButton type="submit" size="sm" color="primary" style={{float:"right"}}> Submit</CButton>
+              <CButton  size="sm" color="danger"  onClick={this.back}> back</CButton>
+            </CCardFooter>
+          </form>
             </CCardBody>
-
           </CCard>
-
         </CCol>
       </CRow>
     );
   }
 }
+const url="https://htmlpdfapi.com/uploads/images/568b96887261690f6dbe0000/content_background-concert-3.jpg?1451988615"
+const divContainer = {
+  width: 795,
+  margin: "0 auto",
+  color: "#ffffff",
+  fontFamily: "Open Sans",
+  fontWeight: 400,
+  fontSize: 25,
+};
+const SectionStyle = {
+  position: 'relative',
+  height: 280,
+  width: '100%',
+  backgroundRepeat: "no-repeat",
+  backgroundImage:`url(${url})`,
+
+};
+const right = {
+  float: 'right',
+  width: 160,
+  paddingTop: 30,
+};
+const left = {
+
+  boxSizing: 'border-box',
+  float: 'left',
+  width: 635,
+  padding: '35 0 0 60',
+};
+const event = {
+
+  lineHeight: 35,
+  textTransform: 'uppercase',
+  position: 'absolute',
+  top: -310,
+  left: 260,
+};
+const title = {
+
+  marginBottom: 35,
+  color: '#F5A623',
+  fontFamily: "Audiowide",
+  fontSize: '2em',
+  textTransform: 'uppercase',
+  top: 170,
+  position: 'absolute',
+  left: 90,
+};
+const info = {
+
+  textTransform: 'uppercase',
+  position: 'absolute',
+  marginTop: 30,
+  left: 30,
+  fontSize: 18,
+};
+const seats = {
+  marginBottom: 35,
+  fontSize: '0.36em',
+  textTransform: 'uppercase',
+  textAlign: 'right'
+};
+const span = {
+  display:" inline-block",
+  width: 80,
+  marginLeft: 15,
+  padding: "10 0",
+  color: "#F5A623",
+  background: "rgba(255, 255, 255, 0.5)",
+  fontFamily: "Kreon",
+  fontSize: '2.777em',
+  textAlign: "center",
+  verticalAlign: "middle",
+};
+

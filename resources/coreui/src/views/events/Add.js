@@ -65,6 +65,7 @@ export default class Add extends Component {
       limit_places:'',
       budget:'',
       ticket:'',
+      organisateur:[]
 
     }
 
@@ -136,16 +137,36 @@ export default class Add extends Component {
     else if(input==="ticket"){
       this.setState({ [input]: [...this.state.ticket, ...e.target.value] });
     }
-    else{this.setState({
+    else if(input==="title"){
+      let organisateur = JSON.parse(localStorage.getItem("appState"));
+      console.log("organisateur")
+      console.log(organisateur.user.id)
+      let idOrg=organisateur.user.id
+      const url=process.env.MIX_REACT_APP_ROOT
+      getResults(url+'/allUsers/'+idOrg,data=>{
+        this.setState({
+          organisateur:data,
+        
+        })
+
+      })
+      this.setState({
+        [input]: e.target.value
+      });
+    }
+
+    else{
+      this.setState({
       [input]: e.target.value
-    });}
+    });
+    }
 
   };
 
       render() {
         const {step} = this.state;
-        const {title, place, status, description, date,categoryID,tagsID,users,media,assurance,autorisation,limit_age,limit_places,budget,ticket} = this.state;
-        const values = {title, place, status, description, date,categoryID,tagsID,users,media,assurance,autorisation,limit_age,limit_places,budget,ticket};
+        const {title, place, status, description, date,categoryID,tagsID,users,media,assurance,autorisation,limit_age,limit_places,budget,ticket,organisateur} = this.state;
+        const values = {title, place, status, description, date,categoryID,tagsID,users,media,assurance,autorisation,limit_age,limit_places,budget,ticket,organisateur};
         if (this.state.redirect) {
           return <Redirect to="/events/liste"/>;
         }

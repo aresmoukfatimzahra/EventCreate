@@ -79,7 +79,7 @@ class RegisterContainer extends Component {
             name: json.data.name,
             email: json.data.email,
             activation_token: json.data.activation_token,
-            role_id: json.data.role_id,
+            role_id: 2,
           };
           let appState = {
             isRegistered: true,
