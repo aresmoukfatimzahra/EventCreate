@@ -24,6 +24,7 @@ import MoreMedias from "./Media/MoreMedias";
 import ArtistBio from "./Artists/ArtistBio";
 import Login from '../../coreui/src/views/pages/login/Login';
 import Register from '../../coreui/src/views/pages/register/Register';
+import Ticket from "./Ticket/Ticket";
 
  class App extends Component {
     render() {
@@ -45,6 +46,7 @@ import Register from '../../coreui/src/views/pages/register/Register';
                         <Route path="/Artist/:id" component={ArtistBio} exact={true} />
                         <Route path="/login" component={Login} exact={true} />
                         <Route path="/register" component={Register} exact={true} />
+                        <Route path="/Tickets/:event" component={Ticket} exact={true} />
                     </Switch>
           </React.Suspense>
         </HashRouter>

@@ -21,7 +21,7 @@ class UserController extends Controller
      * liste users
      */
     public function liste(){
-        $users=User::all();
+        $users=User::with('role')->get();
         return response()->json($users, 201);
     }
 
@@ -43,24 +43,22 @@ class UserController extends Controller
     }
     public function showArtist(User $user)
     {
-//        $qb=DB::table('users')
-//            ->join('media','media.user_id','users.id')
-//            ->join('roles','roles.user_id','users.id')
-//            ->select('users.*', 'media.url as media','media.title as titleMedia' ,'roles.libelle as role')
-//            ->where("roles.libelle","=","artist")
-//            ->where("users.id","=",$user->id)
-//            ->get();
-//     return $qb;
-
         return User::with('role')->with('media')->with('events')->with('media') ->whereBetween('role_id', [6, 11])->where('id','=',$user->id)->get();
+    }
+
+    public function showUser(User $user)
+    {
+
+        return User::with('role')->with('media')->with('events')->with('media')->where('id','=',$user->id)->get();
     }
 
     public function showEvents(User $user)
     {
-        $events= Event::with('media')->get()->find(1);
+       // $events= Event::with('media')->get()->find(1);
 
 
       $events=$user->events;
+        $media=[];
         foreach($events as $event) {
             $media = $event->media;
         }
@@ -90,5 +88,18 @@ class UserController extends Controller
         if($user->delete()){
             return response()->json($user,201);
         }
+    }
+    public function showUserByRole(string  $libelle)
+    {
+        $role=Role::where('libelle','=',$libelle)->firstOrFail();
+        $users=[];
+        if($role){
+            $users= User::with('role')->with('media')
+                ->with('events')->with('media')
+            ->where('role_id',"=",$role->id)->get();
+
+        }
+
+        return ['artists'=>$users];
     }
 }

@@ -1,10 +1,13 @@
-export default [
+const userdata={test: JSON.parse(localStorage["appState"])}
+{console.log(userdata.test.user.role)}
+
+export default userdata.test.user.role===1 ? [
   {
     _tag: 'CSidebarNavItem',
     name: 'Dashboard',
     to: '/dashboard',
     icon: 'cil-speedometer',
-    
+
   },
   {
     _tag: 'CSidebarNavDropdown',
@@ -24,6 +27,35 @@ export default [
       }
     ],
   },
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'Categories',
+    to: '/Categories',
+    icon: 'cil-speedometer',
+
+  },
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'Tags',
+    to: '/Tags',
+    icon: 'cil-speedometer',
+
+  },
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'Tickets',
+    to: '/Tickets',
+    icon: 'cil-speedometer',
+
+  },
+  {
+    _tag: 'CSidebarNavItem',
+    name: userdata.test.user.role===1 ?  'Roles' : '',
+    to: '/Roles',
+    icon: userdata.test.user.role===1 ?  'cil-speedometer': '',
+
+  }
+  
  /* {
     _tag: 'CSidebarNavTitle',
     _children: ['Theme']
@@ -319,5 +351,14 @@ export default [
     _tag: 'CSidebarNavDivider',
     className: 'm-2'
   }*/
-]
+]: 
+userdata.test.user.role===2 ? 
+[
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'Dashboard',
+    to: '/dashboard',
+    icon: 'cil-speedometer',
 
+  }
+] : ''

@@ -17,7 +17,7 @@ import { render } from 'enzyme'
 import Axios from 'axios'
 
 export default class Users extends Component {
-  
+
   constructor(props){
     super(props);
     this.state={
@@ -70,6 +70,8 @@ export default class Users extends Component {
             items={this.state.users}
             fields={[
               { key: 'name', _classes: 'font-weight-bold' },
+              { key: 'role_id', _classes: 'font-weight-bold' },
+
               'email', 'role_id', 'actions'
             ]}
             hover

@@ -20,6 +20,7 @@ class CreateEventsTable extends Migration
             $table->boolean('status');
             $table->text('description');
             $table->date('date');
+            $table->float('budget');
             $table->timestamps();
         });
     }

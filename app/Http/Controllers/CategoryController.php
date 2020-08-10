@@ -14,7 +14,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        return ['categories'=>Category::all()];
+
     }
 
     /**
@@ -46,18 +47,22 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        //
+
+        $cat = Category::find($category->id);
+        return ['categories'=>$cat];
+
+
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function edit(Category $category)
+    public function edit($id)
     {
-        //
+        $category=Category::find($id);
+        return response()->json($category, 200);
     }
 
     /**
@@ -69,7 +74,10 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+
+        $category->update($request->all());
+
+        return response()->json($category, 200);
     }
 
     /**
@@ -81,5 +89,11 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         //
+    }
+    public function delete(Category $category)
+    {
+        $category->delete();
+
+        return response()->json(null, 204);
     }
 }

@@ -86,8 +86,8 @@ export default class MoreEvents extends React.Component {
                 {nextEvents.length>0? nextEvents.map((event,i) => {
                     return (
                 <div className="col-md-6 col-lg-4 mb-5" data-aos="fade-up" data-aos-delay="100">
-                    {event.url?
-                        <Link to={"/EventDesc/"+event.id}><img key={i} className="img-fluid eventImg" src={event.url} style={{width:340,height:300}}/></Link>
+                    {event.media?
+                        <Link to={"/EventDesc/"+event.id}><img key={i} className="img-fluid eventImg" src={event.media[0].url} style={{width:340,height:300}}/></Link>
                         :
                         <Link to={"/EventDesc/"+event.id}><img key={i} className="img-fluid eventImg" src={img} style={{width:340,height:300}}/></Link>
                     }

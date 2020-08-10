@@ -18,8 +18,10 @@ export default class IndexEvents extends React.Component {
 
     componentWillMount() {
         const url=process.env.MIX_REACT_APP_ROOT
-        console.log(url)
+
         indexEvents(url+'/events/indexOfEventsThisMonth',data=>{
+            console.log('oicii')
+            console.log(data)
             this.setState({
                 events:data.events,
             })

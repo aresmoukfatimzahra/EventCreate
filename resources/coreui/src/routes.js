@@ -42,16 +42,32 @@ const User = React.lazy(() => import('./views/users/User'));
 const UpdateUser = React.lazy(() => import('./views/users/Update'));
 const Events = React.lazy(()=> import('./views/events/Liste'))
 const EventAdd = React.lazy(() => import('./views/events/Add'));
+const Categories = React.lazy(() => import('./views/categories/Liste'));
+const Tags = React.lazy(() => import('./views/tags/Liste'));
+const Tickets = React.lazy(() => import('./views/tickets/Liste'));
+const Roles = React.lazy(() => import('./views/roles/List'));
 const EventListe = React.lazy(() => import('./views/events/Liste'));
 const UpdateEvent = React.lazy(() => import('./views/events/Update'));
+const UpdateCategory = React.lazy(() => import('./views/categories/Update'));
+const UpdateTag = React.lazy(() => import('./views/tags/Update'));
+const UpdateTicket = React.lazy(() => import('./views/tickets/Update'));
+const UpdateRole = React.lazy(() => import('./views/roles/Update'));
 
 const routes = [
   { path: '/', exact: true, name: 'Home' },
   { path: '/dashboard', name: 'Dashboard', component: Dashboard },
   { path: '/events', name: 'Events', component: Events, exact: true},
+  { path: '/Categories', name: 'Categories', component: Categories, exact: true},
+  { path: '/tickets', name: 'tickets', component: Tickets, exact: true},
+  { path: '/tags', name: 'tags', component: Tags, exact: true},
+  { path: '/roles', name: 'roles', component: Roles, exact: true},
   { path: '/events/add', name: 'Add Event', component: EventAdd },
   { path: '/events/liste', name: 'Liste Events', component: EventListe },
   { path: '/events/:id/update', name: 'Update Event', component: UpdateEvent },
+  { path: '/categories/:id/update', name: 'Update categorie', component: UpdateCategory },
+  { path: '/tags/:id/update', name: 'Update Tag', component: UpdateTag},
+  { path: '/ticket/:id/update', name: 'Update Ticket', component: UpdateTicket},
+  { path: '/role/:id/update', name: 'Update Role', component: UpdateRole},
 
   { path: '/theme', name: 'Theme', component: Colors, exact: true },
   { path: '/theme/colors', name: 'Colors', component: Colors },

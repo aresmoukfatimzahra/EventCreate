@@ -14,15 +14,21 @@ import {
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { Link, withRouter } from 'react-router-dom'
-
+const userdata={test: JSON.parse(localStorage["appState"])}
 const Users = lazy(() => import('../users/Users.js'))
+const Userprofile= lazy(() => import('../users/Profile.js'))
 
-const Dashboard = () => {
+const Dashboard = () => { 
   return (
+    userdata.test.user.role_id===1 ?
     <>
-    
       <Users />
     </>
+    :
+    userdata.test.user.role_id===2 ?
+    <>
+      <Userprofile />
+    </> : ''
   )
 }
 

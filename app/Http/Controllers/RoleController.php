@@ -14,7 +14,7 @@ class RoleController extends Controller
      */
     public function index()
     {
-        //
+        return ['roles'=>Role::all()];
     }
 
     /**
@@ -52,14 +52,14 @@ class RoleController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Role  $role
+
      * @return \Illuminate\Http\Response
      */
-    public function edit(Role $role)
+    public function edit($id)
     {
-        //
+        $role=Role::find($id);
+        return response()->json($role, 200);
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -69,7 +69,9 @@ class RoleController extends Controller
      */
     public function update(Request $request, Role $role)
     {
-        //
+        $role->update($request->all());
+
+        return response()->json($role, 200);
     }
 
     /**
@@ -81,5 +83,11 @@ class RoleController extends Controller
     public function destroy(Role $role)
     {
         //
+    }
+    public function delete(Role $role)
+    {
+        $role->delete();
+
+        return response()->json(null, 204);
     }
 }

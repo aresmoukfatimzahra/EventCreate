@@ -12,9 +12,13 @@ class TicketSeeder extends Seeder
     public function run()
     {
         $faker = \Faker\Factory::create();
-        for($i=0;$i<5;$i++){
+        $names=['Basic','Regular','Professional','Premium'];
+        $prices=[39,59,79,99];
+        for($i=0;$i<4;$i++){
             \App\Ticket::create([
-                'date'=>$faker->dateTime->format('Y-m-d')
+                'date'=>$faker->dateTime->format('Y-m-d'),
+                'name'=>$names[$i],
+                'price'=>$prices[$i],
 
             ]);
         }

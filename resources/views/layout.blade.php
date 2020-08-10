@@ -53,7 +53,7 @@
         <script src="{{asset('vendors/isotope/isotope-min.js')}}" ></script>
         <script src="{{asset('vendors/owl-carousel/owl.carousel.min.js')}}" ></script>
         <script src="{{asset('js/jquery.ajaxchimp.min.js')}}" ></script>
-        <script src="{{asset('vendors/flipclock/timer.js')}}" ></script>
+{{--        <script src="{{asset('vendors/flipclock/timer.js')}}" ></script>--}}
 
         <script src="{{asset('vendors/counter-up/jquery.waypoints.min.js')}}" ></script>
         <script src="{{asset('vendors/counter-up/jquery.counterup.js')}}" ></script>

@@ -6,5 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Ticket extends Model
 {
-    //
+    protected $guarded = [];
+    public function events()
+    {
+        return $this->belongsToMany('App\Event','event_ticket')->withTimestamps();
+
+    }
+
 }

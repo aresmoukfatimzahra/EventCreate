@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
 import ReactDOM from 'react-dom';
 
-import {indexEvents} from "../../services";
+import {indexEvents,getResults} from "../../services";
 import img from "../../../../public/assets/img/event1.jpg";
 import team1 from '../../../../public/assets/img/team/team-1.jpg';
 import team2 from '../../../../public/assets/img/team/team-2.jpg';
@@ -21,33 +21,51 @@ export default class EventDesc extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            id:this.props.match.params.id,
             event: [],
+            recommended_events: [],
 
         }
     }
+  getEventInfos(id){
+      const url=process.env.MIX_REACT_APP_ROOT
+      this.setState({
+          id:id
+      })
+
+      indexEvents(url+'/events/'+id,data=>{
+          this.setState({
+              event:data.event,
+          })
+
+      })
+      getResults(url+'/events/getRecommendedEvents/'+id,data=>{
+          this.setState({
+              recommended_events:data.events.events,
+          })
+
+      })
+  }
+
+        changeEvent=(id)=>{
+         this.getEventInfos(id)
+    }
 
     componentDidMount() {
-        const url=process.env.MIX_REACT_APP_ROOT
-
-        indexEvents(url+'/events/'+this.props.match.params.id,data=>{
-            this.setState({
-                event:data.event,
-            })
-
-        })
+        this.getEventInfos(this.state.id)
     }
     render() {
+        console.log("teeeehis.state")
         console.log(this.state)
+
+
+        let recommended=this.state.recommended_events
         let pics=[event01,event02,event03,event04]
         let medias=[];
 
-// let n=this.state.medias.length;
-//         let rest=4-n;
-//         let gallery=[];
-//         gallery=medias.concat(pics);
         let event=this.state.event
         let img=guitarist
-        if(event.media) {
+        if(event.media ) {
             img = event.media[0].url
         }
         console.log("this.srrtate")
@@ -56,7 +74,7 @@ export default class EventDesc extends React.Component {
         if(this.state.event.user){
              users=this.state.event.user
         }
-
+let id=this.props.match.params.id
         return (
      <div>
 
@@ -79,7 +97,7 @@ export default class EventDesc extends React.Component {
                                     </li>
                                     <li><Link to="/MoreArtists">Artists</Link></li>
                                     <li><a href="about.html">About</a></li>
-                                    <li><a href="about.html">Music News</a></li>
+                                    {/*<li><a href="about.html">Music News</a></li>*/}
                                     <li><a href="contact.html">Contact</a></li>
                                 </ul>
                             </nav>
@@ -123,7 +141,7 @@ export default class EventDesc extends React.Component {
 
                             (
                                 this.state.event.media.slice(0, 4).map((media,i) => {
-                            return (
+                            return media.title!=="assurance" && media.title!=="autorisation"?(
 
                                 <div className="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
                                     <a href="#" className="unit-9">
@@ -131,12 +149,15 @@ export default class EventDesc extends React.Component {
                                         <div className="image"   style={{ backgroundImage: `url(${media.url})` }}></div>
 
                                         <div className="unit-9-content">
-                                            <h2>Art Gossip</h2>
+                                            {this.state.event.categories && this.state.event.categories.length>0?
+                                                this.state.event.categories.slice(0, 1).map((category,i) => {
+                                                    return (<h2>{category.libelle}</h2>)}):
+                                                (<h2>Art Gossip</h2>)}
                                             <span>Friday {this.state.event.date}</span>
                                         </div>
                                     </a>
                                 </div>
-                            )
+                            ):null
                         }
 
                         )
@@ -163,7 +184,7 @@ export default class EventDesc extends React.Component {
         </div>
     </div>
 
-  <Program/>
+  <Program event={event}/>
 
 
     <div className="site-section bg-light block-13">
@@ -282,7 +303,9 @@ export default class EventDesc extends React.Component {
                     <form action="#" method="post" className="site-block-subscribe">
                         <div className="input-group mb-3">
 
-                            <button style={{marginLeft:220,backgroundColor:'#7cbd1e',color:'white'}} className="btn" type="button" id="button-addon2"><strong>Get ticket</strong></button>
+                            <Link to={"/Tickets/"+event.id} style={{marginLeft:220,backgroundColor:'#7cbd1e',color:'white'}} className="btn" type="button" id="button-addon2">
+                                <strong>Get ticket</strong>
+                            </Link>
 
                         </div>
                     </form>
@@ -301,11 +324,15 @@ export default class EventDesc extends React.Component {
             </div>
             <div className="row">
                 {users?users.map((artist,i) => {
-                    return (
+                    return artist.role.libelle!=="organisateur" &&(
+
+
                 <div key={i} className="col-md-6 col-lg-4 mb-5 mb-lg-5">
+
                     <div className="team-member">
-                        {artist.media.url?
-                            <Link to={"/Artist/"+artist.id}><img  className="img-fluid eventImg" src={artist.media.url} style={{width: 400}}/></Link>
+
+                        {artist.media?
+                            <Link to={"/Artist/"+artist.id} ><img  className="img-fluid eventImg" src={artist.media.url} style={{width: 400}}/></Link>
                             :
                             <Link to={"/Artist/"+artist.id}><img  className="img-fluid eventImg" src={event01} style={{width: 400}}/></Link>
                         }
@@ -320,10 +347,55 @@ export default class EventDesc extends React.Component {
 
                     </div>
                 </div>
-                        )}):null}
+
+                    )}): null  }
+
+
             </div>
         </div>
     </div>
+         <div className="site-section">
+             <div className="container" data-aos="fade-up">
+
+                 <div className="row">
+                     <div className="site-section-heading text-center mb-5 w-border col-md-6 mx-auto">
+                         <h2 className="mb-5">Organised by</h2>
+
+                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet, fugit nam obcaecati fuga itaque deserunt officia, error reiciendis ab quod?</p>
+                     </div>
+                 </div>
+                 <div className="row">
+                     {users?users.map((artist,i) => {
+                         return artist.role.libelle==="organisateur" &&(
+
+
+                             <div key={i} className="col-md-6 col-lg-4 mb-5 mb-lg-5">
+
+                                 <div className="team-member">
+
+                                     {artist.media?
+                                         <Link to={"/Artist/"+artist.id} ><img  className="img-fluid eventImg" src={artist.media.url} style={{width: 400}}/></Link>
+                                         :
+                                         <Link to={"/Artist/"+artist.id}><img  className="img-fluid eventImg" src={event01} style={{width: 400}}/></Link>
+                                     }
+
+                                     <div className="text">
+                                         <Link to={"/Artist/"+artist.id} className="infos-artists">
+                                             <h2 className="mb-2 font-weight-light h4">{artist.name} {artist.last_name}</h2>
+                                             <span className="d-block mb-2 text-white-opacity-05 text-uppercase">{artist.role.libelle}</span>
+                                             <p className="mb-4">{artist.biography}.</p>
+                                         </Link>
+                                     </div>
+
+                                 </div>
+                             </div>
+
+                         )}): null  }
+
+
+                 </div>
+             </div>
+         </div>
 
     <div className="site-section bg-light">
         <div className="container">
@@ -334,30 +406,24 @@ export default class EventDesc extends React.Component {
                 </div>
             </div>
             <div className="row">
-                <div className="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
-                    <a href="#"><img src={img} alt="Image" className="img-fluid"/></a>
+
+                {recommended.map((event,i) =>
+                    event.id!==this.state.event.id?(
+                <div key={i} className="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                    {event.media && event.media.length>0?
+                        event.media.slice(0, 1).map((m,i) =>
+                        <Link to={"/EventDesc/"+event.id} onClick={(e)=>this.changeEvent(event.id)}><img  className="img-fluid eventImg" src={m.url} style={{width: 400}}/></Link>
+                        ):
+                        <Link to={"/EventDesc/"+event.id} onClick={(e)=>this.changeEvent(event.id)}><img  className="img-fluid eventImg" src={event05} style={{width: 400}}/></Link>
+                    }
+
                     <div className="p-4 bg-white">
-                        <span className="d-block text-secondary small text-uppercase">Jan 20th, 2019</span>
-                        <h2 className="h5 text-black mb-3"><a href="#" style={{color:'#7cbd1e'}}>Art Gossip by Mike Charles</a></h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias enim, ipsa exercitationem veniam quae sunt</p>
+                        <span className="d-block text-secondary small text-uppercase">{event.date}</span>
+                        <h2 className="h5 text-black mb-3"> <Link to={"/EventDesc/"+event.id} onClick={(e)=>this.changeEvent(event.id)} >{event.title}</Link></h2>
+                        <p>{event.description}</p>
                     </div>
                 </div>
-                <div className="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
-                    <a href="#"><img src={img} alt="Image" className="img-fluid"/></a>
-                    <div className="p-4 bg-white">
-                        <span className="d-block text-secondary small text-uppercase">Jan 20th, 2019</span>
-                        <h2 className="h5 text-black mb-3"><a href="#" style={{color:'#7cbd1e'}}>Art Gossip by Mike Charles</a></h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias enim, ipsa exercitationem veniam quae sunt</p>
-                    </div>
-                </div>
-                <div className="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="300">
-                    <a href="#"><img src={img} alt="Image" className="img-fluid"/></a>
-                    <div className="p-4 bg-white">
-                        <span className="d-block text-secondary small text-uppercase">Jan 20th, 2019</span>
-                        <h2 className="h5 text-black mb-3"><a href="#" style={{color:'#7cbd1e'}}>Art Gossip by Mike Charles</a></h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias enim, ipsa exercitationem veniam quae sunt</p>
-                    </div>
-                </div>
+                     ):null)}
                 <div className=" offset-5 col-md-6 button-all">  <Link className="main_btn btn-events" to="/MoreEvents">Back to Events</Link></div>
 
             </div>

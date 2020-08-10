@@ -30,7 +30,7 @@ export default class HeaderTemplate extends React.Component {
             this.setState({isLoggedIn:AppState.isLoggedIn, user: AppState.user});
         }
     }
-    
+
     render() {
         const myurl=`/dashboard#/user/${this.state.user.id}`;
         return (
@@ -58,7 +58,7 @@ export default class HeaderTemplate extends React.Component {
                                         <li className="nav-item active"><Link className="nav-link" to="/MoreEvents">Events</Link></li>
                                         <li className="nav-item"><Link to="/MoreArtists" className="nav-link" href="speakers.html">Artists</Link></li>
                                         <li className="nav-item active"><Link className="nav-link" to="/MoreMedias">Gallery</Link></li>
-                                        <li className="nav-item"><a className="nav-link" href="speakers.html">Music News</a></li>
+                                        {/*<li className="nav-item"><a className="nav-link" href="speakers.html">Music News</a></li>*/}
                                         {/*<li className="nav-item submenu dropdown"><a href="#" className="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Pages</a>*/}
                                         {/*        <ul className="dropdown-menu">*/}
                                         {/*            <li className="nav-item"><a className="nav-link" href="schedule.html">Schedule</a></li>*/}
@@ -80,8 +80,8 @@ export default class HeaderTemplate extends React.Component {
                                     </ul>
 
                                     <ul className="nav navbar-nav navbar-right">
-                                        
-                                        {this.state.isLoggedIn ? 
+
+                                        {this.state.isLoggedIn ?
                                         <>
                                         
                                         {console.log(this.state.isLoggedIn)}
@@ -94,7 +94,7 @@ export default class HeaderTemplate extends React.Component {
                                         <li className="nav-item"><a href="#" className="search"><i className="lnr lnr-magnifier"/></a></li>
                                         </>
                                         }
-                                        
+
                                     </ul>
                                 </div>
                             </div>

@@ -9,7 +9,7 @@ class MediaController extends Controller
 {
     public function index()
     {
-        return Media::with('event')->with('user')->get();
+        return Media::with('event')->with('user')->whereNotIn("title", ["assurance","autorisation"])->get();
     }
 
 
@@ -25,7 +25,7 @@ class MediaController extends Controller
             'url' => 'required',
         ]);
         $media = Media::create($request->all());
-
+       dd($request->file());
         return response()->json($media, 201);
     }
 

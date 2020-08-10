@@ -21,6 +21,7 @@ class EventTableSeeder extends Seeder
                 'status' => $faker->boolean(false),
                 'description' => $faker->realText(),
                 'date' => $faker->date('Y-m-d'),
+                'budget' => $faker->randomFloat(2,60,190),
 
             ]);
         }

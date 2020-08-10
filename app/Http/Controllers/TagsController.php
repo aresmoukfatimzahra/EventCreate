@@ -14,7 +14,7 @@ class TagsController extends Controller
      */
     public function index()
     {
-        //
+        return ['tags'=>Tags::all()];
     }
 
     /**
@@ -55,9 +55,10 @@ class TagsController extends Controller
      * @param  \App\Tags  $tags
      * @return \Illuminate\Http\Response
      */
-    public function edit(Tags $tags)
+    public function edit($id)
     {
-        //
+        $tag=Tags::find($id);
+        return response()->json($tag, 200);
     }
 
     /**
@@ -69,7 +70,9 @@ class TagsController extends Controller
      */
     public function update(Request $request, Tags $tags)
     {
-        //
+        $tags->update($request->all());
+
+        return response()->json($tags, 200);
     }
 
     /**
@@ -81,5 +84,11 @@ class TagsController extends Controller
     public function destroy(Tags $tags)
     {
         //
+    }
+    public function delete(Tags $tag)
+    {
+        $tag->delete();
+
+        return response()->json(null, 204);
     }
 }
