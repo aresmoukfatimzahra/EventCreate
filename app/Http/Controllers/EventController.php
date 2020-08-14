@@ -136,13 +136,69 @@ class EventController extends Controller
     }
 
     public function edit($id){
-        $event=Event::find($id);
-        return response()->json($event, 200);
+
+        $event= Event::with('user','media')->with('media')->with('tickets')->with('critere')->get()->find($id);
+        $medias=$event->media;
+        $users=$event->user;
+        $tickets=$event->tickets;
+        $ids=[]; $ids_users=[]; $ids_tickets=[];
+        foreach ($medias as $media){
+            array_push($ids,$media->id);
+        }
+
+        foreach ($users as $user){
+            array_push($ids_users,$user->id);
+        }
+        foreach ($tickets as $ticket){
+            array_push($ids_tickets,$ticket->id);
+        }
+        $data = ["event"=>$event, "medias"=>$ids,"users"=>$ids_users,"tickets"=>$ids_tickets];
+
+        return response()->json($data, 200);
     }
 
     public function update(Request $request, Event $event)
     {
-        $event->update($request->all());
+        $data=$request->input('data');
+       $idsArtists=$data['ArrayArtists'];
+       $idsMedias=$data['ArrayMedias'];
+        $tickets=$data['ArrayTickets'];
+
+
+        $event->update(
+            [
+                'title'=>$data['title'],
+                'place'=>$data['place'],
+                'status'=>$data['status'],
+                'description'=>$data['description'],
+                'date'=>$data['date'],
+             ]);
+
+        if($idsArtists){
+            $event->user()->sync([]);
+            foreach ($idsArtists as $user){
+                $item=User::find($user);
+                $event->user()->save($item);
+            }
+        }
+        if($idsMedias){
+            $old=$event->media();
+            $old->update(["event_id"=>null]);
+
+            foreach ($idsMedias as $media){
+                $item=Media::find($media);
+                $event->media()->save($item);
+            }
+        }
+
+        if($tickets){
+            $event->tickets()->sync([]);
+            foreach ($tickets as $ticket){
+                $item=Ticket::find($ticket);
+                $event->tickets()->save($item);
+            }
+        }
+
 
         return response()->json($event, 200);
     }
@@ -271,6 +327,7 @@ $data=$request->input('data');
         $event->description=$data['description'];
         $event->date=$data['date'];
         $event->budget=$data['budget'];
+        $event->status=1;
 
         $event->save();
 
@@ -342,5 +399,8 @@ $data=$request->input('data');
 
 
         return response()->json($event, 201);
+    }
+    public function eventWithAllInfos($id,Request $request){
+      dd(Event::find($id));
     }
 }

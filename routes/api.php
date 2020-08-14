@@ -40,6 +40,7 @@ Route::get('ticket/{id}/edit', 'TicketController@edit');
 Route::get('role/{id}/edit', 'RoleController@edit');
 
 Route::put('event/{event}/update', 'EventController@update');
+Route::put('eventWithAllInfos/{event}/update', 'EventController@update');
 Route::put('category/{category}/update', 'CategoryController@update');
 Route::put('tags/{tags}/update', 'TagsController@update');
 Route::put('ticket/{ticket}/update', 'TicketController@update');
