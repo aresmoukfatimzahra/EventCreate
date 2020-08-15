@@ -30,7 +30,7 @@ export default class Index extends Component {
 
                    {/*<HomeBanner/>*/}
                 <HomeBanner  pic={banner}
-                             text={[  <h2>Build your Event in Minutes</h2>,
+                             text={[  <h2>Build your Event in Minutes test test </h2>,
                                  <p>Get started by creating an event . From there, you can quickly add content, import images or videos,
                                      customize your fonts. It's that easy.</p>]}/>
 
