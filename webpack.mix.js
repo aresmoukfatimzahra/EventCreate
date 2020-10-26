@@ -1,5 +1,5 @@
 const mix = require('laravel-mix');
-var autoprefixer = require('autoprefixer');
+
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -11,27 +11,5 @@ var autoprefixer = require('autoprefixer');
  |
  */
 
-mix.react('resources/js/app.js', 'public/js')
+mix.js('resources/js/app.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css');
-
-mix.options({
-    postCss: [
-        require('autoprefixer'),
-    ],
-});
-mix.setPublicPath('public');
-mix.webpackConfig({
-    resolve: {
-        extensions: ['.js','.vue'],
-        alias: {
-            '@': __dirname + 'resources'
-        }
-    },
-    output: {
-        chunkFilename: 'js/shunks/[name].js',
-    },
-    
-});
-mix.react('resources/coreui/src/index.js', 'public/js/dashboard/App.js').version();
-mix.copy('resources/coreui/src/assets', 'public/assets');
-mix.copy('resources/coreui/public/avatars', 'public/avatars');
